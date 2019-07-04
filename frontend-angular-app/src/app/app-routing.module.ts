@@ -5,6 +5,7 @@ import { WaiterDashboardComponent } from './components/waiter/waiter-dashboard/w
 import { BartenderDashboardComponent } from './components/bartender/bartender-dashboard/bartender-dashboard.component';
 import { ChefDashboardComponent } from './components/chef/chef-dashboard/chef-dashboard.component';
 import { CashierDashboardComponent } from './components/cashier/cashier-dashboard/cashier-dashboard.component';
+import { WaiterNewOrderComponent } from './components/waiter/waiter-new-order/waiter-new-order.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "cashier",
     component: CashierDashboardComponent,
+  },
+  {
+    path: "neworder",
+    component : WaiterNewOrderComponent
   },
   { path: "**", redirectTo: "" }
 ];
