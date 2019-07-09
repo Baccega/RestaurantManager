@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Order } from "../models/Order";
 import { Observable, of } from "rxjs";
+import { DishStatus } from "../models/Dish";
 
 @Injectable({
   providedIn: "root"
@@ -22,7 +23,7 @@ export class OrderService {
           name: "Pasta",
           price: 2,
           quantity: 1,
-          done: false
+          status: DishStatus["Waiting"]
         },
         {
           id: "2",
@@ -30,7 +31,7 @@ export class OrderService {
           name: "Pizza",
           price: 2,
           quantity: 1,
-          done: false
+          status: DishStatus["Waiting"]
         }
       ]
     },
@@ -49,7 +50,7 @@ export class OrderService {
           name: "Pasta1",
           price: 2,
           quantity: 1,
-          done: false
+          status: DishStatus["Waiting"]
         }
       ]
     },
@@ -68,7 +69,7 @@ export class OrderService {
           name: "Pasta2",
           price: 2,
           quantity: 1,
-          done: false
+          status: DishStatus["Waiting"]
         }
       ]
     }
