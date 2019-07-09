@@ -21,14 +21,6 @@ export class WaiterNewTableComponent implements OnInit {
       piatti: ["second1", "second2", "second3"]
     }
   ];
-  table;
-
-  constructor(private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
-      console.log(params);
-      this.table = params.id;
-    });
-  }
   ngOnInit (){
     
   }

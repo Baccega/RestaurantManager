@@ -11,8 +11,7 @@ import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
 
-import {MatTabsModule, MatButtonModule, MatIconModule} from "@angular/material";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -22,11 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     WaiterModule,
     BartenderModule,
     ChefModule,
-    CashierModule,
-    MatTabsModule,
-    MatButtonModule,
-    MatIconModule,
-    BrowserAnimationsModule
+    CashierModule
   ],
   providers: [],
   bootstrap: [AppComponent]
