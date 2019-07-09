@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: "app-waiter-new-order",
-  templateUrl: "./waiter-new-order.component.html",
-  styleUrls: ["./waiter-new-order.component.scss"]
+  selector: 'app-waiter-new-table',
+  templateUrl: './waiter-new-table.component.html',
+  styleUrls: ['./waiter-new-table.component.scss']
 })
-export class WaiterNewOrderComponent implements OnInit {
+export class WaiterNewTableComponent implements OnInit {
   menu = [
     {
       cat: "anti",
@@ -29,6 +29,7 @@ export class WaiterNewOrderComponent implements OnInit {
       this.table = params.id;
     });
   }
-
-  ngOnInit() {}
+  ngOnInit (){
+    
+  }
 }
