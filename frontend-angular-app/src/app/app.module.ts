@@ -14,9 +14,12 @@ import { WaiterTablesListComponent } from './components/waiter/waiter-tables-lis
 import {MatTabsModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WaiterNewOrderComponent } from './components/waiter/waiter-new-order/waiter-new-order.component'
+import { WaiterNewOrderComponent } from './components/waiter/waiter-new-order/waiter-new-order.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { WaiterNewOrderComponent } from './components/waiter/waiter-new-order/wa
     BartenderDashboardComponent,
     CashierDashboardComponent,
     WaiterTablesListComponent,
-    WaiterNewOrderComponent
+    WaiterNewOrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,10 @@ import { WaiterNewOrderComponent } from './components/waiter/waiter-new-order/wa
     MatTabsModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,11 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class WaiterTablesListComponent implements OnInit {
 
   tables:string[] = ["Tavolo 1", "Tavolo 2", "Tavolo 3"];
+  table_number:number;
 
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

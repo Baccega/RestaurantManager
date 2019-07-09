@@ -12,4 +12,8 @@ export class WaiterDashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClick(){
+    console.log("wedfsg");
+  }
+
 }
