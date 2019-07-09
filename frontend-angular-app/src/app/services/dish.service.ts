@@ -1,9 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { stringify } from "@angular/compiler/src/util";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-export class DishService {
+enum Categories {
+  antipasti,
+  primi,
+  secondi,
+  dolci,
+  bevande
+}
 
-  constructor() { }
+export class DishService {
+  constructor() {}
+
+  getMenu() {
+    return [
+      {
+        category: Categories.antipasti,
+        name: "baccala ecca la",
+        price: 33,
+        quantity: 0,
+        done: false
+      },
+    ];
+  }
 }
