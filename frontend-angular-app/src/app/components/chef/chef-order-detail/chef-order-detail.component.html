@@ -1,0 +1,10 @@
+<ul>
+  <li *ngFor="let dish of this.order.dishes">
+    <mat-card>
+      <div class="container">
+        <p>{{ dish.name }}</p>
+        <button mat-raised-button color="primary">Start</button>
+      </div>
+    </mat-card>
+  </li>
+</ul>

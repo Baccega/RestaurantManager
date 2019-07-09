@@ -1,3 +1,8 @@
-<p>
-  chef-dashboard works!
-</p>
+<mat-tab-group class="tabs">
+  <mat-tab *ngFor="let order of orders">
+    <ng-template mat-tab-label
+      >Order: {{ order.id }}<br />Table: {{ order.table.id }}</ng-template
+    >
+    <app-chef-order-detail [order]="order"></app-chef-order-detail>
+  </mat-tab>
+</mat-tab-group>

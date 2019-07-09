@@ -1,0 +1,12 @@
+ul {
+  list-style: none;
+  padding: 10px;
+  li {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+}
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
