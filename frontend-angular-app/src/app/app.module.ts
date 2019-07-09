@@ -9,8 +9,10 @@ import { HeaderComponent } from "./components/header/header.component";
 import { WaiterModule } from "./modules/waiter/waiter.module";
 import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
-import { MaterialComponentsModule } from "./modules/material-components/material-components.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
+
+import {MatTabsModule, MatButtonModule, MatIconModule} from "@angular/material";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -21,7 +23,10 @@ import { CashierModule } from "./modules/cashier/cashier.module";
     BartenderModule,
     ChefModule,
     CashierModule,
-    MaterialComponentsModule
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
