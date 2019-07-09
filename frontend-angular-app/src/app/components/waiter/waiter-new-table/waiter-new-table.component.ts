@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-waiter-new-table',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./waiter-new-table.component.scss']
 })
 export class WaiterNewTableComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  menu = [
+    {
+      cat: "anti",
+      piatti: ["ant1", "ant2", "ant3"]
+    },
+    {
+      cat: "primi",
+      piatti: ["prim1", "prim2", "prim3"]
+    },
+    {
+      cat: "secondi",
+      piatti: ["second1", "second2", "second3"]
+    }
+  ];
+  ngOnInit (){
+    
   }
-
 }

@@ -9,8 +9,9 @@ import { HeaderComponent } from "./components/header/header.component";
 import { WaiterModule } from "./modules/waiter/waiter.module";
 import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
-import { MaterialComponentsModule } from "./modules/material-components/material-components.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
+
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -20,8 +21,7 @@ import { CashierModule } from "./modules/cashier/cashier.module";
     WaiterModule,
     BartenderModule,
     ChefModule,
-    CashierModule,
-    MaterialComponentsModule
+    CashierModule
   ],
   providers: [],
   bootstrap: [AppComponent]

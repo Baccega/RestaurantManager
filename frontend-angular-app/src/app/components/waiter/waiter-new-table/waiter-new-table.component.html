@@ -1,3 +1,11 @@
-<p>
-  waiter-new-table works!
-</p>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let elem of menu">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ elem.cat }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card *ngFor="let plate of elem.piatti">
+      <p>{{ plate }}</p>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
