@@ -5,26 +5,24 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
-import { WaiterDashboardComponent } from "./components/waiter/waiter-dashboard/waiter-dashboard.component";
-import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
-import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
-import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
-import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
-import { WaiterComponent } from './components/waiter/waiter/waiter.component';
+
+import { WaiterModule } from "./modules/waiter/waiter.module";
+import { BartenderModule } from "./modules/bartender/bartender.module";
+import { ChefModule } from "./modules/chef/chef.module";
+import { MaterialComponentsModule } from "./modules/material-components/material-components.module";
+import { CashierModule } from "./modules/cashier/cashier.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HeaderComponent,
-    WaiterDashboardComponent,
-    ChefDashboardComponent,
-    BartenderDashboardComponent,
-    CashierDashboardComponent,
-    WaiterNewTableComponent,
-    WaiterComponent
+  declarations: [AppComponent, LoginComponent, HeaderComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    WaiterModule,
+    BartenderModule,
+    ChefModule,
+    CashierModule,
+    MaterialComponentsModule
   ],
-  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
