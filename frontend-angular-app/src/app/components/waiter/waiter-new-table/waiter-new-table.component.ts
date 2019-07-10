@@ -4,6 +4,7 @@ import { Dish } from "src/app/models/Dish";
 import { DishService } from "src/app/services/dish.service";
 import { OrderDetailComponent } from "../../order-detail/order-detail.component";
 import { Observable } from "rxjs";
+import { Menu } from "src/app/models/Menu";
 
 @Component({
   selector: "app-waiter-new-table",
@@ -11,7 +12,7 @@ import { Observable } from "rxjs";
   styleUrls: ["./waiter-new-table.component.scss"]
 })
 export class WaiterNewTableComponent implements OnInit {
-  menu: Dish[];
+  menu: Menu[];
 
   constructor(private dishService: DishService) {}
 
@@ -23,19 +24,20 @@ export class WaiterNewTableComponent implements OnInit {
     this.dishService.getMenu().subscribe(menu => (this.menu = menu));
   }
 
-  addQuantity(elem) {
-    this.menu[elem].quantity += 1;
-    console.log(elem);
+  addQuantity(i: number, j: number) {
+    this.menu[i].dishes[j].quantity += 1;
+    console.log(this.menu[i].dishes[j]);
   }
-  removeQuantity(elem) {
-    if (this.menu[elem].quantity > 0) this.menu[elem].quantity -= 1;
-    console.log(elem);
+  removeQuantity(i: number, j: number) {
+    if (this.menu[i].dishes[j].quantity > 0)
+      this.menu[i].dishes[j].quantity -= 1;
+    console.log(this.menu[i].dishes[j].quantity);
   }
 
-  sendOrder():void {
+  sendOrder(): void {
     let order: Dish[] = [];
     for (let elem of this.menu) {
-      if (elem.quantity > 0) order.push(elem);
+      for (let dish of elem.dishes) if (dish.quantity > 0) order.push(dish);
     }
     console.log(order);
     this.dishService.sendOrder(order);

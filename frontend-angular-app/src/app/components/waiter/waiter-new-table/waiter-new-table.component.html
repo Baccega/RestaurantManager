@@ -3,16 +3,16 @@
     <mat-expansion-panel-header>
       <mat-panel-title>{{ elem.category }}</mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-card>
+    <mat-card *ngFor="let dish of elem.dishes; let j = index">
       <div class="flexbox">
-        <p>{{ elem.name }}</p>
+        <p>{{ dish.name }}</p>
 
         <div class="flexbox2">
-          <button mat-icon-button (click)="removeQuantity(i)">
+          <button mat-icon-button (click)="removeQuantity(i, j)">
             <mat-icon>remove</mat-icon>
           </button>
-          <p>{{elem.quantity}}</p>
-          <button mat-icon-button (click)="addQuantity(i)">
+          <p>{{dish.quantity}}</p>
+          <button mat-icon-button (click)="addQuantity(i, j)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
