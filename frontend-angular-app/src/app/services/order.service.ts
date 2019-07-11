@@ -80,4 +80,10 @@ export class OrderService {
   getOrders(): Observable<Order[]> {
     return of(this.orders);
   }
+
+  getOrder(id): Observable<Order> {
+    const found: Order = this.orders.find(order => order.id === id);
+    console.log(found);
+    return of(found);
+  }
 }

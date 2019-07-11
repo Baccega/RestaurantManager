@@ -21,7 +21,8 @@ const routes: Routes = [
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       { path: "dashboard", component: WaiterDashboardComponent },
-      { path: "new-table", component: WaiterNewTableComponent }
+      { path: "new-table", component: WaiterNewTableComponent },
+      { path: "**", redirectTo: "" }
     ]
   },
   {
@@ -30,14 +31,10 @@ const routes: Routes = [
   },
   {
     path: "chef",
-    component: ChefComponent,
+    component: ChefDashboardComponent,
     children: [
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
-      {
-        path: "dashboard",
-        component: ChefDashboardComponent,
-        children: [{ path: ":id", component: ChefOrderDetailComponent }]
-      }
+      { path: ":id", component: ChefOrderDetailComponent },
+      { path: "**", redirectTo: "" }
     ]
   },
   {
