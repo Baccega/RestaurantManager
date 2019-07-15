@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DishStatus } from "src/app/models/Dish";
 import { Order } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -13,6 +13,7 @@ import { Subscription } from "rxjs";
 export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   order: Order;
   orderServiceSub: Subscription;
+  routerSub: Subscription;
 
   constructor(
     private orderService: OrderService,
@@ -20,15 +21,17 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
-
-    this.orderServiceSub = this.orderService
-      .getOrder(id)
-      .subscribe(order => (this.order = order));
+    this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
+      const id = params["id"];
+      this.orderServiceSub = this.orderService
+        .getOrder(id)
+        .subscribe(order => (this.order = order));
+    });
   }
 
   ngOnDestroy() {
     this.orderServiceSub.unsubscribe();
+    this.routerSub.unsubscribe();
   }
 
   startDish(index) {

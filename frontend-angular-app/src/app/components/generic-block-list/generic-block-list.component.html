@@ -7,9 +7,10 @@
   </mat-tab>
 </mat-tab-group> -->
 <ul>
-  <li *ngFor="let order of orders" routerLink="qwefqwe">
-    <a routerLink="/wfefwe"
-      >Order: {{ order.id }}<br />Table: {{ order.table.id }}</a
-    >
+  <li *ngFor="let order of orders" (click)="navigateTo(order.id)">
+    <mat-card>
+      Order: {{ order.id }}<br />
+      Table: {{ order.table.id }}
+    </mat-card>
   </li>
 </ul>

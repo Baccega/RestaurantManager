@@ -55,6 +55,73 @@ export class OrderService {
       ]
     },
     {
+      id: "3",
+      table: {
+        id: "3",
+        seats: 2,
+        free: false
+      },
+      waiter: "tu",
+      dishes: [
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        },
+        {
+          id: "1",
+          category: "Prim12wefi",
+          name: "Pasta2s",
+          price: 2,
+          quantity: 1,
+          status: DishStatus["Waiting"]
+        }
+      ]
+    },
+    {
       id: "2",
       table: {
         id: "2",
@@ -83,7 +150,6 @@ export class OrderService {
 
   getOrder(id): Observable<Order> {
     const found: Order = this.orders.find(order => order.id === id);
-    console.log(found);
     return of(found);
   }
 }
