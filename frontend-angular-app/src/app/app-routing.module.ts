@@ -7,7 +7,6 @@ import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-da
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
-import { ChefComponent } from "./components/chef/chef/chef.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
 
 const routes: Routes = [
