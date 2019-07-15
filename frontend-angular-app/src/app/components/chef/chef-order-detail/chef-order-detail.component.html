@@ -1,0 +1,28 @@
+<ul>
+  <li *ngFor="let dish of this.order.dishes; let i = index">
+    <mat-card>
+      <div class="container">
+        <p>{{ dish.name }}</p>
+        <button
+          *ngIf="dish.status == 0"
+          mat-raised-button
+          color="primary"
+          (click)="startDish(i)"
+        >
+          Start
+        </button>
+        <button
+          *ngIf="dish.status == 1"
+          mat-raised-button
+          color="accent"
+          (click)="finishDish(i)"
+        >
+          Finish
+        </button>
+        <button *ngIf="dish.status == 2" mat-raised-button color="disabled">
+          Done
+        </button>
+      </div>
+    </mat-card>
+  </li>
+</ul>

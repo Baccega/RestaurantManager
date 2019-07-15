@@ -11,8 +11,6 @@ import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
 
-
-
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
   imports: [

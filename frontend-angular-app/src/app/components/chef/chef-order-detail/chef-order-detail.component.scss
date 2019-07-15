@@ -1,0 +1,17 @@
+ul {
+  list-style: none;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  li {
+    padding: 5px;
+    margin-bottom: 10px;
+    mat-card {
+      .container {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+      }
+    }
+  }
+}

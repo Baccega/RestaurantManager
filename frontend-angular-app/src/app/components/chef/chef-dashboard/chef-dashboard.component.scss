@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+  grid-template-rows: 100px auto;
+  background-color: lightgray;
+  height: 100%;
+  .subcontainer {
+    height: 100%;
+  }
+}
