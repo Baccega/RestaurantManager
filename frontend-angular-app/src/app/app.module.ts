@@ -10,6 +10,7 @@ import { WaiterModule } from "./modules/waiter/waiter.module";
 import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
+import { MaterialComponentsModule } from "./modules/material-components/material-components.module";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -19,7 +20,8 @@ import { CashierModule } from "./modules/cashier/cashier.module";
     WaiterModule,
     BartenderModule,
     ChefModule,
-    CashierModule
+    CashierModule,
+    MaterialComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
