@@ -17,6 +17,7 @@ import { CashierDashboardComponent } from "./components/cashier/cashier-dashboar
 import { SidenavService } from "./services/sidenav.service";
 import { WaiterTableDetailComponent } from './components/waiter/waiter-table-detail/waiter-table-detail.component';
 import { WaiterTableListComponent } from './components/waiter/waiter-table-list/waiter-table-list.component';
+import { WaiterComponent } from './components/waiter/waiter/waiter.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { WaiterTableListComponent } from './components/waiter/waiter-table-list/
 
     WaiterTableDetailComponent,
 
-    WaiterTableListComponent
+    WaiterTableListComponent,
+
+    WaiterComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
   providers: [SidenavService],

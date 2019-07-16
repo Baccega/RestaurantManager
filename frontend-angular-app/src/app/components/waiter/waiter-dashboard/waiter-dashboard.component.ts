@@ -1,22 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Order } from "src/app/models/Order";
-import { OrderService } from "src/app/services/order.service";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-waiter-dashboard",
   templateUrl: "./waiter-dashboard.component.html",
   styleUrls: ["./waiter-dashboard.component.scss"]
 })
-export class WaiterDashboardComponent implements OnInit {
-  private orders: Order[];
-
-  constructor(private orderService: OrderService) {}
-
-  ngOnInit() {
-    this.orderService.getOrders().subscribe(orders => (this.orders = orders));
-  }
+export class WaiterDashboardComponent {
+  constructor(private router: Router) {}
 
   onClick() {
-    console.log("wedfsg");
+    this.router.navigate(["waiter", "new-table"]);
   }
 }

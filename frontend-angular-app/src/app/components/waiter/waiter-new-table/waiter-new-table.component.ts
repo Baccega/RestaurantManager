@@ -25,12 +25,10 @@ export class WaiterNewTableComponent implements OnInit {
 
   addQuantity(i: number, j: number) {
     this.menu[i].dishes[j].quantity += 1;
-    console.log(this.menu[i].dishes[j]);
   }
   removeQuantity(i: number, j: number) {
     if (this.menu[i].dishes[j].quantity > 0)
       this.menu[i].dishes[j].quantity -= 1;
-    console.log(this.menu[i].dishes[j].quantity);
   }
 
   sendOrder(): void {
@@ -38,7 +36,6 @@ export class WaiterNewTableComponent implements OnInit {
     for (let elem of this.menu) {
       for (let dish of elem.dishes) if (dish.quantity > 0) order.push(dish);
     }
-    console.log(order);
     this.dishService.sendOrder(order);
   }
 }

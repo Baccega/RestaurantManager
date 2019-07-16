@@ -7,6 +7,8 @@ import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-da
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
+import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
+import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 
 const routes: Routes = [
   {
@@ -15,10 +17,11 @@ const routes: Routes = [
   },
   {
     path: "waiter",
-    component: WaiterDashboardComponent,
+    component: WaiterComponent,
     children: [
-      { path: ":id", component: ChefOrderDetailComponent },
+      { path: "", component: WaiterDashboardComponent, pathMatch: "full" },
       { path: "new-table", component: WaiterNewTableComponent },
+      { path: ":id", component: WaiterTableDetailComponent },
       { path: "**", redirectTo: "" }
     ]
   },

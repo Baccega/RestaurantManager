@@ -9,29 +9,12 @@ import { Subscription } from "rxjs";
   templateUrl: "./chef-dashboard.component.html",
   styleUrls: ["./chef-dashboard.component.scss"]
 })
-export class ChefDashboardComponent implements OnInit, OnDestroy {
-  orders: Order[];
-  orderSub: Subscription;
+export class ChefDashboardComponent {
+  constructor() {}
 
-  constructor(
-    private orderService: OrderService,
-    private activeRoute: ActivatedRoute,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.orderSub = this.orderService.getOrders().subscribe(orders => {
-      this.orders = orders;
-    });
-
-    // this.activeRoute.params.subscribe((params: any) => {
-    //   if (!params.id) {
-    //     this.router.navigate(["chef", this.orders[0].id]);
-    //   }
-    // });
-  }
-
-  ngOnDestroy() {
-    this.orderSub.unsubscribe();
-  }
+  // this.activeRoute.params.subscribe((params: any) => {
+  //   if (!params.id) {
+  //     this.router.navigate(["chef", this.orders[0].id]);
+  //   }
+  // });
 }
