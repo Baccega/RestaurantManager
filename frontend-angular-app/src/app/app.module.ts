@@ -16,6 +16,7 @@ import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/ch
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
 import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
+import { SidenavService } from "./services/sidenav.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { CashierDashboardComponent } from "./components/cashier/cashier-dashboar
     CashierDashboardComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
-  providers: [],
+  providers: [SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
