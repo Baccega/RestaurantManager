@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Order } from "../models/Order";
-import { Observable, of } from "rxjs";
+import { Observable, of, observable, throwError } from "rxjs";
 import { DishStatus } from "../models/Dish";
 
 @Injectable({
@@ -150,6 +150,10 @@ export class OrderService {
 
   getOrder(id): Observable<Order> {
     const found: Order = this.orders.find(order => order.id === id);
-    return of(found);
+    if (found) {
+      return of(found);
+    } else {
+      return throwError(`Order "${id}" not found`);
+    }
   }
 }

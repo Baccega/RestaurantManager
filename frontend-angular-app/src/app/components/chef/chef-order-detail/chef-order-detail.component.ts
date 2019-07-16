@@ -24,9 +24,13 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
       const id = params["id"];
-      this.orderServiceSub = this.orderService
-        .getOrder(id)
-        .subscribe(order => (this.order = order));
+      this.orderServiceSub = this.orderService.getOrder(id).subscribe(
+        order => (this.order = order),
+        err => {
+          console.error(err);
+          this.router.navigate(["chef"]);
+        }
+      );
     });
   }
 

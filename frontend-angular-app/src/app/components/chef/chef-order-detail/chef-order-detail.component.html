@@ -1,4 +1,4 @@
-<ul>
+<ul *ngIf="order">
   <li *ngFor="let dish of this.order.dishes; let i = index">
     <mat-card>
       <div class="container">
