@@ -28,6 +28,25 @@ export class OrderService {
           }
         ],
         waiter: "halal"
+      },
+      {
+        id: "2",
+        table: {
+          id: "3",
+          seats: 10,
+          free: false
+        },
+        dishes: [
+          {
+            id: "0",
+            category: "primi",
+            name: "basta",
+            price: 33,
+            quantity: 0,
+            done: false
+          }
+        ],
+        waiter: "halal"
       }
     ]);
   }

@@ -7,13 +7,15 @@ import { WaiterDashboardComponent } from "src/app/components/waiter/waiter-dashb
 import { AppRoutingModule } from "src/app/app-routing.module";
 import { WaiterTablesListComponent } from 'src/app/components/waiter/waiter-tables-list/waiter-tables-list.component';
 import { MaterialComponentsModule } from '../material-components/material-components.module';
+import { OrderDetailComponent } from 'src/app/components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
     WaiterComponent,
     WaiterNewTableComponent,
     WaiterDashboardComponent,
-    WaiterTablesListComponent
+    WaiterTablesListComponent,
+    OrderDetailComponent
   ],
   imports: [CommonModule, AppRoutingModule, MaterialComponentsModule]
 })
