@@ -1,11 +1,25 @@
-
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let elem of menu">
+  <mat-expansion-panel *ngFor="let elem of menu; let i = index">
     <mat-expansion-panel-header>
-      <mat-panel-title>{{ elem.cat }}</mat-panel-title>
+      <mat-panel-title>{{ elem.category }}</mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-card *ngFor="let plate of elem.piatti">
-      <p>{{ plate }}</p>
+    <mat-card *ngFor="let dish of elem.dishes; let j = index">
+      <div class="flexbox">
+        <p>{{ dish.name }}</p>
+
+        <div class="flexbox2">
+          <button mat-icon-button (click)="removeQuantity(i, j)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <p>{{dish.quantity}}</p>
+          <button mat-icon-button (click)="addQuantity(i, j)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+      </div>
     </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
+
+<button id="send" mat-fab color="primary" (click)="sendOrder()"><mat-icon>send</mat-icon></button>
