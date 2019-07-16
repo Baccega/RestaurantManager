@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Dish } from "src/app/models/Dish";
 import { DishService } from "src/app/services/dish.service";
-import { OrderDetailComponent } from "../../order-detail/order-detail.component";
 import { Observable } from "rxjs";
 import { Menu } from "src/app/models/Menu";
 
