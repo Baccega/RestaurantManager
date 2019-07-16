@@ -5,17 +5,15 @@ import { WaiterComponent } from "src/app/components/waiter/waiter/waiter.compone
 import { WaiterNewTableComponent } from "src/app/components/waiter/waiter-new-table/waiter-new-table.component";
 import { WaiterDashboardComponent } from "src/app/components/waiter/waiter-dashboard/waiter-dashboard.component";
 import { AppRoutingModule } from "src/app/app-routing.module";
-import { WaiterTablesListComponent } from 'src/app/components/waiter/waiter-tables-list/waiter-tables-list.component';
-import { MaterialComponentsModule } from '../material-components/material-components.module';
-import { OrderDetailComponent } from 'src/app/components/order-detail/order-detail.component';
+import { WaiterTablesListComponent } from "src/app/components/waiter/waiter-tables-list/waiter-tables-list.component";
+import { MaterialComponentsModule } from "../material-components/material-components.module";
 
 @NgModule({
   declarations: [
     WaiterComponent,
     WaiterNewTableComponent,
     WaiterDashboardComponent,
-    WaiterTablesListComponent,
-    OrderDetailComponent
+    WaiterTablesListComponent
   ],
   imports: [CommonModule, AppRoutingModule, MaterialComponentsModule]
 })

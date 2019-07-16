@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Dish } from "../models/Dish";
+import { Dish, DishStatus } from "../models/Dish";
 import { Observable, of } from "rxjs";
 import { Menu } from "../models/Menu";
 
@@ -22,7 +22,7 @@ export class DishService {
             name: "baccala ecca la",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -30,7 +30,7 @@ export class DishService {
             name: "baccala ecca la",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -38,7 +38,7 @@ export class DishService {
             name: "baccala ecca la",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           }
         ]
       },
@@ -52,7 +52,7 @@ export class DishService {
             name: "basta",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -60,7 +60,7 @@ export class DishService {
             name: "lisotto",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -68,7 +68,7 @@ export class DishService {
             name: "blodo",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           }
         ]
       },
@@ -81,7 +81,7 @@ export class DishService {
             name: "pesse",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -89,7 +89,7 @@ export class DishService {
             name: "bistecca",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -97,7 +97,7 @@ export class DishService {
             name: "piadina",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           }
         ]
       },
@@ -110,7 +110,7 @@ export class DishService {
             name: "acqua",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -118,7 +118,7 @@ export class DishService {
             name: "vino",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           },
           {
             id: "0",
@@ -126,7 +126,7 @@ export class DishService {
             name: "aria",
             price: 33,
             quantity: 0,
-            done: false
+            status: DishStatus["Waiting"]
           }
         ]
       }
