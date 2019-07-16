@@ -1,9 +1,7 @@
 <mat-tab-group>
   <mat-tab *ngFor="let table of orders" headerPosition="below">
-      <ng-template mat-tab-label>
-          Tavolo {{table.table.id}}
-        </ng-template>
-    <app-order-detail [detail]="table.dishes"></app-order-detail>
+    <ng-template mat-tab-label> Tavolo {{ table.table.id }} </ng-template>
+    <!-- <app-order-detail [detail]="table.dishes"></app-order-detail> -->
   </mat-tab>
 </mat-tab-group>
 

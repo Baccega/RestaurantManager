@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Order } from "src/app/models/Order";
-import { OrderService } from "src/app/services/order.service"
+import { OrderService } from "src/app/services/order.service";
 
 @Component({
   selector: "app-waiter-dashboard",
@@ -13,7 +13,7 @@ export class WaiterDashboardComponent implements OnInit {
   constructor(private orderService: OrderService) {}
 
   ngOnInit() {
-    this.orderService.getOrder().subscribe(orders => (this.orders = orders));
+    this.orderService.getOrders().subscribe(orders => (this.orders = orders));
   }
 
   onClick() {
