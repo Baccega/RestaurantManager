@@ -6,7 +6,7 @@ export enum DishStatus {
 
 export interface Dish {
   id: string;
-  category: string;
+  category: string; //?
   name: string;
   price: number;
   quantity: number;

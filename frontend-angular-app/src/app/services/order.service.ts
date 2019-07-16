@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Order } from "../models/Order";
-import { Observable, of, observable, throwError } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { DishStatus } from "../models/Dish";
 
 @Injectable({

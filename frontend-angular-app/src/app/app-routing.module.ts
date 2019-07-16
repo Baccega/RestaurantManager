@@ -6,7 +6,6 @@ import { BartenderDashboardComponent } from "./components/bartender/bartender-da
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
-import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
 
 const routes: Routes = [
@@ -16,10 +15,9 @@ const routes: Routes = [
   },
   {
     path: "waiter",
-    component: WaiterComponent,
+    component: WaiterDashboardComponent,
     children: [
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
-      { path: "dashboard", component: WaiterDashboardComponent },
+      { path: ":id", component: ChefOrderDetailComponent },
       { path: "new-table", component: WaiterNewTableComponent },
       { path: "**", redirectTo: "" }
     ]

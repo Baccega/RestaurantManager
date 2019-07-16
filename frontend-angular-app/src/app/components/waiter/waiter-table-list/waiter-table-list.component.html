@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let table of tables" (click)="navigateTo(table.id)">
+    <mat-card> Table: {{ table.id }} </mat-card>
+  </li>
+</ul>

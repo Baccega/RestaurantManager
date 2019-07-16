@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   openSidenav() {
-    console.log("pressed");
     this.sidenavService.setStatus(true);
   }
 }
