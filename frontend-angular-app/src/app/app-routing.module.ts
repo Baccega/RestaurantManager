@@ -5,7 +5,7 @@ import { WaiterDashboardComponent } from "./components/waiter/waiter-dashboard/w
 import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
-import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
+import { WaiterNewOrderComponent } from "./components/waiter/waiter-new-order/waiter-new-order.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
 import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
@@ -20,8 +20,8 @@ const routes: Routes = [
     component: WaiterComponent,
     children: [
       { path: "", component: WaiterDashboardComponent, pathMatch: "full" },
-      { path: "new-table", component: WaiterNewTableComponent },
       { path: ":id", component: WaiterTableDetailComponent },
+      { path: ":id/new-order", component: WaiterNewOrderComponent },
       { path: "**", redirectTo: "" }
     ]
   },

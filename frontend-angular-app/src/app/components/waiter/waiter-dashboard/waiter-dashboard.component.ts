@@ -10,6 +10,6 @@ export class WaiterDashboardComponent {
   constructor(private router: Router) {}
 
   onClick() {
-    this.router.navigate(["waiter", "new-table"]);
+    this.router.navigate(["waiter", "1", "new-order"]);
   }
 }
