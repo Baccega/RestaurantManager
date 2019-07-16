@@ -6,7 +6,9 @@ ul {
   margin: 0px;
   display: flex;
   overflow-y: scroll;
+  // Firefox hide scrollbar
   scrollbar-width: none;
+
   li {
     min-width: 100px;
     margin: 10px;
@@ -19,4 +21,8 @@ ul {
       height: 100%;
     }
   }
+}
+// Chrome hide scrollbar
+ul::-webkit-scrollbar {
+  display: none;
 }
