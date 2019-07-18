@@ -18,6 +18,6 @@ export class WaiterTableListComponent implements OnInit {
   }
 
   navigateTo(id: string) {
-    this.router.navigate(["waiter", id]);
+    this.router.navigate(["/", "waiter", "dashboard", id]);
   }
 }

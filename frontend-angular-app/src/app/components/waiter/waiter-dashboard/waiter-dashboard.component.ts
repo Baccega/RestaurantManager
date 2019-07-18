@@ -1,15 +1,24 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { Subscription } from "rxjs";
 @Component({
   selector: "app-waiter-dashboard",
   templateUrl: "./waiter-dashboard.component.html",
   styleUrls: ["./waiter-dashboard.component.scss"]
 })
-export class WaiterDashboardComponent {
-  constructor(private router: Router) {}
+export class WaiterDashboardComponent implements OnInit, OnDestroy {
+  id: String = "";
+  sub: Subscription;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
   onClick() {
-    this.router.navigate(["waiter", "1", "new-order"]);
+    this.router.navigate(["waiter", "dashboard", this.id, "new-order"]);
   }
 }

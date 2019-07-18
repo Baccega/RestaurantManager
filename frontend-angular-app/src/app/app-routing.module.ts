@@ -9,20 +9,36 @@ import { WaiterNewOrderComponent } from "./components/waiter/waiter-new-order/wa
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
 import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
+import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
+import { DummyComponent } from "./components/dummy/dummy.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: LoginComponent
+    component: LoginComponent,
+    pathMatch: "full"
   },
   {
     path: "waiter",
     component: WaiterComponent,
     children: [
-      { path: "", component: WaiterDashboardComponent, pathMatch: "full" },
-      { path: ":id", component: WaiterTableDetailComponent },
-      { path: ":id/new-order", component: WaiterNewOrderComponent },
-      { path: "**", redirectTo: "" }
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      {
+        path: "dashboard",
+        component: WaiterDashboardComponent,
+        children: [
+          {
+            path: "",
+            component: DummyComponent,
+            pathMatch: "full"
+          },
+          { path: ":id", component: WaiterTableDetailComponent },
+          { path: "**", redirectTo: "" }
+        ]
+      },
+      { path: "new-table", component: WaiterNewTableComponent },
+      // { path: "new-order/:id", component: WaiterNewOrderComponent },
+      { path: "**", redirectTo: "dashboard" }
     ]
   },
   {
