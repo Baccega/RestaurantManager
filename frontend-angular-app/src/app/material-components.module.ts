@@ -3,7 +3,8 @@ import { NgModule } from "@angular/core";
 import {
   MatTabsModule,
   MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatProgressBarModule
 } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -23,7 +24,8 @@ import { MatInputModule } from "@angular/material/input";
     MatExpansionModule,
     MatCardModule,
     MatInputModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialComponentsModule {}

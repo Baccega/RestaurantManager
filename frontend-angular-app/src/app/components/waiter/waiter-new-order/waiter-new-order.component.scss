@@ -1,15 +1,32 @@
-.flexbox{
+.main-container {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+  .course-container {
     display: flex;
     justify-content: space-between;
-}
-.flexbox2 {
-    width: 120px;
-    display: flex;
-    justify-content: space-between;
+    .buttons-container {
+      width: 120px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
-#send{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;   
+.progressBar {
+  position: absolute;
+}
+
+#send {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+#cancel {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
 }

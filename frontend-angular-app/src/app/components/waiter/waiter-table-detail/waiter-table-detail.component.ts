@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 
 @Component({
   selector: "app-waiter-table-detail",
@@ -7,14 +7,18 @@ import { ActivatedRoute, Params } from "@angular/router";
   styleUrls: ["./waiter-table-detail.component.scss"]
 })
 export class WaiterTableDetailComponent implements OnInit {
-  id;
+  tableId;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((par: Params) => {
-      this.id = par["id"] ? par["id"] : "";
-      console.log("OK " + this.id);
+      this.tableId = par["id"] ? par["id"] : "";
+      console.log("OK " + this.tableId);
     });
+  }
+
+  goToNewOrder() {
+    this.router.navigate(["waiter", "new-order", this.tableId]);
   }
 }

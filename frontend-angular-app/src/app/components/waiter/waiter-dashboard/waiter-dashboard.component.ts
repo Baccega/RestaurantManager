@@ -6,19 +6,8 @@ import { Subscription } from "rxjs";
   templateUrl: "./waiter-dashboard.component.html",
   styleUrls: ["./waiter-dashboard.component.scss"]
 })
-export class WaiterDashboardComponent implements OnInit, OnDestroy {
-  id: String = "";
-  sub: Subscription;
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+export class WaiterDashboardComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
-
-  onClick() {
-    this.router.navigate(["waiter", "dashboard", this.id, "new-order"]);
-  }
 }

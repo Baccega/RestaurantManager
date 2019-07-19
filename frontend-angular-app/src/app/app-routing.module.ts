@@ -37,7 +37,7 @@ const routes: Routes = [
         ]
       },
       { path: "new-table", component: WaiterNewTableComponent },
-      // { path: "new-order/:id", component: WaiterNewOrderComponent },
+      { path: "new-order/:id", component: WaiterNewOrderComponent },
       { path: "**", redirectTo: "dashboard" }
     ]
   },
