@@ -20,6 +20,7 @@ import { WaiterTableListComponent } from "./components/waiter/waiter-table-list/
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { DummyComponent } from "./components/dummy/dummy.component";
     WaiterNewOrderComponent,
     WaiterNewTableComponent,
 
-    DummyComponent
+    DummyComponent,
+
+    SidenavComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
   providers: [SidenavService],

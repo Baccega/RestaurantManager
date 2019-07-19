@@ -1,11 +1,6 @@
 <mat-sidenav-container class="main-container">
   <mat-sidenav [opened]="open" (closedStart)="onClose()" class="sidenav">
-    <p class="title"><a routerLink="/cashier">cashier</a></p>
-    <p class="title"><a routerLink="/waiter">waiter</a></p>
-    <p class="title">
-      <a routerLink="/waiter/new-table">waiter - new-table</a>
-    </p>
-    <p class="title"><a routerLink="/chef">chef</a></p>
+    <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content class="content-container">
     <app-header></app-header>
