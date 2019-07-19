@@ -2,12 +2,11 @@
   height: 100%;
   width: 100%;
   background-color: lightgrey;
-  .container {
+  .content-container {
     display: grid;
-    grid-template-rows: 56px auto;
-    background-color: black;
+    grid-template-rows: 8vh auto;
   }
   .sidenav {
-    width: 100px;
+    width: 60vw;
   }
 }

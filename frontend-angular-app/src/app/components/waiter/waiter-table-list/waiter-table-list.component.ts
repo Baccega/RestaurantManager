@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Table } from "src/app/models/Table";
 import { TableService } from "src/app/services/table.service";
-import { Router, ActivatedRoute, RoutesRecognized } from "@angular/router";
+import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
 
