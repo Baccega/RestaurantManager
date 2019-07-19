@@ -32,5 +32,15 @@ export class TableService {
     }
   }
 
+  createTable(seats) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        console.log(`Added table with ${seats} seats`);
+        const id = 3;
+        resolve(3);
+      }, 3000);
+    });
+  }
+
   constructor() {}
 }

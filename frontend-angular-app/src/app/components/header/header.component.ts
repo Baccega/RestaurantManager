@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
 import { SidenavService } from "src/app/services/sidenav.service";
+import { HeaderTitleService } from "src/app/services/header-title.service";
 
 @Component({
   selector: "app-header",
@@ -8,13 +9,16 @@ import { SidenavService } from "src/app/services/sidenav.service";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  title: string;
+  title: String;
   activeSub: Subscription;
 
-  constructor(private sidenavService: SidenavService) {}
+  constructor(
+    private sidenavService: SidenavService,
+    private titleService: HeaderTitleService
+  ) {}
 
   ngOnInit() {
-    // console.log();
+    this.titleService.watch().subscribe(title => (this.title = title));
   }
 
   ngOnDestroy() {

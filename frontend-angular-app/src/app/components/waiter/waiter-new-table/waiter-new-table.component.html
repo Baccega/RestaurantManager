@@ -1,3 +1,20 @@
-<p>
-  waiter-new-table works!
-</p>
+<mat-progress-bar
+  *ngIf="waitingPromise"
+  mode="indeterminate"
+  class="progressBar"
+></mat-progress-bar>
+<div class="main-container">
+  <h2 class="title">Create a new table:</h2>
+  <form class="form">
+    <mat-form-field class="inputField">
+      <input matInput #seats placeholder="Seats number" />
+    </mat-form-field>
+  </form>
+</div>
+
+<button id="create" mat-fab color="primary" (click)="createTable()">
+  <mat-icon>assignment_turned_in</mat-icon>
+</button>
+<button id="cancel" mat-fab color="accent" (click)="close()">
+  <mat-icon>clear</mat-icon>
+</button>

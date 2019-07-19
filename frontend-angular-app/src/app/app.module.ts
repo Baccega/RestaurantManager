@@ -18,17 +18,14 @@ import { SidenavService } from "./services/sidenav.service";
 import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
 import { WaiterTableListComponent } from "./components/waiter/waiter-table-list/waiter-table-list.component";
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
-import { WaiterNewTableComponent } from './components/waiter/waiter-new-table/waiter-new-table.component';
-import { DummyComponent } from './components/dummy/dummy.component';
+import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
+import { DummyComponent } from "./components/dummy/dummy.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-
-    WaiterDashboardComponent,
-    WaiterNewOrderComponent,
 
     GenericBlockListComponent,
 
@@ -39,12 +36,11 @@ import { DummyComponent } from './components/dummy/dummy.component';
 
     CashierDashboardComponent,
 
-    WaiterTableDetailComponent,
-
-    WaiterTableListComponent,
-
     WaiterComponent,
-
+    WaiterDashboardComponent,
+    WaiterTableDetailComponent,
+    WaiterTableListComponent,
+    WaiterNewOrderComponent,
     WaiterNewTableComponent,
 
     DummyComponent

@@ -14,7 +14,6 @@ export class WaiterTableDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((par: Params) => {
       this.tableId = par["id"] ? par["id"] : "";
-      console.log("OK " + this.tableId);
     });
   }
 

@@ -1,0 +1,27 @@
+.main-container {
+  padding: 20px;
+
+  .title {
+    text-align: center;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.progressBar {
+  position: absolute;
+}
+
+#create {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+#cancel {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}

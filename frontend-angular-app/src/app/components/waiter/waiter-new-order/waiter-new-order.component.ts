@@ -4,6 +4,7 @@ import { DishService } from "src/app/services/dish.service";
 import { Menu } from "src/app/models/Menu";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { HeaderTitleService } from "src/app/services/header-title.service";
 
 function flattenMenu(menu: Menu[]) {
   return menu.reduce((prev: Dish[], el) => [...prev, ...el.dishes], []);
@@ -25,10 +26,12 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
   constructor(
     private dishService: DishService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderTitleService
   ) {}
 
   ngOnInit() {
+    this.headerService.setTitle("New Order");
     this.dishSub = this.dishService
       .getMenu()
       .subscribe(menu => (this.menu = menu));
