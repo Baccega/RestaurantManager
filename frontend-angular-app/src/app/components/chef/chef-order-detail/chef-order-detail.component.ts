@@ -4,6 +4,7 @@ import { Order } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-chef-order-detail",
@@ -18,12 +19,14 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit() {
     this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
       const id = params["id"];
+      this.utilsService.setId(id);
       this.orderServiceSub = this.orderService.getOrder(id).subscribe(
         order => (this.order = order),
         err => {

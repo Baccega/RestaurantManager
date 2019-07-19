@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from "@angular/core";
-import { SidenavService } from "./services/sidenav.service";
 import { Subscription, Observable } from "rxjs";
+import { UtilsService } from "./services/utils.service";
 
 @Component({
   selector: "app-root",
@@ -12,11 +12,11 @@ export class AppComponent implements OnInit, OnDestroy {
   open = false;
   sub: Subscription;
 
-  constructor(private sidenav: SidenavService) {}
+  constructor(private utilsService: UtilsService) {}
 
   ngOnInit() {
-    this.sub = this.sidenav
-      .getStatus()
+    this.sub = this.utilsService
+      .watchSidebar()
       .subscribe(status => (this.open = status));
   }
 
@@ -25,6 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onClose(): void {
-    this.sidenav.setStatus(false);
+    this.utilsService.setSidebar(false);
   }
 }

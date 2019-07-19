@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let order of orders" (click)="navigateTo(order.id)">
-    <mat-card>
+    <mat-card [ngClass]="{ 'is-active': order.id === id }">
       Order: {{ order.id }}<br />
       Table: {{ order.table.id }}
     </mat-card>

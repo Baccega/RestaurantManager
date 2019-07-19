@@ -32,7 +32,7 @@ const routes: Routes = [
             component: DummyComponent,
             pathMatch: "full"
           },
-          { path: "tables/:id", component: WaiterTableDetailComponent },
+          { path: ":id", component: WaiterTableDetailComponent },
           { path: "**", redirectTo: "" }
         ]
       },
@@ -49,6 +49,11 @@ const routes: Routes = [
     path: "chef",
     component: ChefDashboardComponent,
     children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
       { path: ":id", component: ChefOrderDetailComponent },
       { path: "**", redirectTo: "" }
     ]
