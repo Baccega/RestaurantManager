@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-waiter-table-detail",
@@ -7,13 +8,20 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
   styleUrls: ["./waiter-table-detail.component.scss"]
 })
 export class WaiterTableDetailComponent implements OnInit {
-  tableId;
+  tableId = "";
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private utils: UtilsService
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((par: Params) => {
-      this.tableId = par["id"] ? par["id"] : "";
+      if (par["id"]) {
+        this.tableId = par["id"];
+        this.utils.setId(par["id"]);
+      }
     });
   }
 

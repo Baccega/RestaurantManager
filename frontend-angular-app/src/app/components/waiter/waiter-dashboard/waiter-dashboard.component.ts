@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { HeaderTitleService } from "src/app/services/header-title.service";
 import { MatSnackBar } from "@angular/material";
 import { Subscription } from "rxjs";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-waiter-dashboard",
@@ -10,17 +10,17 @@ import { Subscription } from "rxjs";
   styleUrls: ["./waiter-dashboard.component.scss"]
 })
 export class WaiterDashboardComponent implements OnInit, OnDestroy {
-  routerSub: Subscription;
+  routerQuerySub: Subscription;
 
   constructor(
-    private headerService: HeaderTitleService,
+    private utilsService: UtilsService,
     private _snackBar: MatSnackBar,
     private activated: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.headerService.setTitle("Dashboard");
-    this.routerSub = this.activated.queryParams.subscribe(qParams => {
+    this.utilsService.setTitle("Dashboard");
+    this.routerQuerySub = this.activated.queryParams.subscribe(qParams => {
       if (qParams["result"] == "success") {
         this._snackBar.open("Operazione Eseguita!", "Chiudi", {
           duration: 2000
@@ -29,6 +29,6 @@ export class WaiterDashboardComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.routerSub.unsubscribe();
+    this.routerQuerySub.unsubscribe();
   }
 }

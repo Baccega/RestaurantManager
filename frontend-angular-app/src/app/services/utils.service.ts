@@ -4,16 +4,25 @@ import { Subject } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class HeaderTitleService {
+export class UtilsService {
+  public idWatcher: Subject<String> = new Subject();
   public titleWatcher: Subject<String> = new Subject();
 
-  constructor() {}
+  watchId(): Subject<String> {
+    return this.idWatcher;
+  }
+
+  setId(newId) {
+    this.idWatcher.next(newId);
+  }
 
   setTitle(title) {
     this.titleWatcher.next(title);
   }
 
-  watch(): Subject<String> {
+  watchTitle(): Subject<String> {
     return this.titleWatcher;
   }
+
+  constructor() {}
 }

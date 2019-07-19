@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TableService } from "src/app/services/table.service";
 import { Router } from "@angular/router";
-import { HeaderTitleService } from "src/app/services/header-title.service";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-waiter-new-table",
@@ -15,11 +15,11 @@ export class WaiterNewTableComponent implements OnInit {
   constructor(
     private tableService: TableService,
     private router: Router,
-    private headerService: HeaderTitleService
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit() {
-    this.headerService.setTitle("New Table");
+    this.utilsService.setTitle("New Table");
   }
 
   async createTable() {

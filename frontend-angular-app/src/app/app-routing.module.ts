@@ -32,7 +32,7 @@ const routes: Routes = [
             component: DummyComponent,
             pathMatch: "full"
           },
-          { path: ":id", component: WaiterTableDetailComponent },
+          { path: "tables/:id", component: WaiterTableDetailComponent },
           { path: "**", redirectTo: "" }
         ]
       },
