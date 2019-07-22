@@ -3,13 +3,19 @@
   mode="indeterminate"
   class="progressBar"
 ></mat-progress-bar>
-<div class="main-container">
-  <h2 class="title">Create a new table:</h2>
-  <form class="form">
-    <mat-form-field class="inputField">
-      <input matInput #seats placeholder="Seats number" />
-    </mat-form-field>
-  </form>
+<div class="seats-container">
+  <mat-card>
+    <h2 class="title">Seats number</h2>
+    <div class="grid">
+      <button mat-icon-button (click)="removeSeat()">
+        <mat-icon>remove</mat-icon>
+      </button>
+      <p>{{ seats }}</p>
+      <button mat-icon-button (click)="addSeat()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card>
 </div>
 
 <button id="create" mat-fab color="primary" (click)="createTable()">

@@ -1,12 +1,20 @@
-.main-container {
+.seats-container {
   padding: 20px;
-
-  .title {
-    text-align: center;
-  }
-  .form {
-    display: flex;
-    justify-content: center;
+  mat-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .title {
+      align-self: center;
+      margin-bottom: 0px;
+      text-align: center;
+    }
+    .grid {
+      align-self: center;
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
   }
 }
 

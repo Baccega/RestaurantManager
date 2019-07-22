@@ -10,7 +10,8 @@ import { UtilsService } from "src/app/services/utils.service";
 })
 export class WaiterNewTableComponent implements OnInit {
   waitingPromise: boolean = false;
-  seats: Number = 0;
+  selected = -1;
+  seats = 0;
 
   constructor(
     private tableService: TableService,
@@ -32,5 +33,13 @@ export class WaiterNewTableComponent implements OnInit {
 
   close(): void {
     this.router.navigate(["/waiter", "dashboard"]);
+  }
+
+  removeSeat() {
+    this.seats = this.seats > 0 ? this.seats - 1 : 0;
+  }
+
+  addSeat() {
+    this.seats++;
   }
 }
