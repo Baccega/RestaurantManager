@@ -1,7 +1,9 @@
+@import "./css-variables.scss";
+
 .main-container {
   height: 100%;
   width: 100%;
-  background-color: lightgrey;
+  background-color: $background;
   .content-container {
     display: grid;
     grid-template-rows: 8vh auto;
