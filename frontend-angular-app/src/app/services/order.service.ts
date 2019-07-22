@@ -144,8 +144,8 @@ export class OrderService {
 
   constructor() {}
 
-  getOrders(): Observable<Order[]> {
-    return of(this.orders);
+  getOrders(tableId = ""): Observable<Order[]> {
+    return of(this.orders.filter(el => el.table.id !== tableId));
   }
 
   getOrder(id): Observable<Order> {
