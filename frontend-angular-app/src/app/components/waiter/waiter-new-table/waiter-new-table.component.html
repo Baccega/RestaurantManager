@@ -11,15 +11,16 @@
           <button mat-icon-button (click)="removeQuantity(i, j)">
             <mat-icon>remove</mat-icon>
           </button>
-          <p>{{dish.quantity}}</p>
+          <p>{{ dish.quantity }}</p>
           <button mat-icon-button (click)="addQuantity(i, j)">
             <mat-icon>add</mat-icon>
           </button>
         </div>
-
       </div>
     </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
 
-<button id="send" mat-fab color="primary" (click)="sendOrder()"><mat-icon>send</mat-icon></button>
+<button id="send" mat-fab color="primary" (click)="sendOrder()">
+  <mat-icon>send</mat-icon>
+</button>

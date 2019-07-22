@@ -11,6 +11,7 @@ import { BartenderModule } from "./modules/bartender/bartender.module";
 import { ChefModule } from "./modules/chef/chef.module";
 import { CashierModule } from "./modules/cashier/cashier.module";
 import { MaterialComponentsModule } from "./modules/material-components/material-components.module";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HeaderComponent],
@@ -21,7 +22,8 @@ import { MaterialComponentsModule } from "./modules/material-components/material
     BartenderModule,
     ChefModule,
     CashierModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

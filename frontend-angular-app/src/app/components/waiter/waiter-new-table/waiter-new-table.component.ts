@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Dish } from "src/app/models/Dish";
-import { DishService } from "src/app/services/dish.service";
+import { DishService } from "../../../services/dish.service";
 import { Observable } from "rxjs";
 import { Menu } from "src/app/models/Menu";
 
@@ -20,7 +20,10 @@ export class WaiterNewTableComponent implements OnInit {
   }
 
   getMenu(): void {
-    this.dishService.getMenu().subscribe(menu => (this.menu = menu));
+    this.dishService.getMenu().subscribe(menu => {
+      this.menu = menu;
+      console.log(this.menu);
+    });
   }
 
   addQuantity(i: number, j: number) {
