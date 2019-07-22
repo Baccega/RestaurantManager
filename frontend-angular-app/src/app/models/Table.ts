@@ -1,5 +1,5 @@
 export interface Table {
-  id: string;
+  id: String;
   seats: number;
   free: boolean;
 }
