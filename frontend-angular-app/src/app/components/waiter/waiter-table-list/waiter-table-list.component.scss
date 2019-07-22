@@ -6,12 +6,15 @@ ul {
   margin: 0px;
   display: flex;
   overflow-y: scroll;
+  // Firefox hide scrollbar
   scrollbar-width: none;
+
   li {
     min-width: 100px;
     margin: 10px;
     border-radius: 10%;
     cursor: pointer;
+    text-align: center;
     .card {
       padding: 10px;
       background-color: lightblue;
@@ -19,4 +22,13 @@ ul {
       height: 100%;
     }
   }
+}
+// Chrome hide scrollbar
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+.is-active {
+  background-color: #3f51b5;
+  color: white;
 }

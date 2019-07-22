@@ -1,22 +1,34 @@
-import { Component, OnInit } from "@angular/core";
-import { Order } from "src/app/models/Order";
-import { OrderService } from "src/app/services/order.service";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { Subscription } from "rxjs";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-waiter-dashboard",
   templateUrl: "./waiter-dashboard.component.html",
   styleUrls: ["./waiter-dashboard.component.scss"]
 })
-export class WaiterDashboardComponent implements OnInit {
-  private orders: Order[];
+export class WaiterDashboardComponent implements OnInit, OnDestroy {
+  routerQuerySub: Subscription;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private utilsService: UtilsService,
+    private _snackBar: MatSnackBar,
+    private activated: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.orderService.getOrders().subscribe(orders => (this.orders = orders));
+    this.utilsService.setTitle("Dashboard");
+    this.routerQuerySub = this.activated.queryParams.subscribe(qParams => {
+      if (qParams["result"] == "success") {
+        this._snackBar.open("Operazione Eseguita!", "Chiudi", {
+          duration: 2000
+        });
+      }
+    });
   }
-
-  onClick() {
-    console.log("wedfsg");
+  ngOnDestroy() {
+    this.routerQuerySub.unsubscribe();
   }
 }

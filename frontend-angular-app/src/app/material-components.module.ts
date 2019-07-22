@@ -1,6 +1,12 @@
 import { NgModule } from "@angular/core";
 
-import { MatTabsModule, MatToolbarModule } from "@angular/material";
+import {
+  MatTabsModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatProgressBarModule,
+  MatSnackBarModule
+} from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -18,7 +24,10 @@ import { MatInputModule } from "@angular/material/input";
     BrowserAnimationsModule,
     MatExpansionModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialComponentsModule {}

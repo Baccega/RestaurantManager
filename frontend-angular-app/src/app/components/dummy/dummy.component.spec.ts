@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WaiterTablesListComponent } from './waiter-tables-list.component';
+import { DummyComponent } from './dummy.component';
 
-describe('WaiterTablesListComponent', () => {
-  let component: WaiterTablesListComponent;
-  let fixture: ComponentFixture<WaiterTablesListComponent>;
+describe('DummyComponent', () => {
+  let component: DummyComponent;
+  let fixture: ComponentFixture<DummyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WaiterTablesListComponent ]
+      declarations: [ DummyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WaiterTablesListComponent);
+    fixture = TestBed.createComponent(DummyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

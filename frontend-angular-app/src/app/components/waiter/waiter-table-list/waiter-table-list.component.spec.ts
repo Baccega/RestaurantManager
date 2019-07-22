@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenericBlockListComponent } from './generic-block-list.component';
+import { WaiterTableListComponent } from './waiter-table-list.component';
 
-describe('GenericBlockListComponent', () => {
-  let component: GenericBlockListComponent;
-  let fixture: ComponentFixture<GenericBlockListComponent>;
+describe('WaiterTableListComponent', () => {
+  let component: WaiterTableListComponent;
+  let fixture: ComponentFixture<WaiterTableListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenericBlockListComponent ]
+      declarations: [ WaiterTableListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenericBlockListComponent);
+    fixture = TestBed.createComponent(WaiterTableListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Dish } from "src/app/models/Dish";
-import { DishService } from "../../../services/dish.service";
-import { Observable } from "rxjs";
-import { Menu } from "src/app/models/Menu";
+import { TableService } from "src/app/services/table.service";
+import { Router } from "@angular/router";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-waiter-new-table",
@@ -11,37 +9,35 @@ import { Menu } from "src/app/models/Menu";
   styleUrls: ["./waiter-new-table.component.scss"]
 })
 export class WaiterNewTableComponent implements OnInit {
-  menu: Menu[];
+  waitingPromise: boolean = false;
+  seats: Number = 0;
 
-  constructor(private dishService: DishService) {}
+  constructor(
+    private tableService: TableService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
-    this.getMenu();
+    this.utilsService.setTitle("New Table");
   }
 
+<<<<<<< HEAD
   getMenu(): void {
     this.dishService.getMenu().subscribe(menu => {
       this.menu = menu;
       console.log(this.menu);
+=======
+  async createTable() {
+    this.waitingPromise = true;
+    const newId = await this.tableService.createTable(this.seats);
+    this.router.navigate(["/waiter", "dashboard", newId], {
+      queryParams: { result: "success" }
+>>>>>>> 08e64b6804851b26a6f6cfa48c2ce2fde2b1fa06
     });
   }
 
-  addQuantity(i: number, j: number) {
-    this.menu[i].dishes[j].quantity += 1;
-    console.log(this.menu[i].dishes[j]);
-  }
-  removeQuantity(i: number, j: number) {
-    if (this.menu[i].dishes[j].quantity > 0)
-      this.menu[i].dishes[j].quantity -= 1;
-    console.log(this.menu[i].dishes[j].quantity);
-  }
-
-  sendOrder(): void {
-    let order: Dish[] = [];
-    for (let elem of this.menu) {
-      for (let dish of elem.dishes) if (dish.quantity > 0) order.push(dish);
-    }
-    console.log(order);
-    this.dishService.sendOrder(order);
+  close(): void {
+    this.router.navigate(["/waiter", "dashboard"]);
   }
 }

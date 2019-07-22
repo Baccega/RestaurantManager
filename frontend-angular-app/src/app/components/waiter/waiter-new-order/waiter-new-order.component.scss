@@ -4,9 +4,14 @@
   .title {
     text-align: center;
   }
-  .form {
+  .course-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    .buttons-container {
+      width: 120px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -14,7 +19,7 @@
   position: absolute;
 }
 
-#create {
+#send {
   position: absolute;
   bottom: 15px;
   right: 15px;

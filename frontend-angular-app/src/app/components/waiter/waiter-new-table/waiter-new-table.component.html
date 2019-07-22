@@ -1,26 +1,20 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let elem of menu; let i = index">
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{ elem.category }}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-card *ngFor="let dish of elem.dishes; let j = index">
-      <div class="flexbox">
-        <p>{{ dish.name }}</p>
+<mat-progress-bar
+  *ngIf="waitingPromise"
+  mode="indeterminate"
+  class="progressBar"
+></mat-progress-bar>
+<div class="main-container">
+  <h2 class="title">Create a new table:</h2>
+  <form class="form">
+    <mat-form-field class="inputField">
+      <input matInput #seats placeholder="Seats number" />
+    </mat-form-field>
+  </form>
+</div>
 
-        <div class="flexbox2">
-          <button mat-icon-button (click)="removeQuantity(i, j)">
-            <mat-icon>remove</mat-icon>
-          </button>
-          <p>{{ dish.quantity }}</p>
-          <button mat-icon-button (click)="addQuantity(i, j)">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-      </div>
-    </mat-card>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<button id="send" mat-fab color="primary" (click)="sendOrder()">
-  <mat-icon>send</mat-icon>
+<button id="create" mat-fab color="primary" (click)="createTable()">
+  <mat-icon>assignment_turned_in</mat-icon>
+</button>
+<button id="cancel" mat-fab color="accent" (click)="close()">
+  <mat-icon>clear</mat-icon>
 </button>

@@ -1,0 +1,43 @@
+<mat-progress-bar
+  *ngIf="waitingPromise"
+  mode="indeterminate"
+  class="progressBar"
+></mat-progress-bar>
+<div class="main-container">
+  <h2 class="title">Table: {{ tableId }}</h2>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let elem of menu; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ elem.category }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card *ngFor="let dish of elem.dishes; let j = index">
+        <div class="course-container">
+          <p>{{ dish.name }}</p>
+
+          <div class="buttons-container">
+            <button mat-icon-button (click)="removeQuantity(i, j)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p>{{ dish.quantity }}</p>
+            <button mat-icon-button (click)="addQuantity(i, j)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<button
+  id="send"
+  *ngIf="sendedDishes > 0"
+  mat-fab
+  color="primary"
+  (click)="sendOrder()"
+>
+  <mat-icon>send</mat-icon>
+</button>
+<button id="cancel" mat-fab color="accent" (click)="cancelOrder()">
+  <mat-icon>clear</mat-icon>
+</button>

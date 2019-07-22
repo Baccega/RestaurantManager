@@ -1,5 +1,12 @@
 .main-container {
-  display: grid;
-  grid-template-rows: 56px auto;
-  background-color: black;
+  height: 100%;
+  width: 100%;
+  background-color: lightgrey;
+  .content-container {
+    display: grid;
+    grid-template-rows: 8vh auto;
+  }
+  .sidenav {
+    width: 60vw;
+  }
 }

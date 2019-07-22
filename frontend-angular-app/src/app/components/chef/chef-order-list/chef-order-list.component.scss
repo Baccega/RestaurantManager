@@ -1,0 +1,34 @@
+ul {
+  list-style: none;
+  width: 100%;
+  max-width: 100vw;
+  padding-left: 0px;
+  margin: 0px;
+  display: flex;
+  overflow-y: scroll;
+  // Firefox hide scrollbar
+  scrollbar-width: none;
+
+  li {
+    min-width: 100px;
+    margin: 10px;
+    border-radius: 10%;
+    cursor: pointer;
+    text-align: center;
+    .card {
+      padding: 10px;
+      background-color: lightblue;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.is-active {
+  background-color: #3f51b5;
+  color: white;
+}
+
+// Chrome hide scrollbar
+ul::-webkit-scrollbar {
+  display: none;
+}

@@ -5,23 +5,40 @@ import { WaiterDashboardComponent } from "./components/waiter/waiter-dashboard/w
 import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
-import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
-import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
+import { WaiterNewOrderComponent } from "./components/waiter/waiter-new-order/waiter-new-order.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
+import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
+import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
+import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
+import { DummyComponent } from "./components/dummy/dummy.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: LoginComponent
+    component: LoginComponent,
+    pathMatch: "full"
   },
   {
     path: "waiter",
     component: WaiterComponent,
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
-      { path: "dashboard", component: WaiterDashboardComponent },
+      {
+        path: "dashboard",
+        component: WaiterDashboardComponent,
+        children: [
+          {
+            path: "",
+            component: DummyComponent,
+            pathMatch: "full"
+          },
+          { path: ":id", component: WaiterTableDetailComponent },
+          { path: "**", redirectTo: "" }
+        ]
+      },
       { path: "new-table", component: WaiterNewTableComponent },
-      { path: "**", redirectTo: "" }
+      { path: "new-order/:id", component: WaiterNewOrderComponent },
+      { path: "**", redirectTo: "dashboard" }
     ]
   },
   {
@@ -32,6 +49,11 @@ const routes: Routes = [
     path: "chef",
     component: ChefDashboardComponent,
     children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
       { path: ":id", component: ChefOrderDetailComponent },
       { path: "**", redirectTo: "" }
     ]

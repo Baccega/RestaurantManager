@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from "rxjs";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
   selector: "app-header",
@@ -7,16 +8,20 @@ import { Subscription } from "rxjs";
   styleUrls: ["./header.component.scss"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  title: string;
+  title: String;
   activeSub: Subscription;
 
-  constructor() {}
+  constructor(private utilsService: UtilsService) {}
 
   ngOnInit() {
-    console.log();
+    this.utilsService.watchTitle().subscribe(title => (this.title = title));
   }
 
   ngOnDestroy() {
     this.activeSub.unsubscribe();
+  }
+
+  openSidenav() {
+    this.utilsService.setSidebar(true);
   }
 }
