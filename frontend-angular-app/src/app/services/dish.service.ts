@@ -2,10 +2,6 @@ import { Injectable } from "@angular/core";
 import { Dish, DishStatus } from "../models/Dish";
 import { Observable, of } from "rxjs";
 import { Menu } from "../models/Menu";
-import { HttpClient } from '@angular/common/http';
-
-
-const url = "http://localhost:3000/courses";
 
 @Injectable({
   providedIn: "root"
@@ -13,10 +9,128 @@ const url = "http://localhost:3000/courses";
 export class DishService {
   ordersDish: Dish[][] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getMenu(): Observable<Menu[]> {
-    return this.http.get<Menu[]>(url, {responseType: 'json'});
+    return of([
+      {
+        category: "antipasti",
+        dishes: [
+          {
+            id: "0",
+            category: "antipasti",
+            name: "baccala ecca la",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "antipasti",
+            name: "baccala ecca la",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "antipasti",
+            name: "baccala ecca la",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          }
+        ]
+      },
+
+      {
+        category: "primi",
+        dishes: [
+          {
+            id: "0",
+            category: "primi",
+            name: "basta",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "primi",
+            name: "lisotto",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "primi",
+            name: "blodo",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          }
+        ]
+      },
+      {
+        category: "secondi",
+        dishes: [
+          {
+            id: "0",
+            category: "secondi",
+            name: "pesse",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "secondi",
+            name: "bistecca",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "secondi",
+            name: "piadina",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          }
+        ]
+      },
+      {
+        category: "bevande",
+        dishes: [
+          {
+            id: "0",
+            category: "bevande",
+            name: "acqua",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "bevande",
+            name: "vino",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          },
+          {
+            id: "0",
+            category: "bevande",
+            name: "aria",
+            price: 33,
+            quantity: 0,
+            status: DishStatus["Waiting"]
+          }
+        ]
+      }
+    ]);
   }
 
   sendOrder(order: Dish[]) {

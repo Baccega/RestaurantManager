@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Order } from "../models/Order";
+import { Order, OrderStatus } from "../models/Order";
 import { Observable, of, throwError } from "rxjs";
 import { DishStatus } from "../models/Dish";
 
@@ -16,6 +16,7 @@ export class OrderService {
         free: false
       },
       waiter: "io",
+      status: OrderStatus["Waiting"],
       dishes: [
         {
           id: "1",
@@ -43,6 +44,7 @@ export class OrderService {
         free: false
       },
       waiter: "tu",
+      status: OrderStatus["Preparing"],
       dishes: [
         {
           id: "1",
@@ -62,6 +64,7 @@ export class OrderService {
         free: false
       },
       waiter: "tu",
+      status: OrderStatus["Delivered"],
       dishes: [
         {
           id: "1",
@@ -129,6 +132,7 @@ export class OrderService {
         free: false
       },
       waiter: "tu",
+      status: OrderStatus["Ready"],
       dishes: [
         {
           id: "1",

@@ -1,8 +1,31 @@
+@import "../../../css-variables.scss";
+
 .main-container {
   padding: 20px;
-  .title {
-    text-align: center;
+  height: 75vh;
+  overflow: scroll;
+  // Firefox hide scrollbar
+  scrollbar-width: none;
+  .flexedTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+      margin-right: 30px;
+    }
   }
+  .panel {
+    .flexed {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+// Chrome hide scrollbar
+.main-container::-webkit-scrollbar {
+  display: none;
 }
 button {
   position: absolute;

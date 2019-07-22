@@ -1,3 +1,5 @@
+@import "../../../css-variables.scss";
+
 ul {
   list-style: none;
   width: 100%;
@@ -24,8 +26,8 @@ ul {
   }
 }
 .is-active {
-  background-color: #3f51b5;
-  color: white;
+  background-color: $primary;
+  color: $primary-text;
 }
 
 // Chrome hide scrollbar
