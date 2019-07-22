@@ -22,18 +22,11 @@ export class WaiterNewTableComponent implements OnInit {
     this.utilsService.setTitle("New Table");
   }
 
-<<<<<<< HEAD
-  getMenu(): void {
-    this.dishService.getMenu().subscribe(menu => {
-      this.menu = menu;
-      console.log(this.menu);
-=======
   async createTable() {
     this.waitingPromise = true;
     const newId = await this.tableService.createTable(this.seats);
     this.router.navigate(["/waiter", "dashboard", newId], {
       queryParams: { result: "success" }
->>>>>>> 08e64b6804851b26a6f6cfa48c2ce2fde2b1fa06
     });
   }
 
