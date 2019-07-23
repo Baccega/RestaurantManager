@@ -1,18 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-var mongoose =  require("mongoose");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoose =  require("mongoose");
 const dotenv = require('dotenv');
 
 //DECLARATION OF ROUTES
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var coursesRouter = require('./routes/courses');
-var tablesRouter = require('./routes/tables');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const coursesRouter = require('./routes/courses');
+const tablesRouter = require('./routes/tables');
+const ordersRouter = require('./routes/orders');
+
 
 
 var app = express();
@@ -38,8 +40,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/courses', coursesRouter);
 app.use('/tables', tablesRouter);
-
-
+app.use('/orders', ordersRouter);
 
 
 //MONGOOSE CONNECTION

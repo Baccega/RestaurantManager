@@ -11,7 +11,7 @@ let tableschema = new mongoose.Schema ({
     },
     free: {
         type: Boolean,
-        required: true
+        default: true
     },
 });
 
