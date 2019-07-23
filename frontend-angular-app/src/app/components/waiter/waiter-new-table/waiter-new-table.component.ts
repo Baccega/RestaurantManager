@@ -27,7 +27,7 @@ export class WaiterNewTableComponent implements OnInit {
     this.tableService.getFreeTables(true).subscribe(newTables => {
       this.tables = newTables;
       this.visibleTables = this.tables.filter(
-        table => table.seats <= this.seats
+        table => table.seats > this.seats
       );
     });
   }
@@ -45,16 +45,20 @@ export class WaiterNewTableComponent implements OnInit {
   }
 
   removeSeat() {
-    if (this.seats > 0) {
+    if (this.seats > 1) {
       this.seats--;
       this.visibleTables = this.tables.filter(
-        table => table.seats <= this.seats
+        table => table.seats > this.seats
       );
     }
   }
 
   addSeat() {
     this.seats++;
-    this.visibleTables = this.tables.filter(table => table.seats <= this.seats);
+    this.visibleTables = this.tables.filter(table => table.seats > this.seats);
+  }
+
+  select(id) {
+    this.selected = id != this.selected ? id : -1;
   }
 }

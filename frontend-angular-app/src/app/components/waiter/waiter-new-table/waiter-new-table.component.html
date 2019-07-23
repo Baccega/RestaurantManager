@@ -20,12 +20,23 @@
 <div class="list-container">
   <ul>
     <li *ngFor="let table of visibleTables">
-      <mat-card class="table-block">Table {{ table.id }}</mat-card>
+      <mat-card
+        (click)="select(table.id)"
+        [ngClass]="{ active: table.id === selected }"
+        class="table-block"
+        >Table {{ table.id }}</mat-card
+      >
     </li>
   </ul>
 </div>
 
-<button id="create" mat-fab color="primary" (click)="createTable()">
+<button
+  *ngIf="selected != -1"
+  id="create"
+  mat-fab
+  color="primary"
+  (click)="createTable()"
+>
   <mat-icon>assignment_turned_in</mat-icon>
 </button>
 <button id="cancel" mat-fab color="accent" (click)="close()">

@@ -18,22 +18,22 @@ export class TableService {
       free: true
     },
     {
-      id: "2",
+      id: "3",
       seats: 3,
       free: true
     },
     {
-      id: "2",
+      id: "4",
       seats: 4,
       free: true
     },
     {
-      id: "2",
+      id: "5",
       seats: 5,
       free: true
     },
     {
-      id: "2",
+      id: "6",
       seats: 6,
       free: true
     },
