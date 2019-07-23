@@ -30,8 +30,8 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/freeTable", async (req, res, next) => {
-  const freeTable = await TablesModel.find({ free: true });
+router.get("/freeTables", async (req, res, next) => {
+  const freeTable = await TablesModel.find({ free: true, seats:req.body.seats });
   res.status(200).send(freeTable);
 });
 

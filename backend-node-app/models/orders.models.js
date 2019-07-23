@@ -7,7 +7,7 @@ let orderSchema = new mongoose.Schema({
     required: true
   },
   waiter: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   dishes: { type: [DishesModel.Schema], required: true },

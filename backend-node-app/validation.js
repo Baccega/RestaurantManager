@@ -14,7 +14,9 @@ const registerValidation = data => {
     password: Joi.string()
       .min(6)
       .required(),
-    role: Joi.string().required()
+    role: Joi.string()
+      .allow("waiter", "bartender", "chef", "cashier")
+      .required()
   };
   return Joi.validate(data, schema);
 };
@@ -61,3 +63,25 @@ const dishValidation = data => {
 };
 
 module.exports.dishValidation = dishValidation;
+
+const dishSchema = {
+  name: Joi.string().required(),
+  category: Joi.string()
+    .allow("Antipasti", "Primi", "Secondi", "Bevande")
+    .required(),
+  price: Joi.number().required(),
+  quantity: Joi.number().required(),
+  status: Joi.number(),
+  preparation: Joi.number().required()
+};
+
+const orderValidation = data => {
+  const schema = {
+    table: Joi.number().required(),
+    waiter: Joi.string().required(),
+    dishes: Joi.array().items(Joi.object(dishSchema))
+  };
+  return Joi.validate(data, schema);
+};
+
+module.exports.orderValidation = orderValidation;
