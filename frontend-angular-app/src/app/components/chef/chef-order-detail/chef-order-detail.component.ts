@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DishStatus } from "src/app/models/Dish";
-import { Order } from "src/app/models/Order";
+import { Order, OrderStatus } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -42,16 +42,31 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     this.routerSub.unsubscribe();
   }
 
-  startDish(index) {
+  async startDish(index) {
+    this.utilsService.setProgressbar(true);
+    console.log("started " + index);
     this.order.dishes[index].status = DishStatus["Started"];
+    await this.orderService.setDishStatus(
+      this.order.id,
+      index,
+      DishStatus["Started"]
+    );
+    console.log("finished " + index);
+    this.utilsService.setProgressbar(false);
   }
 
-  finishDish(index) {
+  async finishDish(index) {
     this.order.dishes[index].status = DishStatus["Finished"];
     if (
       this.order.dishes.filter(ord => ord.status != DishStatus["Finished"])
         .length == 0
     ) {
+      this.utilsService.setProgressbar(true);
+      await this.orderService.setOrderStatus(
+        this.order.id,
+        OrderStatus["Ready"]
+      );
+      this.utilsService.setProgressbar(false);
       this.router.navigate(["/chef"]);
     }
   }
