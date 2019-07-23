@@ -182,9 +182,10 @@ export class OrderService {
   setDishStatus(id: String, dishIndex: number, newStatus: DishStatus) {
     return new Promise(resolve => {
       setTimeout(() => {
-        this.orders.find(order => order.id === id).dishes[
-          dishIndex
-        ].status = newStatus;
+        const order = this.orders.find(order => order.id === id);
+        order.dishes[dishIndex].status = newStatus;
+        order.status = OrderStatus["Preparing"];
+
         resolve();
       }, 500);
     });

@@ -42,21 +42,19 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     this.routerSub.unsubscribe();
   }
 
-  async startDish(index) {
+  async setDishStatus(index, newStatus) {
     this.utilsService.setProgressbar(true);
-    console.log("started " + index);
-    this.order.dishes[index].status = DishStatus["Started"];
-    await this.orderService.setDishStatus(
-      this.order.id,
-      index,
-      DishStatus["Started"]
-    );
-    console.log("finished " + index);
+    this.order.dishes[index].status = newStatus;
+    await this.orderService.setDishStatus(this.order.id, index, newStatus);
     this.utilsService.setProgressbar(false);
   }
 
+  async startDish(index) {
+    await this.setDishStatus(index, DishStatus["Started"]);
+  }
+
   async finishDish(index) {
-    this.order.dishes[index].status = DishStatus["Finished"];
+    await this.setDishStatus(index, DishStatus["Finished"]);
     if (
       this.order.dishes.filter(ord => ord.status != DishStatus["Finished"])
         .length == 0
