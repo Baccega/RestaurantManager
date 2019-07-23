@@ -8,6 +8,7 @@ export class UtilsService {
   public idWatcher: Subject<String> = new Subject();
   public titleWatcher: Subject<String> = new Subject();
   public sidebarWatcher: Subject<boolean> = new Subject();
+  public progressbarWatcher: Subject<boolean> = new Subject();
 
   setId(newId) {
     this.idWatcher.next(newId);
@@ -21,6 +22,10 @@ export class UtilsService {
     this.sidebarWatcher.next(newSidebar);
   }
 
+  setProgressbar(newProgressbar) {
+    this.progressbarWatcher.next(newProgressbar);
+  }
+
   watchId(): Subject<String> {
     return this.idWatcher;
   }
@@ -31,6 +36,10 @@ export class UtilsService {
 
   watchSidebar(): Subject<boolean> {
     return this.sidebarWatcher;
+  }
+
+  watchProgressbar(): Subject<boolean> {
+    return this.progressbarWatcher;
   }
 
   constructor() {}

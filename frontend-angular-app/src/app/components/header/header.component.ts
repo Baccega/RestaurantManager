@@ -9,16 +9,24 @@ import { UtilsService } from "src/app/services/utils.service";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   title: String;
-  activeSub: Subscription;
+  progressbar: boolean;
+  titleSub: Subscription;
+  progressSub: Subscription;
 
   constructor(private utilsService: UtilsService) {}
 
   ngOnInit() {
-    this.utilsService.watchTitle().subscribe(title => (this.title = title));
+    this.titleSub = this.utilsService
+      .watchTitle()
+      .subscribe(title => (this.title = title));
+    this.progressSub = this.utilsService
+      .watchProgressbar()
+      .subscribe(progressbar => (this.progressbar = progressbar));
   }
 
   ngOnDestroy() {
-    this.activeSub.unsubscribe();
+    this.titleSub.unsubscribe();
+    this.progressSub.unsubscribe();
   }
 
   openSidenav() {

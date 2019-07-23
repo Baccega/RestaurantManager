@@ -5,6 +5,7 @@ import { Menu } from "src/app/models/Menu";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
+import { OrderService } from "src/app/services/order.service";
 
 function flattenMenu(menu: Menu[]) {
   return menu.reduce((prev: Dish[], el) => [...prev, ...el.dishes], []);
@@ -25,6 +26,7 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dishService: DishService,
+    private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private utilsService: UtilsService
@@ -59,8 +61,9 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
 
   async sendOrder() {
     const order = flattenMenu(this.menu).filter(dish => dish.quantity > 0);
-    this.waitingPromise = true;
-    await this.dishService.sendOrder(order);
+    this.utilsService.setProgressbar(true);
+    await this.orderService.sendOrder(order);
+    this.utilsService.setProgressbar(false);
     this.router.navigate(["/waiter", "dashboard", this.tableId], {
       queryParams: { result: "success" }
     });

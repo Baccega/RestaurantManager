@@ -132,13 +132,4 @@ export class DishService {
       }
     ]);
   }
-
-  sendOrder(order: Dish[]) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        this.ordersDish.push(order);
-        resolve();
-      }, 3000);
-    });
-  }
 }

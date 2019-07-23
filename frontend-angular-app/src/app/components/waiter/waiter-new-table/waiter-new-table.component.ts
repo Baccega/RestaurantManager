@@ -10,7 +10,6 @@ import { Table } from "src/app/models/Table";
   styleUrls: ["./waiter-new-table.component.scss"]
 })
 export class WaiterNewTableComponent implements OnInit {
-  waitingPromise: boolean = false;
   selected: number = -1;
   seats: number = 4;
   tables: Table[];
@@ -33,8 +32,9 @@ export class WaiterNewTableComponent implements OnInit {
   }
 
   async createTable() {
-    this.waitingPromise = true;
+    this.utilsService.setProgressbar(true);
     const newId = await this.tableService.createTable(this.seats);
+    this.utilsService.setProgressbar(false);
     this.router.navigate(["/waiter", "dashboard", newId], {
       queryParams: { result: "success" }
     });

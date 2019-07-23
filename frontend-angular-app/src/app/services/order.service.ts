@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Order, OrderStatus } from "../models/Order";
 import { Observable, of, throwError } from "rxjs";
-import { DishStatus } from "../models/Dish";
+import { DishStatus, Dish } from "../models/Dish";
 
 @Injectable({
   providedIn: "root"
@@ -159,5 +159,13 @@ export class OrderService {
     } else {
       return throwError(`Order "${id}" not found`);
     }
+  }
+
+  sendOrder(order: Dish[]) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    });
   }
 }
