@@ -5,7 +5,7 @@
 ></mat-progress-bar>
 <div class="seats-container">
   <mat-card>
-    <h2 class="title">Seats number</h2>
+    <h3 class="title">Seats</h3>
     <div class="grid">
       <button mat-icon-button (click)="removeSeat()">
         <mat-icon>remove</mat-icon>
@@ -16,6 +16,13 @@
       </button>
     </div>
   </mat-card>
+</div>
+<div class="list-container">
+  <ul>
+    <li *ngFor="let table of visibleTables">
+      <mat-card class="table-block">Table {{ table.id }}</mat-card>
+    </li>
+  </ul>
 </div>
 
 <button id="create" mat-fab color="primary" (click)="createTable()">

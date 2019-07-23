@@ -5,7 +5,8 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatProgressBarModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatListModule
 } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -27,7 +28,8 @@ import { MatInputModule } from "@angular/material/input";
     MatInputModule,
     MatSidenavModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule
   ]
 })
 export class MaterialComponentsModule {}

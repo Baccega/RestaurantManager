@@ -2,7 +2,7 @@
   <mat-card>
     <mat-accordion>
       <mat-expansion-panel
-        class="panel"
+        class="panel no-padding"
         *ngFor="let order of tableOrders; let i = index"
       >
         <mat-expansion-panel-header class="panel">
@@ -14,7 +14,8 @@
             <mat-icon *ngIf="order.status == 3">done</mat-icon>
           </div>
         </mat-expansion-panel-header>
-        <mat-card *ngFor="let dish of order.dishes; let j = index">
+
+        <mat-card cls *ngFor="let dish of order.dishes; let j = index">
           <div class="flexed">
             <p>{{ dish.name }}</p>
             <mat-icon *ngIf="dish.status == 0">hourglass_empty</mat-icon>

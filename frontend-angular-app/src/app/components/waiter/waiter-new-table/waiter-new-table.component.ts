@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { TableService } from "src/app/services/table.service";
 import { Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
+import { Table } from "src/app/models/Table";
 
 @Component({
   selector: "app-waiter-new-table",
@@ -10,8 +11,10 @@ import { UtilsService } from "src/app/services/utils.service";
 })
 export class WaiterNewTableComponent implements OnInit {
   waitingPromise: boolean = false;
-  selected = -1;
-  seats = 0;
+  selected: number = -1;
+  seats: number = 4;
+  tables: Table[];
+  visibleTables: Table[];
 
   constructor(
     private tableService: TableService,
@@ -21,6 +24,12 @@ export class WaiterNewTableComponent implements OnInit {
 
   ngOnInit() {
     this.utilsService.setTitle("New Table");
+    this.tableService.getFreeTables(true).subscribe(newTables => {
+      this.tables = newTables;
+      this.visibleTables = this.tables.filter(
+        table => table.seats <= this.seats
+      );
+    });
   }
 
   async createTable() {
@@ -36,10 +45,16 @@ export class WaiterNewTableComponent implements OnInit {
   }
 
   removeSeat() {
-    this.seats = this.seats > 0 ? this.seats - 1 : 0;
+    if (this.seats > 0) {
+      this.seats--;
+      this.visibleTables = this.tables.filter(
+        table => table.seats <= this.seats
+      );
+    }
   }
 
   addSeat() {
     this.seats++;
+    this.visibleTables = this.tables.filter(table => table.seats <= this.seats);
   }
 }

@@ -9,18 +9,47 @@ export class TableService {
   tables: Table[] = [
     {
       id: "1",
-      seats: 2,
+      seats: 1,
       free: false
     },
     {
       id: "2",
       seats: 2,
       free: true
+    },
+    {
+      id: "2",
+      seats: 3,
+      free: true
+    },
+    {
+      id: "2",
+      seats: 4,
+      free: true
+    },
+    {
+      id: "2",
+      seats: 5,
+      free: true
+    },
+    {
+      id: "2",
+      seats: 6,
+      free: true
+    },
+    {
+      id: "2",
+      seats: 7,
+      free: true
     }
   ];
 
   getTables(): Observable<Table[]> {
     return of(this.tables);
+  }
+
+  getFreeTables(free: boolean): Observable<Table[]> {
+    return of(this.tables.filter(table => table.free == free));
   }
 
   getTable(id): Observable<Table> {
