@@ -1,0 +1,15 @@
+@import "../../../css-variables.scss";
+.tabs-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  mat-card {
+    width: 30%;
+    text-align: center;
+  }
+}
+
+.is-active {
+  background-color: $primary;
+  color: $primary-text;
+}

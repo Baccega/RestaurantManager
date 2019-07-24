@@ -1,3 +1,8 @@
-<p>
-  cashier-dashboard works!
-</p>
+<div class="tabs-container">
+  <mat-card [ngClass]="{ 'is-active': !free }">
+    BUSY
+  </mat-card>
+  <mat-card [ngClass]="{ 'is-active': free }">
+    FREE
+  </mat-card>
+</div>

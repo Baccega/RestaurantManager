@@ -20,6 +20,9 @@ import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/wa
 import { DummyComponent } from "./components/dummy/dummy.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-order-list.component";
+import { CashierBusyComponent } from './components/cashier/cashier-busy/cashier-busy.component';
+import { CashierFreeComponent } from './components/cashier/cashier-free/cashier-free.component';
+import { CashierStatisticsComponent } from './components/cashier/cashier-statistics/cashier-statistics.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,13 @@ import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-o
 
     DummyComponent,
 
-    SidenavComponent
+    SidenavComponent,
+
+    CashierBusyComponent,
+
+    CashierFreeComponent,
+
+    CashierStatisticsComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
   providers: [],
