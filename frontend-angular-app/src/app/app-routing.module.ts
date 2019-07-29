@@ -11,6 +11,8 @@ import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-det
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
+import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
+import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 
 const routes: Routes = [
   {
@@ -61,11 +63,9 @@ const routes: Routes = [
     path: "cashier",
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
-      {
-        path: "dashboard",
-        component: CashierDashboardComponent
-      },
-      { path: "bills/:table", component: CashierStatisticsComponent },
+      { path: "dashboard", component: CashierDashboardComponent },
+      { path: "tables/:table", component: CashierViewOrderComponent },
+      { path: "tables/:table/bill", component: CashierBillComponent },
       { path: "statistics", component: CashierStatisticsComponent },
       { path: "**", redirectTo: "" }
     ]

@@ -1,0 +1,37 @@
+.main-container {
+  padding: 20px;
+  height: 75vh;
+  overflow: scroll;
+  // Firefox hide scrollbar
+  scrollbar-width: none;
+  .flexedTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+      margin-right: 30px;
+    }
+  }
+  .panel {
+    .flexed {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .body {
+    padding: 0px;
+  }
+}
+
+#btn-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+#btn-left {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}

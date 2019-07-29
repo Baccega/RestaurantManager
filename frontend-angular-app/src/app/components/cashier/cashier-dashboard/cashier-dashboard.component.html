@@ -18,7 +18,7 @@
     <ul *ngIf="tab === 'busy'">
       <ng-container *ngFor="let table of tables">
         <li *ngIf="!table.free">
-          <a [routerLink]="['/cashier/bills/' + table.id]">
+          <a [routerLink]="['/cashier/tables/' + table.id]">
             <mat-card class="table-block">Table {{ table.id }}</mat-card>
           </a>
         </li>
@@ -27,7 +27,7 @@
     <ul *ngIf="tab === 'free'">
       <ng-container *ngFor="let table of tables">
         <li *ngIf="table.free">
-          <a [routerLink]="['/cashier/bills/' + table.id]">
+          <a [routerLink]="['/cashier/tables/' + table.id]">
             <mat-card class="table-block">Table {{ table.id }}</mat-card>
           </a>
         </li>

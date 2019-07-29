@@ -1,0 +1,36 @@
+<div class="main-container">
+  <mat-card>
+    <mat-accordion>
+      <mat-expansion-panel
+        class="panel no-padding"
+        *ngFor="let order of tableOrders; let i = index"
+      >
+        <mat-expansion-panel-header class="panel">
+          <div class="flexedTitle">
+            <mat-panel-title>Ordine: {{ order.id }}</mat-panel-title>
+            <mat-icon *ngIf="order.status == 0">hourglass_empty</mat-icon>
+            <mat-icon *ngIf="order.status == 1">whatshot</mat-icon>
+            <mat-icon *ngIf="order.status == 2">notifications_active</mat-icon>
+            <mat-icon *ngIf="order.status == 3">done</mat-icon>
+          </div>
+        </mat-expansion-panel-header>
+
+        <mat-card cls *ngFor="let dish of order.dishes; let j = index">
+          <div class="flexed">
+            <p>{{ dish.name }}</p>
+            <mat-icon *ngIf="dish.status == 0">hourglass_empty</mat-icon>
+            <mat-icon *ngIf="dish.status == 1">whatshot</mat-icon>
+            <mat-icon *ngIf="dish.status == 2">fastfood</mat-icon>
+          </div>
+        </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</div>
+
+<button mat-fab color="primary" id="btn-right" (click)="navigateToBill()">
+  <mat-icon>euro_symbol</mat-icon>
+</button>
+<button id="btn-left" mat-fab color="accent" (click)="navigateToDashboard()">
+  <mat-icon>clear</mat-icon>
+</button>
