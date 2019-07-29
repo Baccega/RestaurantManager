@@ -3,7 +3,7 @@
     <mat-accordion>
       <mat-expansion-panel
         class="panel no-padding"
-        *ngFor="let order of tableOrders; let i = index"
+        *ngFor="let order of orders; let i = index"
       >
         <mat-expansion-panel-header class="panel">
           <div class="flexedTitle">
@@ -29,7 +29,7 @@
 </div>
 
 <button mat-fab color="primary" id="btn-right" (click)="navigateToBill()">
-  <mat-icon>euro_symbol</mat-icon>
+  <mat-icon>local_printshop</mat-icon>
 </button>
 <button id="btn-left" mat-fab color="accent" (click)="navigateToDashboard()">
   <mat-icon>clear</mat-icon>
