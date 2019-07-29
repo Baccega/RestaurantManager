@@ -24,7 +24,7 @@ export class WaiterTableListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tableSub = this.tableService
-      .getTables()
+      .watchTables()
       .subscribe(tables => (this.tables = tables));
 
     this.utilsSub = this.utils.watchId().subscribe(newId => {

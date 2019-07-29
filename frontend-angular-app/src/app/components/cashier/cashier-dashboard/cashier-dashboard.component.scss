@@ -1,11 +1,47 @@
 @import "../../../css-variables.scss";
-.tabs-container {
-  margin-top: 20px;
+
+.main-container {
   display: flex;
-  justify-content: space-evenly;
-  mat-card {
-    width: 30%;
-    text-align: center;
+  flex-direction: column;
+  height: 80vh;
+
+  .tabs-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    mat-card {
+      cursor: pointer;
+      width: 30%;
+      text-align: center;
+    }
+  }
+
+  .list-container {
+    padding: 20px;
+    flex: 1;
+    ul {
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      li {
+        a {
+          text-decoration: none;
+
+          .table-block {
+            width: 90px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 }
 

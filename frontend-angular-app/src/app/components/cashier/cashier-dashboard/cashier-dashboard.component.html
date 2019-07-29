@@ -1,8 +1,37 @@
-<div class="tabs-container">
-  <mat-card [ngClass]="{ 'is-active': !free }">
-    BUSY
-  </mat-card>
-  <mat-card [ngClass]="{ 'is-active': free }">
-    FREE
-  </mat-card>
+<div class="main-container">
+  <div class="tabs-container">
+    <mat-card
+      (click)="changeTab('busy')"
+      [ngClass]="{ 'is-active': tab === 'busy' }"
+    >
+      BUSY
+    </mat-card>
+    <mat-card
+      (click)="changeTab('free')"
+      [ngClass]="{ 'is-active': tab === 'free' }"
+    >
+      FREE
+    </mat-card>
+  </div>
+
+  <div class="list-container">
+    <ul *ngIf="tab === 'busy'">
+      <ng-container *ngFor="let table of tables">
+        <li *ngIf="!table.free">
+          <a [routerLink]="['/cashier/bills/' + table.id]">
+            <mat-card class="table-block">Table {{ table.id }}</mat-card>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+    <ul *ngIf="tab === 'free'">
+      <ng-container *ngFor="let table of tables">
+        <li *ngIf="table.free">
+          <a [routerLink]="['/cashier/bills/' + table.id]">
+            <mat-card class="table-block">Table {{ table.id }}</mat-card>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
 </div>

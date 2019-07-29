@@ -44,7 +44,7 @@ export class TableService {
     }
   ];
 
-  getTables(): Observable<Table[]> {
+  watchTables(): Observable<Table[]> {
     return of(this.tables);
   }
 
@@ -52,7 +52,7 @@ export class TableService {
     return of(this.tables.filter(table => table.free == free));
   }
 
-  getTable(id): Observable<Table> {
+  watchTable(id): Observable<Table> {
     const found: Table = this.tables.find(table => table.id === id);
     if (found) {
       return of(found);

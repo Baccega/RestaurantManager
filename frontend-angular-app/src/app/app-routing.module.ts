@@ -8,11 +8,8 @@ import { CashierDashboardComponent } from "./components/cashier/cashier-dashboar
 import { WaiterNewOrderComponent } from "./components/waiter/waiter-new-order/waiter-new-order.component";
 import { ChefOrderDetailComponent } from "./components/chef/chef-order-detail/chef-order-detail.component";
 import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
-import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
-import { CashierBusyComponent } from "./components/cashier/cashier-busy/cashier-busy.component";
-import { CashierFreeComponent } from "./components/cashier/cashier-free/cashier-free.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 
 const routes: Routes = [
@@ -23,7 +20,6 @@ const routes: Routes = [
   },
   {
     path: "waiter",
-    component: WaiterComponent,
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       {
@@ -63,22 +59,13 @@ const routes: Routes = [
   },
   {
     path: "cashier",
-    component: CashierDashboardComponent,
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       {
         path: "dashboard",
-        component: CashierDashboardComponent,
-        children: [
-          {
-            path: "",
-            component: CashierBusyComponent,
-            pathMatch: "full"
-          },
-          { path: "free", component: CashierFreeComponent },
-          { path: "**", redirectTo: "" }
-        ]
+        component: CashierDashboardComponent
       },
+      { path: "bills/:table", component: CashierStatisticsComponent },
       { path: "statistics", component: CashierStatisticsComponent },
       { path: "**", redirectTo: "" }
     ]

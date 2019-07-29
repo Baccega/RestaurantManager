@@ -15,14 +15,12 @@ import { BartenderDashboardComponent } from "./components/bartender/bartender-da
 import { CashierDashboardComponent } from "./components/cashier/cashier-dashboard/cashier-dashboard.component";
 import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-detail/waiter-table-detail.component";
 import { WaiterTableListComponent } from "./components/waiter/waiter-table-list/waiter-table-list.component";
-import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-order-list.component";
-import { CashierBusyComponent } from './components/cashier/cashier-busy/cashier-busy.component';
-import { CashierFreeComponent } from './components/cashier/cashier-free/cashier-free.component';
-import { CashierStatisticsComponent } from './components/cashier/cashier-statistics/cashier-statistics.component';
+import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
+import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 
 @NgModule({
   declarations: [
@@ -37,8 +35,9 @@ import { CashierStatisticsComponent } from './components/cashier/cashier-statist
     BartenderDashboardComponent,
 
     CashierDashboardComponent,
+    CashierStatisticsComponent,
+    CashierBillComponent,
 
-    WaiterComponent,
     WaiterDashboardComponent,
     WaiterTableDetailComponent,
     WaiterTableListComponent,
@@ -47,13 +46,7 @@ import { CashierStatisticsComponent } from './components/cashier/cashier-statist
 
     DummyComponent,
 
-    SidenavComponent,
-
-    CashierBusyComponent,
-
-    CashierFreeComponent,
-
-    CashierStatisticsComponent
+    SidenavComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
   providers: [],

@@ -1,25 +1,46 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
-import { ActivatedRoute, UrlSegment } from "@angular/router";
+import { TableService } from "src/app/services/table.service";
+import { Subscription } from "rxjs";
+import { Table } from "src/app/models/Table";
 
 @Component({
   selector: "app-cashier-dashboard",
   templateUrl: "./cashier-dashboard.component.html",
   styleUrls: ["./cashier-dashboard.component.scss"]
 })
-export class CashierDashboardComponent implements OnInit {
-  free: boolean = false;
+export class CashierDashboardComponent implements OnInit, OnDestroy {
+  tab: string = "busy";
+  tables: Table[] = [];
+  tableSub: Subscription[] = [];
+  tablesSub: Subscription;
 
   constructor(
     private utilsService: UtilsService,
-    private activeRoute: ActivatedRoute
+    private tableService: TableService
   ) {}
 
   ngOnInit() {
     this.utilsService.setTitle("Dashboard");
-    this.activeRoute.url.subscribe((route: UrlSegment[]) => {
-      console.log(route);
-      this.free = route.includes(new UrlSegment("free", {})) ? true : false;
+    this.tablesSub = this.tableService.watchTables().subscribe(tables => {
+      this.tables = tables;
+      tables.forEach(
+        (table, index) =>
+          (this.tableSub[index] = this.tableService
+            .watchTable(table.id)
+            .subscribe(newTable => {
+              tables[index] = newTable;
+            }))
+      );
     });
+  }
+
+  ngOnDestroy() {
+    this.tableSub.forEach(sub => sub.unsubscribe());
+    this.tablesSub.unsubscribe();
+  }
+
+  changeTab(which) {
+    this.tab = which;
   }
 }
