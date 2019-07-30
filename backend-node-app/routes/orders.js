@@ -15,7 +15,7 @@ router.get("/all", (req, res, next) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.post("/newOrder/:table", async (req, res, next) => {
+router.post("/:table", async (req, res, next) => {
   if (!req.body) return res.status(400).send("Bad request, body missing");
   else {
     const table = await TableModel.findOne({ number: req.params.table });

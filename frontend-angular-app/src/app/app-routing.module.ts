@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from "./components/frontpage/login/login.component";
 import { WaiterDashboardComponent } from "./components/waiter/waiter-dashboard/waiter-dashboard.component";
 import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
@@ -11,10 +11,22 @@ import { WaiterTableDetailComponent } from "./components/waiter/waiter-table-det
 import { WaiterComponent } from "./components/waiter/waiter/waiter.component";
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
+import { FrontpageComponent } from "./components/frontpage/frontpage/frontpage.component";
+import { RegisterComponent } from "./components/frontpage/register/register.component";
 
 const routes: Routes = [
   {
     path: "",
+    component: FrontpageComponent,
+    pathMatch: "full"
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
+    pathMatch: "full"
+  },
+  {
+    path: "login",
     component: LoginComponent,
     pathMatch: "full"
   },

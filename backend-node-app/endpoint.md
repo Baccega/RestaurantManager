@@ -39,7 +39,7 @@ Cominica da Table
 | **GET** tables/freeTables **PL** {seats} | Ritorna i tavoli liberi che hanno X posti a sedere |
 | **GET** orders/all                       | Ritorna tutti gli ordini                           |
 | **POST** /newOrder/:table                | Crea un nuovo ordine per il tavolo                 |
-| **GET** orders/                          | Ritorna gli ordini a seconda del ruole del JWT     |
+| **GET** orders/                          | Ritorna gli ordini a seconda del ruolo del JWT     |
 |                                          |                                                    |
 |                                          |                                                    |
 |                                          |                                                    |

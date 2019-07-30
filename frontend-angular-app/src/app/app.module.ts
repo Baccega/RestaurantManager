@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from "./components/frontpage/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
 
 import { MaterialComponentsModule } from "./material-components.module";
@@ -20,6 +20,11 @@ import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/wa
 import { DummyComponent } from "./components/dummy/dummy.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-order-list.component";
+import { FrontpageComponent } from "./components/frontpage/frontpage/frontpage.component";
+import { RegisterComponent } from "./components/frontpage/register/register.component";
+
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -44,9 +49,20 @@ import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-o
 
     DummyComponent,
 
-    SidenavComponent
+    SidenavComponent,
+
+    LoginComponent,
+    FrontpageComponent,
+    RegisterComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

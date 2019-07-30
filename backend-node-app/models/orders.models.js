@@ -12,7 +12,7 @@ let orderSchema = new mongoose.Schema({
   },
   dishes: { type: [DishesModel.Schema], required: true },
   delivered: {
-    type: Boolean,
+    type: Number,
     default: false
   }
 });

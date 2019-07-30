@@ -79,7 +79,8 @@ const orderValidation = data => {
   const schema = {
     table: Joi.number().required(),
     waiter: Joi.string().required(),
-    dishes: Joi.array().items(Joi.object(dishSchema))
+    dishes: Joi.array().items(Joi.object(dishSchema)),
+    delivered: Joi.number().allow(0,1,2,3)
   };
   return Joi.validate(data, schema);
 };
