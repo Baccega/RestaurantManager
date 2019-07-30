@@ -21,7 +21,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-order-list.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
-import { CashierViewOrderComponent } from './components/cashier/cashier-view-order/cashier-view-order.component';
+import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { CashierViewOrderComponent } from './components/cashier/cashier-view-ord
     CashierDashboardComponent,
     CashierStatisticsComponent,
     CashierBillComponent,
+    CashierViewOrderComponent,
 
     WaiterDashboardComponent,
     WaiterTableDetailComponent,
@@ -47,9 +48,7 @@ import { CashierViewOrderComponent } from './components/cashier/cashier-view-ord
 
     DummyComponent,
 
-    SidenavComponent,
-
-    CashierViewOrderComponent
+    SidenavComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialComponentsModule],
   providers: [],

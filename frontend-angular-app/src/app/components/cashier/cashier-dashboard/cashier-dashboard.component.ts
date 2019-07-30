@@ -12,7 +12,6 @@ import { Table } from "src/app/models/Table";
 export class CashierDashboardComponent implements OnInit, OnDestroy {
   tab: string = "busy";
   tables: Table[] = [];
-  tableSub: Subscription[] = [];
   tablesSub: Subscription;
 
   constructor(
@@ -24,19 +23,10 @@ export class CashierDashboardComponent implements OnInit, OnDestroy {
     this.utilsService.setTitle("Dashboard");
     this.tablesSub = this.tableService.watchTables().subscribe(tables => {
       this.tables = tables;
-      tables.forEach(
-        (table, index) =>
-          (this.tableSub[index] = this.tableService
-            .watchTable(table.id)
-            .subscribe(newTable => {
-              tables[index] = newTable;
-            }))
-      );
     });
   }
 
   ngOnDestroy() {
-    this.tableSub.forEach(sub => sub.unsubscribe());
     this.tablesSub.unsubscribe();
   }
 

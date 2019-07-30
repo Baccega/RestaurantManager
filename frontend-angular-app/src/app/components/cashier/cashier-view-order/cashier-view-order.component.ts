@@ -15,7 +15,6 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   routeSub: Subscription;
   ordersSub: Subscription;
-  orderSub: Subscription[] = [];
 
   constructor(
     private router: Router,
@@ -30,18 +29,11 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
       this.utilService.setTitle(`Table: ${this.tableId}`);
       this.ordersSub = this.orderService
         .getOrders(this.tableId)
-        .subscribe(newOrders =>
-          newOrders.forEach((order, index) => {
-            this.orderSub[index] = this.orderService
-              .getOrder(order.id)
-              .subscribe(newOrder => (this.orders[index] = newOrder));
-          })
-        );
+        .subscribe(newOrders => (this.orders = newOrders));
     });
   }
 
   ngOnDestroy() {
-    this.orderSub.forEach(sub => sub.unsubscribe());
     this.ordersSub.unsubscribe();
     this.routeSub.unsubscribe();
   }
