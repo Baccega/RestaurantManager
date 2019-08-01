@@ -25,6 +25,12 @@ import { RegisterComponent } from "./components/frontpage/register/register.comp
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { LoginService } from "./services/login.service";
+import { JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -61,9 +67,18 @@ import { HttpClientModule } from "@angular/common/http";
     MaterialComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:3000"],
+        blacklistedRoutes: [],
+        authScheme:"",
+        headerName:"auth-token"
+      }
+    })
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
