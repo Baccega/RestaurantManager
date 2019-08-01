@@ -61,7 +61,7 @@ router.post("/:table", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   if (!req.body) return res.status(400).send("Bad request, body missing");
-  const { role } = await UserModel.findById(req.body.id);
+  const { role, name } = await UserModel.findById(req.body.id);
   console.log(role);
   switch (role) {
     //Waiter test id --> 5d35cb8d1471d70980e39209
