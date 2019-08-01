@@ -12,15 +12,16 @@ Dish {
   name: string;
   price: number;
   quantity: number;
+  preparation: string;
   status: DishStatus;
-  category: string;       // Category ID
-  handler: string	      // Employee ID
+  category: string;       		// Category ID
+  handler: string	      		// Employee ID
 }
 
 Course {
   id: string
   name: string;
-  dishes: string[];       // Dish ID []       --- Volendo si può fare a meno
+  dishes: string[];       		// Dish ID []       --- Volendo si può fare a meno
 }
 
 Order {
@@ -29,7 +30,7 @@ Order {
   foodStatus: FoodStatus;
   drinkStatus: DrinkStatus;
   table: string;			// Table ID
-  waiter: string;           // Employee ID
+  waiter: string;           		// Employee ID
 }
 
 Table {
@@ -42,13 +43,13 @@ Bill {
   date: Date;
   orders: string[];			// Order ID []
   table: string;			// Table ID
-  waiter: string;           // Employee ID
+  waiter: string;           		// Employee ID
 }
 
 Employee {
-	id: string;
-	name: string;
-	role: Role;
+  id: string;
+  name: string;
+  role: Role;
 }
 
 --- STATUSES & ROLES ---
