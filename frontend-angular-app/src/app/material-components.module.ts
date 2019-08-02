@@ -5,7 +5,8 @@ import {
   MatToolbarModule,
   MatSidenavModule,
   MatProgressBarModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatListModule
 } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
