@@ -11,27 +11,28 @@ router.get("/", async (req, res, next) => {
 
 //Inserisci tavolo
 router.post("/", async (req, res, next) => {
-  req.body.forEach(async element => {
-    //validate before creation
-    const { error } = tableValidation(element);
-    if (error) return res.status(400).send(error.details[0].message);
+  const { error } = tableValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
-    const table = await TablesModel.findOne({ number: element.number });
-    if (table) return res.status(400).send("Table already insert !");
+  const table = await TablesModel.findOne({ number: req.body.number });
+  if (table) return res.status(400).send("Table already insert !");
 
-    let model = new TablesModel(element);
-    try {
-      const savedTable = await model.save();
-      console.log(savedTable);
-      res
-        .status(201)
-        .type("application/json")
-        .send(savedTable);
-    } catch (e) {
-      res.status(400).send(e);
-    }
-  });
+  let model = new TablesModel(req.body);
+  try {
+    const savedTable = await model.save();
+    console.log(savedTable);
+    res
+      .status(201)
+      .type("application/json")
+      .send(savedTable);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
+router.get("/freeTables", async (req, res, next) => {
+  const freeTable = await TablesModel.find({ free: true, seats:req.body.seats });
+  res.status(200).send(freeTable);
+});
 
 module.exports = router;

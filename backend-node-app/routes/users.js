@@ -10,7 +10,7 @@ router.get("/", function(req, res, next) {
   res.send("respond with a resource");
 });
 
-router.post("/newUser", async function(req, res, next) {
+router.post("/register", async function(req, res, next) {
   //validate before creation
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -49,11 +49,14 @@ router.post("/login", async function(req, res, next) {
 
   //Password correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(400).send("Invalid pwd");
+  if (!validPass) return res.status(400).send("Invalid passowrd !");
 
   //Create and assign token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header("auth-token", token).send(token);
+  res
+    .status(200)
+    .header("auth-token", token)
+    .send({ token: token, role: user.role });
 });
 
 module.exports = router;

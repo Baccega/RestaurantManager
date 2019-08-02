@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var DishesModel = require("../models/dishes.models");
 var CoursesModel = require("../models/courses.models");
+const { dishValidation } = require("../validation");
 
 //Get tutte le portate
 router.get("/", function(req, res, next) {
@@ -9,7 +10,6 @@ router.get("/", function(req, res, next) {
     .then(doc => res.json(doc))
     .catch(err => res.status(500).json(err));
 });
-
 
 //Tenere cosi o sistemare ? probabilemte eliminare
 //Try catch ?
@@ -33,36 +33,45 @@ router.post("/createCourse", async function(req, res, next) {
   }
 });
 
-//add ARRAY of dishes in SubDocument
-//Aggiunge piatti alla portata
-router.post("/newplate", function(req, res, next) {
-  if (!req.body) return res.status(400).send("Request body is missing");
-  else {
-    req.body.forEach(element => {
-      let model = new DishesModel(element);
-      console.log(model);
-      CoursesModel.findOneAndUpdate(
-        { category: model.category },
-        { $push: { dishes: model } }
-      )
-        .then(function(doc) {
-          if (!doc || doc.length === 0) {
-            return res.status(500).send(doc);
-          }
-          doc.dishes.push(model);
-          console.log(doc);
-          res
-            .status(201)
-            .type("application/json")
-            .send(doc);
-        })
-        .catch(err => res.status(500).json(err));
-    });
+//Add single plate to menu
+router.post("/newPlate", async function(req, res, next) {
+  if (!req.body) {
+    return res.status(400).send("Request body is missing");
+  } else {
+    const course = await CoursesModel.findOne({ category: req.body.category });
+    if (!course)
+      res
+        .status(400)
+        .send('This category "' + req.body.category + "\" doesn't exist!");
+    if (
+      course.dishes.find(ref => {
+        return ref.name == req.body.name;
+      })
+    ) {
+      res.status(400).send('Plate "' + req.body.name + '" already insert');
+    } else {
+
+      //validation
+      const { error } = dishValidation(req.body);
+      if (error) return res.status(400).send(error.details[0].message);
+
+      let model = new DishesModel(req.body);
+      console.log("model create" + model.toString());
+      try {
+        course.dishes.push(model);
+        const savedCourse = await course.save();
+        if (!savedCourse || savedCourse.length === 0) {
+          return res.status(500).send(savedCourse);
+        }
+        res
+          .status(201)
+          .type("application/json")
+          .send(savedCourse);
+      } catch (e) {
+        res.status(400).send(e);
+      }
+    }
   }
-});
-
-router.post("/newOrder", function( req, res, next){
-
 });
 
 module.exports = router;
