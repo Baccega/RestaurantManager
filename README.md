@@ -122,6 +122,12 @@ Role {
 | ------ | --------- | ------------ | -------------------------------------- |
 | POST   | (true|false) |              | Apri o chiudi un conto |
 
+### /orders
+
+| Method | Body            | Query Params | Description                 |
+| ------ | --------------- | ------------ | --------------------------- |
+| GET    |                 |              | Ricevi tutti gli ordini in base al tuo ruolo (bartender o chef)         |
+
 ### /orders/:id
 
 | Method | Body            | Query Params | Description                 |
