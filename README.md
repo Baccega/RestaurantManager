@@ -6,7 +6,7 @@
 
 # Frontend Data Models
 
-```
+```typescript
 Dish {
   id: string;
   name: string;
@@ -15,7 +15,7 @@ Dish {
   preparation: string;
   status: DishStatus;
   category: string;       		// Category ID
-  handler: string	      		// Employee ID
+  handler: string	      			// Employee ID
 }
 
 Course {
@@ -29,7 +29,7 @@ Order {
   dishes: Dish[];
   foodStatus: FoodStatus;
   drinkStatus: DrinkStatus;
-  table: string;			// Table ID
+  table: string;								// Table ID
   waiter: string;           		// Employee ID
 }
 
@@ -90,69 +90,69 @@ Role {
 
 ### /employees
 
-| Method | Body         | Query Params       | Description                                                  |
-| ------ | ------------ | ------------------ | ------------------------------------------------------------ |
-| GET    |              | role*=(1\|2\|3\|4) | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti |
-| POST#  | { Employee } |                    | Crea un nuovo dipendente                                     |
+| Method | Body         | Query Params         | Description                                                  | Users |
+| ------ | ------------ | -------------------- | ------------------------------------------------------------ | ----- |
+| GET    |              | role* = (1\|2\|3\|4) | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
+| POST   | { Employee } |                      | Crea un nuovo dipendente                                     | Cassa |
 
 ### /employee/:id
 
-| Method  | Body | Query Params | Description                |
-| ------- | ---- | ------------ | -------------------------- |
-| GET     |      |              | Ricevi il dipendente :id   |
-| DELETE# |      |              | Cancella il dipendente :id |
+| Method | Body | Query Params | Description                | Users |
+| ------ | ---- | ------------ | -------------------------- | ----- |
+| GET    |      |              | Ricevi il dipendente :id   | Cassa |
+| DELETE |      |              | Cancella il dipendente :id | Cassa |
 
 ### /bills
 
-| Method | Body     | Query Params                           | Description                                                  |
-| ------ | -------- | -------------------------------------- | ------------------------------------------------------------ |
-| GET    |          | waiter*=string<br />all*=(true\|false) | Ricevi tutti i conti aperti<br />*all*: Anche i conti chiusi del giorno<br />*waiter*: Solo i conti di un cameriere |
-| POST   | { Bill } |                                        | Crea un nuovo conto                                          |
+| Method | Body     | Query Params                           | Description                                                  | Users                |
+| ------ | -------- | -------------------------------------- | ------------------------------------------------------------ | -------------------- |
+| GET    |          | waiter*=string<br />all*=(true\|false) | Ricevi tutti i conti aperti<br />*all*: Anche i conti chiusi del giorno<br />*waiter*: Solo i conti di un cameriere | Cassa<br />Cameriere |
+| POST   | { Bill } |                                        | Crea un nuovo conto                                          | Cameriere            |
 
 ### /bills/:id
 
-| Method | Body      | Query Params | Description                            |
-| ------ | --------- | ------------ | -------------------------------------- |
-| GET    |           |              | Ricevi il conto :id                    |
-| POST   | { Order } |              | Inserisci un nuovo ordine al conto :id |
+| Method | Body      | Query Params | Description                            | Users                |
+| ------ | --------- | ------------ | -------------------------------------- | -------------------- |
+| GET    |           |              | Ricevi il conto :id                    | Cassa<br />Cameriere |
+| POST   | { Order } |              | Inserisci un nuovo ordine al conto :id | Cameriere            |
 
 ### /bills/:id/close
 
-| Method | Body      | Query Params | Description                            |
-| ------ | --------- | ------------ | -------------------------------------- |
-| POST   | (true|false) |              | Apri o chiudi un conto |
+| Method | Body      | Query Params | Description                            | Users |
+| ------ | --------- | ------------ | -------------------------------------- | ------ |
+| POST   | (true\|false) | | Apri/chiudi un conto | Cassa |
 
 ### /orders
 
-| Method | Body            | Query Params | Description                 |
-| ------ | --------------- | ------------ | --------------------------- |
-| GET    |                 |              | Ricevi tutti gli ordini in base al tuo ruolo (bartender o chef)         |
+| Method | Body | Query Params | Description                                  | Users             |
+| ------ | ---- | ------------ | -------------------------------------------- | ----------------- |
+| GET    |      |              | Ricevi tutti gli ordini in base al tuo ruolo | Barman<br />Cuoco |
 
 ### /orders/:id
 
-| Method | Body            | Query Params | Description                 |
-| ------ | --------------- | ------------ | --------------------------- |
-| GET    |                 |              | Ricevi l'ordine :id         |
-| POST   | { OrderStatus } |              | Cambia lo stato dell'ordine |
+| Method | Body            | Query Params | Description                 | Users |
+| ------ | --------------- | ------------ | --------------------------- | ----- |
+| GET    |                 |              | Ricevi l'ordine :id         | Tutti |
+| POST   | { OrderStatus } |              | Cambia lo stato dell'ordine | Tutti |
 
 ### /orders/:id/:dish
 
-| Method | Body           | Query Params | Description                                      |
-| ------ | -------------- | ------------ | ------------------------------------------------ |
-| GET    |                |              | Ricevi il piatto :dish dell'ordine :id           |
-| POST   | { DishStatus } |              | Cambia lo stato del piatto :dish dell'ordine :id |
+| Method | Body         | Query Params | Description                                      | Users            |
+| ------ | ------------ | ------------ | ------------------------------------------------ | ---------------- |
+| GET    |              |              | Ricevi il piatto :dish dell'ordine :id           | Tutti            |
+| POST   | {DishStatus} |              | Cambia lo stato del piatto :dish dell'ordine :id | Barman<br/>Cuoco |
 
 ### /tables
 
-| Method | Body      | Query Params | Description           |
-| ------ | --------- | ------------ | --------------------- |
-| GET    |           |              | Ricevi tutti i tavoli |
-| POST#  | { Table } |              | Crea un nuovo tavolo  |
+| Method | Body      | Query Params | Description           | Users |
+| ------ | --------- | ------------ | --------------------- | ----- |
+| GET    |           |              | Ricevi tutti i tavoli | Tutti |
+| POST#  | { Table } |              | Crea un nuovo tavolo  | Cassa |
 
 ### /tables/:id
 
-| Method  | Body        | Query Params | Description                                        |
-| ------- | ----------- | ------------ | -------------------------------------------------- |
-| GET     |             |              | Ricevi il tavolo :id                               |
-| POST    | { boolean } |              | Cambia lo stato del tavolo :id (free: true\|false) |
-| DELETE# |             |              | Cancella il tavolo :id                             |
+| Method  | Body        | Query Params | Description                                        | Users                |
+| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
+| GET     |             |              | Ricevi il tavolo :id                               | Tutti                |
+| POST    | { boolean } |              | Cambia lo stato del tavolo :id (free: true\|false) | Cassa<br />Cameriere |
+| DELETE# |             |              | Cancella il tavolo :id                             | Cassa                |
