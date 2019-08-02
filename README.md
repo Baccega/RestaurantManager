@@ -40,10 +40,11 @@ Table {
 }
 
 Bill {
+  open: boolean;
   date: Date;
   orders: string[];			// Order ID []
-  table: string;			// Table ID
-  waiter: string;           		// Employee ID
+  table: string;			  // Table ID
+  waiter: string;       // Employee ID
 }
 
 Employee {
@@ -114,6 +115,12 @@ Role {
 | ------ | --------- | ------------ | -------------------------------------- |
 | GET    |           |              | Ricevi il conto :id                    |
 | POST   | { Order } |              | Inserisci un nuovo ordine al conto :id |
+
+### /bills/:id/close
+
+| Method | Body      | Query Params | Description                            |
+| ------ | --------- | ------------ | -------------------------------------- |
+| POST   | (true|false) |              | Apri o chiudi un conto |
 
 ### /orders/:id
 
