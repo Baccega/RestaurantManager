@@ -38,7 +38,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HeaderComponent,
 
     ChefDashboardComponent,

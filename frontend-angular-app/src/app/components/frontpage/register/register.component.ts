@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     { name: "waiter" },
     { name: "bartender" },
     { name: "chef" },
-    { name: "cassher" }
+    { name: "cashier" }
   ];
 
   newUser;
