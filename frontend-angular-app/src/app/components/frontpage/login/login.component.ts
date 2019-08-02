@@ -1,5 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+  FormGroup
+} from "@angular/forms";
 import { LoginService } from "src/app/services/login.service";
 import { User } from "../../../models/User";
 import { Router } from "@angular/router";
@@ -13,9 +20,9 @@ import { UtilsService } from "src/app/services/utils.service";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  credential;
+  credential: FormGroup;
+
   constructor(
-    private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
     private _snackBar: MatSnackBar,
@@ -23,6 +30,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   onSubmit(data: any) {
+    console.log(this.credential);
     this.utilsService.setProgressbar(true);
 
     this.loginService.loginUser(data).subscribe(
@@ -41,14 +49,20 @@ export class LoginComponent implements OnInit {
         console.log(err.error);
       }
     );
-
-    this.credential.reset();
   }
 
   ngOnInit() {
-    this.credential = this.formBuilder.group({
-      email: "",
-      password: ""
+    this.utilsService.setTitle("Restaurant App");
+    this.credential = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", [
+        Validators.required,
+        Validators.minLength(6)
+      ])
     });
   }
+
+  public hasError = (controlName: string, errorName: string) => {
+    return this.credential.controls[controlName].hasError(errorName);
+  };
 }
