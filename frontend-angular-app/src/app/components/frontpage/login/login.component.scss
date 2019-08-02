@@ -1,4 +1,8 @@
-div {
+form {
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  mat-form-field {
+    margin-bottom: 10px;
+  }
 }

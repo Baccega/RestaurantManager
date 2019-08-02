@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ export class RegisterService {
 
   registerUser(data): Observable<any> {
     return this.http.post<any>(
-      "http://localhost:3000/users/register",
+      `${environment.serverUrl}/users/register`,
       data,
       httpOption
     );

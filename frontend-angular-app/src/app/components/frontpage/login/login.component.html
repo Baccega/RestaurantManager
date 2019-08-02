@@ -1,20 +1,19 @@
-<form [formGroup]="credential" (ngSubmit)="onSubmit(credential.value)">
-  <mat-form-field>
-    <input
-      id="email"
-      matInput
-      placeholder="email"
-      formControlName="email"
-    />
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      id="password"
-      matInput
-      type="password"
-      placeholder="password"
-      formControlName="password"
-    />
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
-</form>
+<div>
+  <form [formGroup]="credential" (ngSubmit)="onSubmit(credential.value)">
+    <mat-form-field>
+      <input id="email" matInput placeholder="email" formControlName="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        id="password"
+        matInput
+        type="password"
+        placeholder="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Sign In</button>
+  </form>
+
+  <a mat-raised-button color="primary" href="register">Sign up</a>
+</div>

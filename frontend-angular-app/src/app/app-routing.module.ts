@@ -13,13 +13,13 @@ import { DummyComponent } from "./components/dummy/dummy.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
-import { FrontpageComponent } from "./components/frontpage/frontpage/frontpage.component";
+
 import { RegisterComponent } from "./components/frontpage/register/register.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: FrontpageComponent,
+    redirectTo: "login",
     pathMatch: "full"
   },
   {
@@ -79,10 +79,10 @@ const routes: Routes = [
       { path: "tables/:table", component: CashierViewOrderComponent },
       { path: "tables/:table/bill", component: CashierBillComponent },
       { path: "statistics", component: CashierStatisticsComponent },
-      { path: "**", redirectTo: "" }
+      { path: "**", redirectTo: "dashboard" }
     ]
   },
-  { path: "**", redirectTo: "" }
+  { path: "**", redirectTo: "login" }
 ];
 
 @NgModule({

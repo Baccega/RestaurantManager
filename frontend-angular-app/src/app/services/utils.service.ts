@@ -10,19 +10,19 @@ export class UtilsService {
   public sidebarWatcher: Subject<boolean> = new Subject();
   public progressbarWatcher: Subject<boolean> = new Subject();
 
-  setId(newId) {
+  setId(newId: String) {
     this.idWatcher.next(newId);
   }
 
-  setTitle(title) {
+  setTitle(title: String) {
     this.titleWatcher.next(title);
   }
 
-  setSidebar(newSidebar) {
+  setSidebar(newSidebar: boolean) {
     this.sidebarWatcher.next(newSidebar);
   }
 
-  setProgressbar(newProgressbar) {
+  setProgressbar(newProgressbar: boolean) {
     this.progressbarWatcher.next(newProgressbar);
   }
 
