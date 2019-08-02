@@ -3,6 +3,8 @@ import { FormBuilder } from "@angular/forms";
 import { LoginService } from "src/app/services/login.service";
 import { User } from "../../../models/User";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { SnackbarComponent } from "../../snackbar/snackbar.component";
 
 @Component({
   selector: "app-login",
@@ -14,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
     this.credential = this.formBuilder.group({
       email: "",
@@ -35,6 +38,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate([data.role]);
       },
       err => {
+        this._snackBar.openFromComponent(SnackbarComponent, {
+          duration: 2000,
+          data: err.error
+        });
         console.log(err.error);
       }
     );

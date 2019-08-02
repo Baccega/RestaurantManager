@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { LoginService } from "./services/login.service";
 import { JwtModule } from "@auth0/angular-jwt";
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -59,7 +60,8 @@ export function tokenGetter() {
 
     LoginComponent,
     FrontpageComponent,
-    RegisterComponent
+    RegisterComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -73,12 +75,13 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         whitelistedDomains: ["localhost:3000"],
         blacklistedRoutes: [],
-        authScheme:"",
-        headerName:"auth-token"
+        authScheme: "",
+        headerName: "auth-token"
       }
     })
   ],
   providers: [LoginService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SnackbarComponent]
 })
 export class AppModule {}
