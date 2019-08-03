@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DishStatus } from "src/app/models/Dish";
-import { Order, OrderStatus } from "src/app/models/Order";
+import { Order, FoodStatus, DrinkStatus } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -60,9 +60,9 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
         .length == 0
     ) {
       this.utilsService.setProgressbar(true);
-      await this.orderService.setOrderStatus(
+      await this.orderService.setOrderFoodStatus(
         this.order.id,
-        OrderStatus["Ready"]
+        FoodStatus["Ready"]
       );
       this.utilsService.setProgressbar(false);
       this.router.navigate(["/chef"]);

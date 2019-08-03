@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Order, OrderStatus } from "../models/Order";
+import { Order, FoodStatus, DrinkStatus } from "../models/Order";
 import { Observable, of, throwError } from "rxjs";
 import { DishStatus, Dish } from "../models/Dish";
 
@@ -10,13 +10,10 @@ export class OrderService {
   private orders: Order[] = [
     {
       id: "1",
-      table: {
-        id: "1",
-        seats: 2,
-        free: false
-      },
+      table: "1",
       waiter: "io",
-      status: OrderStatus["Waiting"],
+      drinkStatus: DrinkStatus["Waiting"],
+      foodStatus: FoodStatus["Waiting"],
       dishes: [
         {
           id: "1",
@@ -24,6 +21,8 @@ export class OrderService {
           name: "Pasta",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -32,19 +31,18 @@ export class OrderService {
           name: "Pizza",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         }
       ]
     },
     {
       id: "2",
-      table: {
-        id: "2",
-        seats: 2,
-        free: false
-      },
+      table: "2",
       waiter: "tu",
-      status: OrderStatus["Preparing"],
+      drinkStatus: DrinkStatus["Ready"],
+      foodStatus: FoodStatus["Preparing"],
       dishes: [
         {
           id: "1",
@@ -52,19 +50,18 @@ export class OrderService {
           name: "Pasta1",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         }
       ]
     },
     {
       id: "3",
-      table: {
-        id: "3",
-        seats: 2,
-        free: false
-      },
+      table: "3",
       waiter: "tu",
-      status: OrderStatus["Delivered"],
+      drinkStatus: DrinkStatus["Delivered"],
+      foodStatus: FoodStatus["Delivered"],
       dishes: [
         {
           id: "1",
@@ -72,6 +69,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -80,6 +79,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -88,6 +89,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -96,6 +99,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -104,6 +109,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -112,6 +119,8 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         },
         {
@@ -120,19 +129,18 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         }
       ]
     },
     {
       id: "2",
-      table: {
-        id: "2",
-        seats: 2,
-        free: false
-      },
+      table: "2",
       waiter: "tu",
-      status: OrderStatus["Ready"],
+      drinkStatus: DrinkStatus["Ready"],
+      foodStatus: FoodStatus["Ready"],
       dishes: [
         {
           id: "1",
@@ -140,6 +148,8 @@ export class OrderService {
           name: "Pasta2",
           price: 2,
           quantity: 1,
+          handler: "someone",
+          preparation: "10",
           status: DishStatus["Waiting"]
         }
       ]
@@ -149,7 +159,7 @@ export class OrderService {
   constructor() {}
 
   getOrders(tableId = ""): Observable<Order[]> {
-    return of(this.orders.filter(el => el.table.id !== tableId));
+    return of(this.orders.filter(el => el.table !== tableId));
   }
 
   getOrder(id): Observable<Order> {
@@ -169,11 +179,21 @@ export class OrderService {
     });
   }
 
-  setOrderStatus(id: String, newStatus: OrderStatus) {
+  setOrderFoodStatus(id: String, newStatus: FoodStatus) {
     return new Promise(resolve => {
       setTimeout(() => {
         const order = this.orders.find(order => order.id === id);
-        order.status = newStatus;
+        order.foodStatus = newStatus;
+        resolve();
+      }, 3000);
+    });
+  }
+
+  setOrderDrinkStatus(id: String, newStatus: DrinkStatus) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const order = this.orders.find(order => order.id === id);
+        order.drinkStatus = newStatus;
         resolve();
       }, 3000);
     });
@@ -184,7 +204,7 @@ export class OrderService {
       setTimeout(() => {
         const order = this.orders.find(order => order.id === id);
         order.dishes[dishIndex].status = newStatus;
-        order.status = OrderStatus["Preparing"];
+        order.foodStatus = FoodStatus["Preparing"];
 
         resolve();
       }, 500);

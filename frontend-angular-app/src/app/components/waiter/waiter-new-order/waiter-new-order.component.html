@@ -8,7 +8,7 @@
   <mat-accordion>
     <mat-expansion-panel *ngFor="let elem of menu; let i = index">
       <mat-expansion-panel-header>
-        <mat-panel-title>{{ elem.category }}</mat-panel-title>
+        <mat-panel-title>{{ elem.name }}</mat-panel-title>
       </mat-expansion-panel-header>
       <mat-card *ngFor="let dish of elem.dishes; let j = index">
         <div class="course-container">

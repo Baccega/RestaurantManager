@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Dish } from "src/app/models/Dish";
 import { DishService } from "src/app/services/dish.service";
-import { Menu } from "src/app/models/Menu";
+import { Course } from "src/app/models/Course";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
 import { OrderService } from "src/app/services/order.service";
 
-function flattenMenu(menu: Menu[]) {
+function flattenCourse(menu: Course[]) {
   return menu.reduce((prev: Dish[], el) => [...prev, ...el.dishes], []);
 }
 
@@ -17,7 +17,7 @@ function flattenMenu(menu: Menu[]) {
   styleUrls: ["./waiter-new-order.component.scss"]
 })
 export class WaiterNewOrderComponent implements OnInit, OnDestroy {
-  menu: Menu[];
+  menu: Course[];
   tableId: String;
   waitingPromise: boolean = false;
   sendedDishes = 0;
@@ -34,12 +34,13 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.utilsService.setTitle("New Order");
-    this.dishSub = this.dishService
-      .getMenu()
-      .subscribe(menu => (this.menu = menu));
-    this.routerSub = this.activatedRoute.params.subscribe(
-      params => (this.tableId = params["id"])
-    );
+
+    this.routerSub = this.activatedRoute.params.subscribe(params => {
+      this.tableId = params["id"];
+      this.dishSub = this.dishService
+        .getCourses()
+        .subscribe(menu => (this.menu = menu));
+    });
   }
 
   ngOnDestroy() {
@@ -60,7 +61,7 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
   }
 
   async sendOrder() {
-    const order = flattenMenu(this.menu).filter(dish => dish.quantity > 0);
+    const order = flattenCourse(this.menu).filter(dish => dish.quantity > 0);
     this.utilsService.setProgressbar(true);
     await this.orderService.sendOrder(order);
     this.utilsService.setProgressbar(false);
