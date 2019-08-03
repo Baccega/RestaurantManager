@@ -40,7 +40,7 @@ Table {
 }
 
 Bill {
-  open: boolean;
+  total: number;
   date: Date;
   orders: string[];			// Order ID []
   table: string;			  // Table ID
