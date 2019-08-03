@@ -104,36 +104,29 @@ Role {
 
 ### /bills
 
-| Method | Body     | Query Params                           | Description                                                  | Users                |
-| ------ | -------- | -------------------------------------- | ------------------------------------------------------------ | -------------------- |
-| GET    |          | waiter*=string<br />all*=(true\|false) | Ricevi tutti i conti aperti<br />*all*: Anche i conti chiusi del giorno<br />*waiter*: Solo i conti di un cameriere | Cassa<br />Cameriere |
-| POST   | { Bill } |                                        | Crea un nuovo conto                                          | Cameriere            |
+| Method | Body            | Query Params   | Description                                                  | Users |
+| ------ | --------------- | -------------- | ------------------------------------------------------------ | ----- |
+| GET    |                 | waiter*=string | Ricevi tutti i conti<br />*waiter*: Solo i conti di un cameriere | Cassa |
+| POST   | { TableNumber } |                | Crea un nuovo conto                                          | Cassa |
 
 ### /bills/:id
 
-| Method | Body      | Query Params | Description                            | Users                |
-| ------ | --------- | ------------ | -------------------------------------- | -------------------- |
-| GET    |           |              | Ricevi il conto :id                    | Cassa<br />Cameriere |
-| POST   | { Order } |              | Inserisci un nuovo ordine al conto :id | Cameriere            |
-
-### /bills/:id/close
-
-| Method | Body      | Query Params | Description                            | Users |
-| ------ | --------- | ------------ | -------------------------------------- | ------ |
-| POST   | (true\|false) | | Apri/chiudi un conto | Cassa |
+| Method | Body | Query Params | Description         | Users |
+| ------ | ---- | ------------ | ------------------- | ----- |
+| GET    |      |              | Ricevi il conto :id | Cassa |
 
 ### /orders
 
-| Method | Body | Query Params | Description                                  | Users             |
-| ------ | ---- | ------------ | -------------------------------------------- | ----------------- |
-| GET    |      |              | Ricevi tutti gli ordini in base al tuo ruolo | Barman<br />Cuoco |
+| Method | Body | Query Params | Description                                              | Users                            |
+| ------ | ---- | ------------ | -------------------------------------------------------- | -------------------------------- |
+| GET    |      |              | Ricevi tutti gli ordini in base al tuo ruolo e a chi sei | Barman<br />Cuoco<br />Cameriere |
 
 ### /orders/:id
 
-| Method | Body            | Query Params | Description                 | Users |
-| ------ | --------------- | ------------ | --------------------------- | ----- |
-| GET    |                 |              | Ricevi l'ordine :id         | Tutti |
-| POST   | { food: FoodStatus, drink: DrinkStatus } |              | Cambia lo stato dell'ordine | Tutti |
+| Method | Body                                       | Query Params | Description                 | Users |
+| ------ | ------------------------------------------ | ------------ | --------------------------- | ----- |
+| GET    |                                            |              | Ricevi l'ordine :id         | Tutti |
+| POST   | { food*: FoodStatus, drink*: DrinkStatus } |              | Cambia lo stato dell'ordine | Tutti |
 
 ### /orders/:id/:dish
 
