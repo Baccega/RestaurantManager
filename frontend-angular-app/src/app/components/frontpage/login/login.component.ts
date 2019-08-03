@@ -8,7 +8,6 @@ import {
   FormGroup
 } from "@angular/forms";
 import { LoginService } from "src/app/services/login.service";
-import { User } from "../../../models/User";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { SnackbarComponent } from "../../snackbar/snackbar.component";
@@ -21,16 +20,15 @@ import { UtilsService } from "src/app/services/utils.service";
 })
 export class LoginComponent implements OnInit {
   credential: FormGroup;
+  error: string = "";
 
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private _snackBar: MatSnackBar,
     private utilsService: UtilsService
   ) {}
 
   onSubmit(data: any) {
-    console.log(this.credential);
     this.utilsService.setProgressbar(true);
 
     this.loginService.loginUser(data).subscribe(
@@ -42,13 +40,11 @@ export class LoginComponent implements OnInit {
       },
       err => {
         this.utilsService.setProgressbar(false);
-        this._snackBar.openFromComponent(SnackbarComponent, {
-          duration: 1500,
-          data: err.error
-        });
-        console.log(err.error);
+        this.error = err.error;
+        console.error(err.error);
       }
     );
+    this.credential.value["password"] = "";
   }
 
   ngOnInit() {
