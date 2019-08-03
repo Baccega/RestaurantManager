@@ -133,7 +133,7 @@ Role {
 | Method | Body            | Query Params | Description                 | Users |
 | ------ | --------------- | ------------ | --------------------------- | ----- |
 | GET    |                 |              | Ricevi l'ordine :id         | Tutti |
-| POST   | { OrderStatus } |              | Cambia lo stato dell'ordine | Tutti |
+| POST   | { food: FoodStatus, drink: DrinkStatus } |              | Cambia lo stato dell'ordine | Tutti |
 
 ### /orders/:id/:dish
 
