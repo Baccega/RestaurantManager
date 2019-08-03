@@ -21,7 +21,7 @@ Dish {
 Course {
   id: string
   name: string;
-  dishes: string[];       		// Dish ID []       --- Volendo si può fare a meno
+  dishes: Dish[];
 }
 
 Order {
