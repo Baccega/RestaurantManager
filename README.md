@@ -135,6 +135,12 @@ Role {
 | GET    |              |              | Ricevi il piatto :dish dell'ordine :id           | Tutti            |
 | POST   | {DishStatus} |              | Cambia lo stato del piatto :dish dell'ordine :id | Barman<br/>Cuoco |
 
+### /courses
+
+| Method | Body         | Query Params | Description                                      | Users            |
+| ------ | ------------ | ------------ | ------------------------------------------------ | ---------------- |
+| GET    |              |              | Ricevi la lista di menù                          | Tutti            |
+
 ### /tables
 
 | Method | Body      | Query Params | Description           | Users |
