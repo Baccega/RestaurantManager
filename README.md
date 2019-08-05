@@ -88,14 +88,14 @@ Role {
 
 '#' vuol dire che non è necessario farlo
 
-### /employees
+### /users
 
 | Method | Body         | Query Params         | Description                                                  | Users |
 | ------ | ------------ | -------------------- | ------------------------------------------------------------ | ----- |
-| GET    |              | role* = (1\|2\|3\|4) | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
+| GET    |              | role* = (role in String) | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
 | POST   | { Employee } |                      | Crea un nuovo dipendente                                     | Cassa |
 
-### /employee/:id
+### /users/:id
 
 | Method | Body | Query Params | Description                | Users |
 | ------ | ---- | ------------ | -------------------------- | ----- |
@@ -106,7 +106,7 @@ Role {
 
 | Method | Body            | Query Params   | Description                                                  | Users |
 | ------ | --------------- | -------------- | ------------------------------------------------------------ | ----- |
-| GET    |                 | waiter*=string | Ricevi tutti i conti<br />*waiter*: Solo i conti di un cameriere | Cassa |
+| GET    |                 | waiter*=String ID | Ricevi tutti i conti<br />*waiter*: Solo i conti di un cameriere | Cassa |
 | POST   | { TableNumber } |                | Crea un nuovo conto                                          | Cassa |
 
 ### /bills/:id
