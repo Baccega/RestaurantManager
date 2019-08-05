@@ -15,7 +15,7 @@ export class CashierBillComponent implements OnInit, OnDestroy {
   tableId;
   courses: Course[];
   total: number;
-  idSub: Subscription;
+  routerSub: Subscription;
   orderSub: Subscription;
 
   constructor(
@@ -26,19 +26,22 @@ export class CashierBillComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.idSub = this.utilService.watchId().subscribe(newId => {
-      this.tableId = newId;
-      this.utilService.setTitle(`Table ${this.tableId} - Bill`);
-    });
-    this.orderSub = this.billService
-      .getBill(this.tableId)
-      .subscribe(newCourses => {
-        this.courses = newCourses;
-        this.total = this.calcTotal(newCourses);
-      });
+    // Typescript dice che è sbagliato, ma esiste.....
+    this.routerSub = this.activatedRoute.paramMap.subscribe(
+      ({ params }: any) => {
+        this.tableId = params["table"];
+        this.orderSub = this.billService
+          .getBill(this.tableId)
+          .subscribe(newCourses => {
+            this.utilService.setTitle(`Table: ${this.tableId} - Bill`);
+            this.courses = newCourses;
+            this.total = this.calcTotal(newCourses);
+          });
+      }
+    );
   }
   ngOnDestroy() {
-    this.idSub.unsubscribe();
+    this.routerSub.unsubscribe();
     this.orderSub.unsubscribe();
   }
 

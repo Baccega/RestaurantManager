@@ -26,7 +26,6 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
       this.tableId = params["table"];
-      this.utilService.setId(this.tableId);
       this.utilService.setTitle(`Table: ${this.tableId}`);
       this.ordersSub = this.orderService
         .getOrders(this.tableId)

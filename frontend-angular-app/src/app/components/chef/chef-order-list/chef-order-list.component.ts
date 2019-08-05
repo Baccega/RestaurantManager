@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Order } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
 
@@ -19,7 +19,8 @@ export class ChefOrderListComponent implements OnInit, OnDestroy {
   constructor(
     private orderService: OrderService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
