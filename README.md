@@ -149,3 +149,9 @@ Role {
 | GET     |             |              | Ricevi il tavolo :id                               | Tutti                |
 | POST    | { boolean } |              | Cambia lo stato del tavolo :id (free: true\|false) | Cassa<br />Cameriere |
 | DELETE# |             |              | Cancella il tavolo :id                             | Cassa                |
+
+### /tables/:id/bill
+
+| Method  | Body        | Query Params | Description                                        | Users                |
+| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
+| GET     |             |              | Ricevi il conto del tavolo :id                     | Cassa                |
