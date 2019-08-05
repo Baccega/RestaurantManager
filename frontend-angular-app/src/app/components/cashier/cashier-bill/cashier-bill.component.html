@@ -1,3 +1,25 @@
-<p>
-  cashier-bill works!
-</p>
+<div class="main-container">
+  <mat-list *ngFor="let course of courses">
+    <mat-card>
+      <mat-list-item>
+        <h3>{{ course.name }}</h3>
+      </mat-list-item>
+      <mat-list-item *ngFor="let dish of course.dishes">
+        <div class="dish-container">
+          <p class="name">{{ dish.name }}</p>
+          <p class="quantity">{{ dish.quantity }}</p>
+          <p class="price">{{ dish.price }}&euro;</p>
+        </div>
+      </mat-list-item>
+    </mat-card>
+  </mat-list>
+</div>
+<div>
+  <h2>Totale: {{ this.total }}&euro;</h2>
+</div>
+<button mat-fab color="primary" id="btn-right" (click)="createBill()">
+  <mat-icon>euro_symbol</mat-icon>
+</button>
+<button id="btn-left" mat-fab color="accent" (click)="navigateToOrder()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
