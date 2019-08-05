@@ -161,3 +161,16 @@ Role {
 | Method  | Body        | Query Params | Description                                        | Users                |
 | ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
 | GET     |             |              | Ricevi il conto del tavolo :id                     | Cassa                |
+
+### /statistics
+
+| Method  | Body        | Query Params | Description                                        | Users                |
+| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
+| GET     |             |              | Ricevi le statistiche della giornata               | Cassa                |
+
+
+### /statistics/:id
+
+| Method  | Body        | Query Params | Description                                        | Users                |
+| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
+| GET     |             |              | Ricevi le statistiche dell'utente :id              | Cassa                |
