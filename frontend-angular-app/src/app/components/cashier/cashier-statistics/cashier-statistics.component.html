@@ -1,6 +1,6 @@
 <mat-card class="stat-container">
   <div>
-    <h3>Today's profit: {{ profit }}</h3>
+    <h3>Today's profit: {{ profit }}&euro;</h3>
   </div>
   <div>
     <mat-divider></mat-divider>
@@ -11,7 +11,7 @@
 </mat-card>
 
 <mat-card class="user-container">
-  <h3>Employees statistics</h3>
+  <h3>Employees management</h3>
   <mat-divider></mat-divider>
   <mat-list>
     <a [routerLink]="['users', user.id]" *ngFor="let user of users">
@@ -23,5 +23,13 @@
         </div>
       </mat-list-item>
     </a>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <div>
+        <a [routerLink]="['users', 'new']">
+          <mat-icon [inline]="true">add_circle_outline</mat-icon>
+        </a>
+      </div>
+    </mat-list-item>
   </mat-list>
 </mat-card>

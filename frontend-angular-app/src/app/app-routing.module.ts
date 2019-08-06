@@ -15,6 +15,8 @@ import { CashierViewOrderComponent } from "./components/cashier/cashier-view-ord
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 
 import { RegisterComponent } from "./components/frontpage/register/register.component";
+import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
+import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 
 const routes: Routes = [
   {
@@ -79,6 +81,14 @@ const routes: Routes = [
       { path: "tables/:table", component: CashierViewOrderComponent },
       { path: "tables/:table/bill", component: CashierBillComponent },
       { path: "statistics", component: CashierStatisticsComponent },
+      {
+        path: "statistics/users/new",
+        component: CashierNewUserComponent
+      },
+      {
+        path: "statistics/users/:user",
+        component: CashierStatisticsUserComponent
+      },
       { path: "**", redirectTo: "dashboard" }
     ]
   },

@@ -10,9 +10,18 @@ export class StatisticsService {
     profit: 100
   };
 
+  scode = {
+    preparedDishes: 0,
+    customersServed: 100
+  };
+
   constructor() {}
 
   getTodayStatistics() {
     return this.today;
+  }
+
+  getTodayEmployeeStatistics(id) {
+    return this.scode;
   }
 }

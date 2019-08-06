@@ -1,0 +1,22 @@
+<mat-card>
+  <div class="info-container">
+    <h3>Name</h3>
+    <h3 class="right">{{ user.name }}</h3>
+    <p>Role</p>
+    <p class="right">{{ roles[user.role] }}</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="stats" *ngIf="stat.customersServed > 0">
+    <h3>Today's customers served: {{ stat.customersServed }}</h3>
+  </div>
+  <div class="stats" *ngIf="stat.preparedDishes > 0">
+    <h3>Today's customers: {{ stat.preparedDishes }}</h3>
+  </div>
+</mat-card>
+
+<button id="btn-left" mat-fab color="primary" (click)="navigateToStatistics()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<button id="btn-right" mat-fab color="warn" (click)="deleteUser()">
+  <mat-icon>delete</mat-icon>
+</button>

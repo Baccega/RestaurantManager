@@ -30,6 +30,8 @@ import { LoginService } from "./services/login.service";
 import { JwtModule } from "@auth0/angular-jwt";
 import { SnackbarComponent } from "./components/snackbar/snackbar.component";
 import { domain } from "src/environments/environment";
+import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
+import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -50,6 +52,8 @@ export function tokenGetter() {
     CashierStatisticsComponent,
     CashierBillComponent,
     CashierViewOrderComponent,
+    CashierStatisticsUserComponent,
+    CashierNewUserComponent,
 
     WaiterDashboardComponent,
     WaiterTableDetailComponent,

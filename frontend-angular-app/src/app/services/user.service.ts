@@ -23,4 +23,17 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+
+  getUser(id): User {
+    let found = this.users.find(user => user.id === id);
+    return found;
+  }
+
+  deleteUser(id) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    });
+  }
 }

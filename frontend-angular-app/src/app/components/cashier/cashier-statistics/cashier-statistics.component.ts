@@ -26,7 +26,7 @@ export class CashierStatisticsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.utilsService.setTitle("Statistics");
+    this.utilsService.setTitle("Statistics & Management");
 
     const {
       profit,
