@@ -133,7 +133,7 @@ Role {
 | Method | Body         | Query Params | Description                                      | Users            |
 | ------ | ------------ | ------------ | ------------------------------------------------ | ---------------- |
 | GET    |              |              | Ricevi il piatto :dish dell'ordine :id           | Tutti            |
-| POST   | {DishStatus} |              | Cambia lo stato del piatto :dish dell'ordine :id | Barman<br/>Cuoco |
+| POST   | {status:DishStatus} |              | Cambia lo stato del piatto :dish dell'ordine :id | Barman<br/>Cuoco |
 
 ### /courses
 
