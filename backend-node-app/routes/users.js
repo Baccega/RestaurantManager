@@ -5,11 +5,34 @@ const { registerValidation, loginValidation } = require("../validation");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-/* GET users listing. */
-router.get("/", function(req, res, next) {
-  res.send("respond with a resource");
+const verify = require("./verifyToken");
+
+/* GET users listing.
+ * If no body return all user, otherwise only the user with
+ * the specific role
+ */
+router.get("/", verify, async function(req, res, next) {
+  if (!req.body) {
+    const allUser = await UsersModel.find({});
+    res.status(200).send(allUser);
+  } else {
+    const allRoleUser = await UsersModel.find({ role: req.body.role });
+    res.status(200).send(allRoleUser);
+  }
 });
 
+/*
+ * GET the the user by Id
+ */
+router.get("/:id", verify, async function(req, res, next) {
+  const user = await UsersModel.find({ userId: req.params.id });
+  if (!user) res.status(400).send("User doesn't exist !");
+  else res.status(200).send(user);
+});
+
+/*
+ * REGISTRATION of a new User
+ */
 router.post("/register", async function(req, res, next) {
   //validate before creation
   const { error } = registerValidation(req.body);
@@ -38,6 +61,9 @@ router.post("/register", async function(req, res, next) {
   }
 });
 
+/*
+ * LOGIN of an user
+ */
 router.post("/login", async function(req, res, next) {
   //validate before creation
   const { error } = loginValidation(req.body);
@@ -57,6 +83,20 @@ router.post("/login", async function(req, res, next) {
     .status(200)
     .header("auth-token", token)
     .send({ token: token, role: user.role });
+});
+
+/*
+ * DELETE the user with the id
+ */
+router.delete("/:id", async function(req, res, next) {
+  try {
+    let del = await UsersModel.remove({ userId: req.params.id });
+    console.log(del);
+    if (!del.n) return res.status(400).send("User doesn't exist!");
+    else return res.status(400).send("Deleted user successfully!");
+  } catch (e) {
+    return res.status(400).send(e.message);
+  }
 });
 
 module.exports = router;

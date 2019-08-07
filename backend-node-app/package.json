@@ -18,6 +18,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.4",
+    "mongoose-sequence": "^5.1.0",
     "morgan": "~1.9.1",
     "typescript": "^3.5.3"
   },

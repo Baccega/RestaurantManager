@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+const autoIncrement = require("mongoose-sequence")(mongoose);
 
 let dishSchema = new mongoose.Schema({
   name: {
@@ -27,4 +28,5 @@ let dishSchema = new mongoose.Schema({
   }
 });
 
+dishSchema.plugin(autoIncrement, { inc_field: "dishId" });
 module.exports = mongoose.model("Dish", dishSchema);
