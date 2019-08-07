@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -13,13 +13,19 @@ const httpOption = {
 @Injectable({
   providedIn: "root"
 })
-export class RegisterService {
+export class AuthService {
   constructor(private http: HttpClient) {}
 
-  registerUser(data): Observable<any> {
+  registerUser(data): Promise<any> {
+    return this.http
+      .post<any>(`${environment.serverUrl}/users/register`, data, httpOption)
+      .toPromise();
+  }
+
+  loginUser(user): Observable<any> {
     return this.http.post<any>(
-      `${environment.serverUrl}/users/register`,
-      data,
+      `${environment.serverUrl}/users/login`,
+      user,
       httpOption
     );
   }

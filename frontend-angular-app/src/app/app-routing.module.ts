@@ -14,7 +14,6 @@ import { CashierStatisticsComponent } from "./components/cashier/cashier-statist
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 
-import { RegisterComponent } from "./components/frontpage/register/register.component";
 import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 
@@ -22,11 +21,6 @@ const routes: Routes = [
   {
     path: "",
     redirectTo: "login",
-    pathMatch: "full"
-  },
-  {
-    path: "register",
-    component: RegisterComponent,
     pathMatch: "full"
   },
   {

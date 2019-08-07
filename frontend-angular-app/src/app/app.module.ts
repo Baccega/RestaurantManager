@@ -22,16 +22,15 @@ import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-o
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
-import { RegisterComponent } from "./components/frontpage/register/register.component";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { LoginService } from "./services/login.service";
 import { JwtModule } from "@auth0/angular-jwt";
 import { SnackbarComponent } from "./components/snackbar/snackbar.component";
 import { domain } from "src/environments/environment";
 import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
+import { AuthService } from "./services/auth.service";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -66,7 +65,6 @@ export function tokenGetter() {
     SidenavComponent,
 
     LoginComponent,
-    RegisterComponent,
     SnackbarComponent
   ],
   imports: [
@@ -86,7 +84,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [LoginService],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent]
 })

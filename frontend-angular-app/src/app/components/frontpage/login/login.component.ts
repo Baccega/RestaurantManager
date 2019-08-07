@@ -1,17 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-  FormGroup
-} from "@angular/forms";
-import { LoginService } from "src/app/services/login.service";
+import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material";
-import { SnackbarComponent } from "../../snackbar/snackbar.component";
 import { UtilsService } from "src/app/services/utils.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -23,7 +14,7 @@ export class LoginComponent implements OnInit {
   error: string = "";
 
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private router: Router,
     private utilsService: UtilsService
   ) {}
@@ -31,7 +22,7 @@ export class LoginComponent implements OnInit {
   onSubmit(data: any) {
     this.utilsService.setProgressbar(true);
 
-    this.loginService.loginUser(data).subscribe(
+    this.authService.loginUser(data).subscribe(
       data => {
         this.utilsService.setProgressbar(false);
         console.log(data);

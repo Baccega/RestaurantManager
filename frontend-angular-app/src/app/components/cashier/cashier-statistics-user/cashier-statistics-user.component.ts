@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { UseExistingWebDriver } from "protractor/built/driverProviders";
 import { User } from "src/app/models/User";
 import { UserService } from "src/app/services/user.service";
 import { StatisticsService } from "src/app/services/statistics.service";
