@@ -37,6 +37,6 @@ export class ChefOrderListComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(id: string) {
-    this.router.navigate(["chef", id]);
+    this.router.navigate(["./", id], { relativeTo: this.activatedRoute });
   }
 }

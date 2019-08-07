@@ -4,6 +4,9 @@
   overflow: scroll;
   // Firefox hide scrollbar
   scrollbar-width: none;
+  h3 {
+    text-align: center;
+  }
   .flexedTitle {
     display: flex;
     flex-direction: row;

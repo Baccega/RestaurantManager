@@ -12,5 +12,4 @@ export interface Dish {
   preparation: string;
   status: DishStatus;
   category: string;
-  handler: string;
 }

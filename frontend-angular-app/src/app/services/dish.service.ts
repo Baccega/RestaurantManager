@@ -15,7 +15,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
@@ -25,7 +24,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
@@ -35,7 +33,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
@@ -52,7 +49,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "basta",
           price: 33,
@@ -62,7 +58,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "lisotto",
           price: 33,
@@ -72,7 +67,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "blodo",
           price: 33,
@@ -88,7 +82,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "secondi",
           name: "pesse",
           price: 33,
@@ -98,7 +91,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "secondi",
           name: "bistecca",
           price: 33,
@@ -108,7 +100,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "secondi",
           name: "piadina",
           price: 33,
@@ -124,7 +115,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "bevande",
           name: "acqua",
           price: 33,
@@ -134,7 +124,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "bevande",
           name: "vino",
           price: 33,
@@ -144,7 +133,6 @@ export class DishService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "bevande",
           name: "aria",
           price: 33,

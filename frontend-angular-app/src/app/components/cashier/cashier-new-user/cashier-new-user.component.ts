@@ -50,7 +50,7 @@ export class CashierNewUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.utilsService.setTitle("Sign up a new user");
+    this.utilsService.setTitle("Sign up a new employee");
     this.newUser = new FormGroup({
       name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),

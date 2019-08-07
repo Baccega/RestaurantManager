@@ -9,12 +9,16 @@ export class UserService {
     {
       id: "5",
       name: "Scode",
-      role: 0
+      role: 0,
+      dailyPlate: 1,
+      totalPlate: 20
     },
     {
       id: "1",
       name: "Scode2",
-      role: 1
+      role: 1,
+      dailyPlate: 2,
+      totalPlate: 30
     }
   ];
 

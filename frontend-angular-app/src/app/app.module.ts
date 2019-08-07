@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./components/frontpage/login/login.component";
+import { LoginComponent } from "./components/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
 
 import { MaterialComponentsModule } from "./material-components.module";
@@ -31,6 +31,7 @@ import { domain } from "src/environments/environment";
 import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 import { AuthService } from "./services/auth.service";
+import { BartenderOrderDetailComponent } from './components/bartender/bartender-order-detail/bartender-order-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -65,7 +66,8 @@ export function tokenGetter() {
     SidenavComponent,
 
     LoginComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    BartenderOrderDetailComponent
   ],
   imports: [
     BrowserModule,

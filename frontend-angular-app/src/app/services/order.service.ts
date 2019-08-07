@@ -40,7 +40,7 @@ export class OrderService {
     {
       id: "2",
       table: "2",
-      waiter: "tu",
+      waiter: "1",
       drinkStatus: DrinkStatus["Ready"],
       foodStatus: FoodStatus["Preparing"],
       dishes: [
@@ -59,7 +59,7 @@ export class OrderService {
     {
       id: "3",
       table: "3",
-      waiter: "tu",
+      waiter: "1",
       drinkStatus: DrinkStatus["Delivered"],
       foodStatus: FoodStatus["Delivered"],
       dishes: [
@@ -138,7 +138,7 @@ export class OrderService {
     {
       id: "2",
       table: "2",
-      waiter: "tu",
+      waiter: "1",
       drinkStatus: DrinkStatus["Ready"],
       foodStatus: FoodStatus["Ready"],
       dishes: [
