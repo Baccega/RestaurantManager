@@ -4,7 +4,9 @@ var DishesModel = require("../models/dishes.models");
 var CoursesModel = require("../models/courses.models");
 const { dishValidation } = require("../validation");
 
-//Get tutte le portate
+/*
+ * GET all courses
+ */
 router.get("/", function(req, res, next) {
   CoursesModel.find({})
     .then(doc => res.json(doc))
@@ -13,27 +15,34 @@ router.get("/", function(req, res, next) {
 
 //Tenere cosi o sistemare ? probabilemte eliminare
 //Try catch ?
-//Crea Portata vuota
+/*
+ * CREATE new courses
+ */
 router.post("/createCourse", async function(req, res, next) {
   if (!req.body) return res.status(400).send("Request body is missing");
   else if (!req.body.category)
     return res.status(400).send("Missing parameters");
   else {
-    let model = new CoursesModel(req.body);
-    const savedCourse = await model.save();
-
-    if (!savedCourse || savedCourse.length === 0) {
-      return res.status(500).send(savedCourse);
+    try {
+      let model = new CoursesModel(req.body);
+      const savedCourse = await model.save();
+      if (!savedCourse || savedCourse.length === 0) {
+        return res.status(500).send(savedCourse);
+      }
+      console.log(savedCourse);
+      res
+        .status(201)
+        .type("application/json")
+        .send(savedCourse);
+    } catch (e) {
+      res.status(400).send(e.message);
     }
-    console.log(savedCourse);
-    res
-      .status(201)
-      .type("application/json")
-      .send(savedCourse);
   }
 });
 
-//Add single plate to menu
+/*
+ * CREATE new plate
+ */
 router.post("/newPlate", async function(req, res, next) {
   if (!req.body) {
     return res.status(400).send("Request body is missing");
@@ -50,7 +59,6 @@ router.post("/newPlate", async function(req, res, next) {
     ) {
       res.status(400).send('Plate "' + req.body.name + '" already insert');
     } else {
-
       //validation
       const { error } = dishValidation(req.body);
       if (error) return res.status(400).send(error.details[0].message);

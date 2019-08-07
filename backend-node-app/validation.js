@@ -5,7 +5,6 @@ const Joi = require("@hapi/joi");
 const registerValidation = data => {
   const schema = {
     name: Joi.string()
-      .min(6)
       .required(),
     email: Joi.string()
       .min(6)
@@ -55,7 +54,7 @@ const dishValidation = data => {
       .allow("Antipasti", "Primi", "Secondi", "Bevande")
       .required(),
     price: Joi.number().required(),
-    quantity: Joi.number().required(),
+    quantity: Joi.number(),
     status: Joi.number(),
     preparation: Joi.number().required()
   };
@@ -80,7 +79,8 @@ const orderValidation = data => {
     table: Joi.number().required(),
     waiter: Joi.string().required(),
     dishes: Joi.array().items(Joi.object(dishSchema)),
-    delivered: Joi.number().allow(0,1,2,3)
+    foodStatus: Joi.number().allow(0, 2, 3),
+    drinkStatus: Joi.number().allow(0, 2, 3)
   };
   return Joi.validate(data, schema);
 };
