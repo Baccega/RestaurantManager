@@ -41,7 +41,7 @@ Table {
 Bill {
   total: number;
   date: Date;
-  orders: string[];			// Order ID []
+  dishes: Object[];
   table: string;			  // Table ID
   waiter: string;       // Employee ID
 }
