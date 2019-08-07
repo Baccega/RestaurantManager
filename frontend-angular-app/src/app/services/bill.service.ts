@@ -16,7 +16,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
@@ -26,7 +25,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
@@ -43,7 +41,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "basta",
           price: 33,
@@ -53,7 +50,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "lisotto",
           price: 33,
@@ -63,7 +59,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "blodo",
           price: 33,
@@ -79,7 +74,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "basta",
           price: 33,
@@ -89,7 +83,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "lisotto",
           price: 33,
@@ -99,7 +92,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "blodo",
           price: 33,
@@ -115,7 +107,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "basta",
           price: 33,
@@ -125,7 +116,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "lisotto",
           price: 33,
@@ -135,7 +125,6 @@ export class BillService {
         {
           id: "0",
           preparation: "10",
-          handler: "waiter1",
           category: "primi",
           name: "blodo",
           price: 33,
