@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LoginComponent } from "./components/frontpage/login/login.component";
+import { LoginComponent } from "./components/login/login.component";
 import { WaiterDashboardComponent } from "./components/waiter/waiter-dashboard/waiter-dashboard.component";
 import { BartenderDashboardComponent } from "./components/bartender/bartender-dashboard/bartender-dashboard.component";
 import { ChefDashboardComponent } from "./components/chef/chef-dashboard/chef-dashboard.component";
@@ -13,18 +13,15 @@ import { DummyComponent } from "./components/dummy/dummy.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
-import { FrontpageComponent } from "./components/frontpage/frontpage/frontpage.component";
-import { RegisterComponent } from "./components/frontpage/register/register.component";
+
+import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
+import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
+import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: FrontpageComponent,
-    pathMatch: "full"
-  },
-  {
-    path: "register",
-    component: RegisterComponent,
+    redirectTo: "login",
     pathMatch: "full"
   },
   {
@@ -56,7 +53,16 @@ const routes: Routes = [
   },
   {
     path: "bartender",
-    component: BartenderDashboardComponent
+    component: BartenderDashboardComponent,
+    children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
+      { path: ":id", component: BartenderOrderDetailComponent },
+      { path: "**", redirectTo: "" }
+    ]
   },
   {
     path: "chef",
@@ -79,10 +85,18 @@ const routes: Routes = [
       { path: "tables/:table", component: CashierViewOrderComponent },
       { path: "tables/:table/bill", component: CashierBillComponent },
       { path: "statistics", component: CashierStatisticsComponent },
-      { path: "**", redirectTo: "" }
+      {
+        path: "statistics/users/new",
+        component: CashierNewUserComponent
+      },
+      {
+        path: "statistics/users/:user",
+        component: CashierStatisticsUserComponent
+      },
+      { path: "**", redirectTo: "dashboard" }
     ]
   },
-  { path: "**", redirectTo: "" }
+  { path: "**", redirectTo: "login" }
 ];
 
 @NgModule({

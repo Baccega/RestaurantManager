@@ -1,0 +1,57 @@
+<form [formGroup]="newUser" (ngSubmit)="onSubmit(newUser.value)">
+  <mat-form-field>
+    <input
+      id="username"
+      matInput
+      placeholder="Username"
+      formControlName="name"
+    />
+    <mat-error *ngIf="hasError('name', 'required')">
+      Username is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="email" matInput placeholder="Email" formControlName="email" />
+    <mat-error *ngIf="hasError('email', 'email')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="hasError('email', 'required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      id="password"
+      matInput
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <mat-error *ngIf="hasError('password', 'required')"
+      >Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="hasError('password', 'minlength')"
+      >Requires at least 6 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select id="role" formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role">
+        {{ role }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="hasError('role', 'required')"
+      >Role is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <button id="btn-right" mat-fab color="primary" type="submit">
+    <mat-icon>person_add</mat-icon>
+  </button>
+</form>
+
+<button id="btn-left" mat-fab color="accent" (click)="navigateToStatistics()">
+  <mat-icon>arrow_back</mat-icon>
+</button>

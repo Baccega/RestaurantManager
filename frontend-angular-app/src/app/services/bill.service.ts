@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Dish, DishStatus } from "../models/Dish";
 import { Observable, of } from "rxjs";
+import { Order, FoodStatus, DrinkStatus } from "../models/Order";
+import { DishStatus } from "../models/Dish";
 import { Course } from "../models/Course";
 
 @Injectable({
   providedIn: "root"
 })
-export class DishService {
-  menu: Course[] = [
+export class BillService {
+  orders: Course[] = [
     {
       id: "1",
       name: "antipasti",
@@ -18,8 +19,8 @@ export class DishService {
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
@@ -27,17 +28,8 @@ export class DishService {
           category: "antipasti",
           name: "baccala ecca la",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "antipasti",
-          name: "baccala ecca la",
-          price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 2,
+          status: DishStatus["Finished"]
         }
       ]
     },
@@ -52,8 +44,8 @@ export class DishService {
           category: "primi",
           name: "basta",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
@@ -61,8 +53,8 @@ export class DishService {
           category: "primi",
           name: "lisotto",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
@@ -70,74 +62,74 @@ export class DishService {
           category: "primi",
           name: "blodo",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 2,
+          status: DishStatus["Finished"]
         }
       ]
     },
     {
       id: "2",
-      name: "secondi",
+      name: "primi",
       dishes: [
         {
           id: "0",
           preparation: "10",
-          category: "secondi",
-          name: "pesse",
+          category: "primi",
+          name: "basta",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
           preparation: "10",
-          category: "secondi",
-          name: "bistecca",
+          category: "primi",
+          name: "lisotto",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
           preparation: "10",
-          category: "secondi",
-          name: "piadina",
+          category: "primi",
+          name: "blodo",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 2,
+          status: DishStatus["Finished"]
         }
       ]
     },
     {
       id: "2",
-      name: "bevande",
+      name: "primi",
       dishes: [
         {
           id: "0",
           preparation: "10",
-          category: "bevande",
-          name: "acqua",
+          category: "primi",
+          name: "basta",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
           preparation: "10",
-          category: "bevande",
-          name: "vino",
+          category: "primi",
+          name: "lisotto",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 1,
+          status: DishStatus["Finished"]
         },
         {
           id: "0",
           preparation: "10",
-          category: "bevande",
-          name: "aria",
+          category: "primi",
+          name: "blodo",
           price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
+          quantity: 2,
+          status: DishStatus["Finished"]
         }
       ]
     }
@@ -145,7 +137,15 @@ export class DishService {
 
   constructor() {}
 
-  getCourses(): Observable<Course[]> {
-    return of(this.menu);
+  createBill(tableId) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve();
+      }, 3000);
+    });
+  }
+
+  getBill(tableId): Observable<Course[]> {
+    return of(this.orders);
   }
 }

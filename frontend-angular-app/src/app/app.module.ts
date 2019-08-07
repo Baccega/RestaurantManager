@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./components/frontpage/login/login.component";
+import { LoginComponent } from "./components/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
 
 import { MaterialComponentsModule } from "./material-components.module";
@@ -22,14 +22,16 @@ import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-o
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
-import { FrontpageComponent } from "./components/frontpage/frontpage/frontpage.component";
-import { RegisterComponent } from "./components/frontpage/register/register.component";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { LoginService } from "./services/login.service";
 import { JwtModule } from "@auth0/angular-jwt";
 import { SnackbarComponent } from "./components/snackbar/snackbar.component";
+import { domain } from "src/environments/environment";
+import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
+import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
+import { AuthService } from "./services/auth.service";
+import { BartenderOrderDetailComponent } from './components/bartender/bartender-order-detail/bartender-order-detail.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -50,6 +52,8 @@ export function tokenGetter() {
     CashierStatisticsComponent,
     CashierBillComponent,
     CashierViewOrderComponent,
+    CashierStatisticsUserComponent,
+    CashierNewUserComponent,
 
     WaiterDashboardComponent,
     WaiterTableDetailComponent,
@@ -62,9 +66,8 @@ export function tokenGetter() {
     SidenavComponent,
 
     LoginComponent,
-    FrontpageComponent,
-    RegisterComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    BartenderOrderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -76,14 +79,14 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["localhost:3000"],
+        whitelistedDomains: [domain],
         blacklistedRoutes: [],
         authScheme: "",
         headerName: "auth-token"
       }
     })
   ],
-  providers: [LoginService],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent]
 })

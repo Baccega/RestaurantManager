@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button mat-icon-button (click)="openSidenav()">
+  <button *ngIf="notLogin" mat-icon-button (click)="openSidenav()">
     <mat-icon>menu</mat-icon>
   </button>
   <p class="title">{{ title }}</p>

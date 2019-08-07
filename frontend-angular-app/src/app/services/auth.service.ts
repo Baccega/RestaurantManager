@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
 
 const httpOption = {
@@ -12,12 +13,18 @@ const httpOption = {
 @Injectable({
   providedIn: "root"
 })
-export class LoginService {
+export class AuthService {
   constructor(private http: HttpClient) {}
+
+  registerUser(data): Promise<any> {
+    return this.http
+      .post<any>(`${environment.serverUrl}/users/register`, data, httpOption)
+      .toPromise();
+  }
 
   loginUser(user): Observable<any> {
     return this.http.post<any>(
-      "http://localhost:3000/users/login",
+      `${environment.serverUrl}/users/login`,
       user,
       httpOption
     );

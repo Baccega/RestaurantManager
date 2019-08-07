@@ -15,7 +15,7 @@ export class TableService {
     {
       id: "2",
       seats: 2,
-      free: true
+      free: false
     },
     {
       id: "3",

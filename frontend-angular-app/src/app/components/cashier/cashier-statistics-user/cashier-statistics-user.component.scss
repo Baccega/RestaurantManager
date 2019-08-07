@@ -1,0 +1,25 @@
+mat-card {
+  margin: 20px;
+  .info-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    .right {
+      text-align: right;
+    }
+  }
+  .stats {
+    text-align: center;
+  }
+}
+
+#btn-left {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+#btn-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
