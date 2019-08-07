@@ -21,7 +21,6 @@ export class OrderService {
           name: "Pasta",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -31,7 +30,6 @@ export class OrderService {
           name: "Pizza",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         }
@@ -50,7 +48,6 @@ export class OrderService {
           name: "Pasta1",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         }
@@ -69,7 +66,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -79,7 +75,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -89,7 +84,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -99,7 +93,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -109,7 +102,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -119,7 +111,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         },
@@ -129,7 +120,6 @@ export class OrderService {
           name: "Pasta2s",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         }
@@ -148,7 +138,6 @@ export class OrderService {
           name: "Pasta2",
           price: 2,
           quantity: 1,
-          handler: "someone",
           preparation: "10",
           status: DishStatus["Waiting"]
         }
