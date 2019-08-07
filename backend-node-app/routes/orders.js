@@ -78,9 +78,13 @@ router.post("/", async (req, res, next) => {
  * GET respective order depending on the role
  */
 router.get("/", async (req, res, next) => {
+  /*
+   * JWT token poi query, il body non serve
+  */
   if (!req.body) return res.status(400).send("Bad request, body missing");
   const { role, name } = await UserModel.findById(req.body.id);
   console.log(role);
+  
   switch (role) {
     //Waiter test id --> 5d35cb8d1471d70980e39209
     case "waiter":
@@ -186,6 +190,10 @@ router.get("/:id/:dish", async function(req, res, next) {
  */
 router.post("/:id/:dish", async function(req, res, next) {
   try {
+    /*
+     * Quando lo status è "completed" aumentare il contatore
+     * dell'utente del JWT
+    */
     let order = await OrderModel.findOne({ orderId: req.params.id });
     let plate = order.dishes.find(elem => {
       if (elem.id == req.params.dish) return elem;

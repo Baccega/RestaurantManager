@@ -3,14 +3,16 @@ let mongoose = require("mongoose");
 let billSchema = new mongoose.Schema({
   date: {
     type: Date,
-    required: true
+    required: true,
+    default: Date.now
   },
-  orders: {
-    type: [String],
+  dishes: {
+    type: Object,
     required: false
   },
   table: String,
-  waiter: String
+  waiter: String,
+  total: Number
 });
 
 module.exports = mongoose.model("Bill", billSchema);
