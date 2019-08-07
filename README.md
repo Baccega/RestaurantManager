@@ -15,7 +15,6 @@ Dish {
   preparation: string;
   status: DishStatus;
   category: string;       		// Category ID
-  handler: string	      			// Employee ID
 }
 
 Course {
@@ -51,6 +50,8 @@ Employee {
   id: string;
   name: string;
   role: Role;
+  dailyPlate: number;
+  totalPlate: number;
 }
 
 --- STATUSES & ROLES ---
