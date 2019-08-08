@@ -41,7 +41,7 @@ router.post("/", verify, async (req, res, next) => {
 router.get("/freeTables", verify, async (req, res) => {
   const freeTable = await TablesModel.find({
     free: true,
-    seats: req.body.seats
+    seats: { $gte: req.body.seats }
   });
   res.status(200).send(freeTable);
 });
