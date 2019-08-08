@@ -1,3 +1,9 @@
-<p>
-  bartender-order-detail works!
-</p>
+<ul *ngIf="order">
+  <li *ngFor="let dish of this.order.dishes">
+    <mat-card>
+      <div class="container">
+        <p>{{ dish.name }}</p>
+      </div>
+    </mat-card>
+  </li>
+</ul>

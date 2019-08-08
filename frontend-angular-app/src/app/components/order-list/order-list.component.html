@@ -1,8 +1,21 @@
 <ul>
   <li *ngFor="let order of orders" (click)="navigateTo(order.id)">
     <mat-card [ngClass]="{ 'is-active': order.id === id }">
-      Order: {{ order.id }}<br />
-      Table: {{ order.table }}
+      <p>
+        Order: {{ order.id }}<br />
+        Table: {{ order.table }}
+      </p>
+      <div *ngIf="source == 'chef'">
+        <mat-icon *ngIf="order.foodStatus == 0">hourglass_empty</mat-icon>
+        <mat-icon *ngIf="order.foodStatus == 1">whatshot</mat-icon>
+        <mat-icon *ngIf="order.foodStatus == 2">notifications_active</mat-icon>
+        <mat-icon *ngIf="order.foodStatus == 3">done</mat-icon>
+      </div>
+      <div *ngIf="source == 'bartender'">
+        <mat-icon *ngIf="order.drinkStatus == 0">hourglass_empty</mat-icon>
+        <mat-icon *ngIf="order.drinkStatus == 1">notifications_active</mat-icon>
+        <mat-icon *ngIf="order.drinkStatus == 2">done</mat-icon>
+      </div>
     </mat-card>
   </li>
 </ul>

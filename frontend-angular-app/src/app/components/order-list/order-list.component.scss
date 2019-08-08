@@ -12,11 +12,23 @@ ul {
   scrollbar-width: none;
 
   li {
-    min-width: 100px;
+    min-width: 130px;
     margin: 10px;
     border-radius: 10%;
     cursor: pointer;
     text-align: center;
+    mat-card {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      p {
+        margin: 0px;
+        text-align: left;
+      }
+      div {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 }
 .is-active {

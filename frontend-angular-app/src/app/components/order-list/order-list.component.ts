@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { Order } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
+import { Source } from "webpack-sources";
 
 @Component({
   selector: "app-order-list",
@@ -11,6 +12,7 @@ import { Subscription } from "rxjs";
   styleUrls: ["./order-list.component.scss"]
 })
 export class OrderListComponent implements OnInit, OnDestroy {
+  @Input() source: string;
   orders: Order[];
   id: String;
   orderSub: Subscription;

@@ -30,7 +30,7 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
         order => (this.order = order),
         err => {
           console.error(err);
-          this.router.navigate(["chef"]);
+          this.router.navigate(["../"], { relativeTo: this.activatedRoute });
         }
       );
     });
