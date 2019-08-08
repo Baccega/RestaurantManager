@@ -26,8 +26,8 @@ Course {
 Order {
   id: String;
   dishes: Dish[];
-  foodStatus: FoodStatus;
-  drinkStatus: DrinkStatus;
+  foodStatus: OrderStatus;
+  drinkStatus: OrderStatus;
   table: string;								// Table ID
   waiter: string;           		// Employee ID
 }
@@ -62,15 +62,9 @@ DishStatus {
   Finished = 2
 }
 
-FoodStatus {
+OrderStatus {
   Waiting = 0,
   Preparing = 1,
-  Ready = 2,
-  Delivered = 3
-}
-
-DrinkStatus {
-  Waiting = 0,
   Ready = 2,
   Delivered = 3
 }
@@ -107,8 +101,8 @@ Role {
 
 | Method | Body            | Query Params   | Description                                                  | Users |
 | ------ | --------------- | -------------- | ------------------------------------------------------------ | ----- |
-| GET    |                 | waiter*=String ID | Ricevi tutti i conti<br />*waiter*: Solo i conti di un cameriere | Cassa |
-| POST   | { TableNumber } |                | Crea un nuovo conto per il tavolo Tablenumber | Cameriere |
+| GET    |                 |  | Ricevi tutti i conti| Cassa |
+| POST   | { TableNumber, CustomersNumber } |         | Crea un nuovo conto vuoto per il tavolo Tablenumber, occupandolo | Cameriere |
 
 ### /bills/:id
 
@@ -146,7 +140,7 @@ Role {
 
 | Method | Body      | Query Params | Description           | Users |
 | ------ | --------- | ------------ | --------------------- | ----- |
-| GET    |           |              | Ricevi tutti i tavoli | Tutti |
+| GET    |           |              | Ricevi tutti i miei tavoli | Cameriere<br />Cassa |
 | POST#  | { Table } |              | Crea un nuovo tavolo  | Cassa |
 
 ### /tables/:id
@@ -161,7 +155,7 @@ Role {
 
 | Method  | Body        | Query Params | Description                                        | Users                |
 | ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
-| GET     |             |              | Ricevi il conto del tavolo :id                     | Cassa                |
+| POST     | Object |              | Chiudi il conto del tavolo :id                    | Cassa                |
 
 ### /statistics
 
