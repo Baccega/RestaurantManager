@@ -1,11 +1,29 @@
-ul {
-  list-style: none;
-  padding: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  li {
-    padding: 5px;
-    margin-bottom: 10px;
+.subcontainer {
+  height: 65vh;
+  overflow-y: scroll;
+  margin: 10px;
+  // Firefox hide scrollbar
+  scrollbar-width: none;
+  ul {
+    margin: 0px;
+    list-style: none;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    li {
+      padding: 5px;
+      margin-bottom: 10px;
+    }
   }
+}
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+// Chrome hide scrollbar
+.subcontainer::-webkit-scrollbar {
+  display: none;
 }

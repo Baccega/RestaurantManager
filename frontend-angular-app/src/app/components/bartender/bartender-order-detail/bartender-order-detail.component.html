@@ -1,9 +1,16 @@
-<ul *ngIf="order">
-  <li *ngFor="let dish of this.order.dishes">
-    <mat-card>
-      <div class="container">
-        <p>{{ dish.name }}</p>
-      </div>
-    </mat-card>
-  </li>
-</ul>
+<div class="subcontainer">
+  <ul *ngIf="order">
+    <li *ngFor="let dish of this.order.dishes">
+      <mat-card>
+        <div class="container">
+          <p>{{ dish.name }}</p>
+        </div>
+      </mat-card>
+    </li>
+  </ul>
+</div>
+<div class="button-container">
+  <button mat-raised-button color="primary" (click)="startDish(i)">
+    Ciao
+  </button>
+</div>
