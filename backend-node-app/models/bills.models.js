@@ -11,6 +11,7 @@ let billSchema = new mongoose.Schema({
     required: false
   },
   table: String,
+  customerNumber: Number,
   waiter: String,
   total: Number
 });

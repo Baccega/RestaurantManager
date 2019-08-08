@@ -3,11 +3,12 @@ var router = express.Router();
 var DishesModel = require("../models/dishes.models");
 var CoursesModel = require("../models/courses.models");
 const { dishValidation } = require("../validation");
+const verify = require("./verifyToken");
 
 /*
  * GET all courses
  */
-router.get("/", function(req, res, next) {
+router.get("/", verify, function(req, res, next) {
   CoursesModel.find({})
     .then(doc => res.json(doc))
     .catch(err => res.status(500).json(err));
@@ -18,7 +19,7 @@ router.get("/", function(req, res, next) {
 /*
  * CREATE new courses
  */
-router.post("/createCourse", async function(req, res, next) {
+router.post("/createCourse", verify, async function(req, res, next) {
   if (!req.body) return res.status(400).send("Request body is missing");
   else if (!req.body.category)
     return res.status(400).send("Missing parameters");
@@ -43,7 +44,7 @@ router.post("/createCourse", async function(req, res, next) {
 /*
  * CREATE new plate
  */
-router.post("/newPlate", async function(req, res, next) {
+router.post("/newPlate", verify, async function(req, res, next) {
   if (!req.body) {
     return res.status(400).send("Request body is missing");
   } else {

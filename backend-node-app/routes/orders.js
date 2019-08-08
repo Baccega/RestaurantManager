@@ -21,7 +21,7 @@ router.get("/all", (req, res, next) => {
 /*
  * POST Order at specified table table
  */
-router.post("/", async (req, res, next) => {
+router.post("/", verify, async (req, res, next) => {
   if (!req.body) return res.status(400).send("Bad request, body missing");
   else {
     const table = await TableModel.findOne({ number: req.body.table });
@@ -53,7 +53,6 @@ router.post("/", async (req, res, next) => {
 
       */
       try {
-
         /*
         await user.save();
         */
@@ -76,19 +75,16 @@ router.post("/", async (req, res, next) => {
 
 /*
  * GET respective order depending on the role
+ * FIX FILTER
  */
-router.get("/", async (req, res, next) => {
-  /*
-   * JWT token poi query, il body non serve
-  */
-  if (!req.body) return res.status(400).send("Bad request, body missing");
-  const { role, name } = await UserModel.findById(req.body.id);
+router.get("/", verify, async (req, res, next) => {
+
+  const { role } = await UserModel.findById(req.user._id);
   console.log(role);
-  
+
   switch (role) {
     //Waiter test id --> 5d35cb8d1471d70980e39209
     case "waiter":
-      console.log(req.body.id);
       try {
         const myOrder = await OrderModel.find({ waiter: req.body.id }); //verra sostituito con id di JWT
         console.log(myOrder);
@@ -99,20 +95,25 @@ router.get("/", async (req, res, next) => {
       break;
     // Chef test id --> 5d3704cd1930b11928e876ee
     case "chef":
+      console.log("hello kitchen");
       try {
         let orderList = await OrderModel.find({});
+        /*let result = orderList.map(elem =>
+          elem.dishes.filter(dish => dish.category != "Bevande")
+        );*/
         orderList.forEach(element => {
-          element.dishes.filter(dish => dish.category != "Bevande");
+          element = element.dishes.filter(dish => dish.category != "Bevande");
         });
         res.status(201).send(orderList);
       } catch (e) {
-        res.status(400).send(e);
+        res.status(400).send(e.message);
       }
 
       break;
 
     //Bartender test id --> 5d37043e1930b11928e876ed
     case "bartender":
+      console.log("hello bar");
       try {
         let orderList = await OrderModel.find({});
         orderList.forEach(element => {
@@ -133,7 +134,7 @@ router.get("/", async (req, res, next) => {
 /*
  * GET the order with the :id
  */
-router.get("/:id", async function(req, res, next) {
+router.get("/:id", verify, async function(req, res, next) {
   try {
     const order = await OrderModel.find({ orderId: req.params.id });
     if (!order.length) res.status(400).send("Table doesn't exist !");
@@ -147,7 +148,7 @@ router.get("/:id", async function(req, res, next) {
  * POST modify the food or drink status of the
  * order :id
  */
-router.post("/:id", async function(req, res, next) {
+router.post("/:id", verify, async function(req, res, next) {
   try {
     let order = await OrderModel.findOne({ orderId: req.params.id });
     console.log(req.body);
@@ -170,7 +171,7 @@ router.post("/:id", async function(req, res, next) {
 /*
  * GET specific :dish of the order :id
  */
-router.get("/:id/:dish", async function(req, res, next) {
+router.get("/:id/:dish", verify, async function(req, res, next) {
   try {
     const order = await OrderModel.findOne({ orderId: req.params.id });
     const dishes = order.dishes;
@@ -188,12 +189,12 @@ router.get("/:id/:dish", async function(req, res, next) {
 /*
  * POST modify status of the :dish in order :id
  */
-router.post("/:id/:dish", async function(req, res, next) {
+router.post("/:id/:dish", verify, async function(req, res, next) {
   try {
     /*
      * Quando lo status è "completed" aumentare il contatore
      * dell'utente del JWT
-    */
+     */
     let order = await OrderModel.findOne({ orderId: req.params.id });
     let plate = order.dishes.find(elem => {
       if (elem.id == req.params.dish) return elem;

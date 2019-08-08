@@ -9,7 +9,6 @@ const mongoose =  require("mongoose");
 const dotenv = require('dotenv');
 
 //DECLARATION OF ROUTES
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
 const tablesRouter = require('./routes/tables');
@@ -36,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //USAGE OF ROUTES
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/courses', coursesRouter);
 app.use('/tables', tablesRouter);
