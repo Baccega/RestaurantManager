@@ -4,13 +4,33 @@
       <mat-card>
         <div class="container">
           <p>{{ dish.name }}</p>
+          <p>x {{ dish.quantity }}</p>
         </div>
       </mat-card>
     </li>
   </ul>
 </div>
 <div class="button-container">
-  <button mat-raised-button color="primary" (click)="startDish(i)">
-    Ciao
+  <button
+    *ngIf="order.drinkStatus == 0"
+    mat-raised-button
+    color="primary"
+    (click)="startOrder()"
+  >
+    <div class="content-container">
+      <p>Start Order</p>
+      <mat-icon>play_arrow</mat-icon>
+    </div>
+  </button>
+  <button
+    *ngIf="order.drinkStatus == 1"
+    mat-raised-button
+    color="accent"
+    (click)="finishOrder()"
+  >
+    <div class="content-container">
+      <p>Finish Order</p>
+      <mat-icon>av_timer</mat-icon>
+    </div>
   </button>
 </div>

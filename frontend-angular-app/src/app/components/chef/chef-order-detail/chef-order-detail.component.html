@@ -3,7 +3,8 @@
     <mat-card>
       <div class="container">
         <p>{{ dish.name }}</p>
-        <p>10:00</p>
+        <p>{{ dish.preparation }}</p>
+        <p>x {{ dish.quantity }}</p>
         <button
           *ngIf="dish.status == 0"
           mat-raised-button

@@ -19,7 +19,7 @@ export class WaiterDashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.utilsService.setTitle("Dashboard");
+    this.utilsService.setTitle("Dashboard - Waiter");
     this.routerQuerySub = this.activated.queryParams.subscribe(qParams => {
       if (qParams["result"] == "success") {
         this._snackBar.open("Operazione Eseguita!", "Chiudi", {

@@ -10,6 +10,6 @@ export class BartenderDashboardComponent implements OnInit {
   constructor(private utilsService: UtilsService) {}
 
   ngOnInit() {
-    this.utilsService.setTitle("Dashboard");
+    this.utilsService.setTitle("Dashboard - Bartender");
   }
 }

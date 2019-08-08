@@ -3,7 +3,7 @@ import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
-import { Order } from "src/app/models/Order";
+import { Order, DrinkStatus, FoodStatus } from "src/app/models/Order";
 
 @Component({
   selector: "app-bartender-order-detail",
@@ -14,7 +14,6 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
   order: Order;
   orderServiceSub: Subscription;
   routerSub: Subscription;
-
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
@@ -39,5 +38,15 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.orderServiceSub.unsubscribe();
     this.routerSub.unsubscribe();
+  }
+
+  async startOrder() {
+    this.order.drinkStatus = 1; // OrderStatus["Preparing"]
+    // post to backend
+  }
+
+  async finishOrder() {
+    this.order.drinkStatus = 2; // OrderStatus["Preparing"]
+    // post to backend
   }
 }

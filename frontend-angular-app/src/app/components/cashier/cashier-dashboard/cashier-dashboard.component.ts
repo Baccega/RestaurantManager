@@ -20,7 +20,7 @@ export class CashierDashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.utilsService.setTitle("Dashboard");
+    this.utilsService.setTitle("Dashboard - Cashier");
     this.tablesSub = this.tableService.watchTables().subscribe(tables => {
       this.tables = tables;
     });

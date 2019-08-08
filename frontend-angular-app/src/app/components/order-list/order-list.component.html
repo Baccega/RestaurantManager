@@ -13,8 +13,9 @@
       </div>
       <div *ngIf="source == 'bartender'">
         <mat-icon *ngIf="order.drinkStatus == 0">hourglass_empty</mat-icon>
-        <mat-icon *ngIf="order.drinkStatus == 1">notifications_active</mat-icon>
-        <mat-icon *ngIf="order.drinkStatus == 2">done</mat-icon>
+        <mat-icon *ngIf="order.drinkStatus == 1">whatshot</mat-icon>
+        <mat-icon *ngIf="order.drinkStatus == 2">notifications_active</mat-icon>
+        <mat-icon *ngIf="order.drinkStatus == 3">done</mat-icon>
       </div>
     </mat-card>
   </li>

@@ -10,6 +10,6 @@ export class ChefDashboardComponent implements OnInit {
   constructor(private utils: UtilsService) {}
 
   ngOnInit() {
-    this.utils.setTitle("Dashboard");
+    this.utils.setTitle("Dashboard - Chef");
   }
 }
