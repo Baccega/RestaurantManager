@@ -18,7 +18,7 @@ import { WaiterTableListComponent } from "./components/waiter/waiter-table-list/
 import { WaiterNewTableComponent } from "./components/waiter/waiter-new-table/waiter-new-table.component";
 import { DummyComponent } from "./components/dummy/dummy.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
-import { ChefOrderListComponent } from "./components/chef/chef-order-list/chef-order-list.component";
+import { OrderListComponent } from "./components/order-list/order-list.component";
 import { CashierStatisticsComponent } from "./components/cashier/cashier-statistics/cashier-statistics.component";
 import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-bill.component";
 import { CashierViewOrderComponent } from "./components/cashier/cashier-view-order/cashier-view-order.component";
@@ -31,7 +31,7 @@ import { domain } from "src/environments/environment";
 import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 import { AuthService } from "./services/auth.service";
-import { BartenderOrderDetailComponent } from './components/bartender/bartender-order-detail/bartender-order-detail.component';
+import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -44,7 +44,7 @@ export function tokenGetter() {
 
     ChefDashboardComponent,
     ChefOrderDetailComponent,
-    ChefOrderListComponent,
+    OrderListComponent,
 
     BartenderDashboardComponent,
 

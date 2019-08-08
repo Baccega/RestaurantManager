@@ -6,11 +6,11 @@ import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-chef-order-list",
-  templateUrl: "./chef-order-list.component.html",
-  styleUrls: ["./chef-order-list.component.scss"]
+  selector: "app-order-list",
+  templateUrl: "./order-list.component.html",
+  styleUrls: ["./order-list.component.scss"]
 })
-export class ChefOrderListComponent implements OnInit, OnDestroy {
+export class OrderListComponent implements OnInit, OnDestroy {
   orders: Order[];
   id: String;
   orderSub: Subscription;
