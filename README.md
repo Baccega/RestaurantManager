@@ -102,7 +102,7 @@ Role {
 | Method | Body            | Query Params   | Description                                                  | Users |
 | ------ | --------------- | -------------- | ------------------------------------------------------------ | ----- |
 | GET    |                 | waiter*=String ID | Ricevi tutti i conti<br />*waiter*: Solo i conti di un cameriere | Cassa |
-| POST   | { TableNumber } |                | Crea un nuovo conto per il tavolo Tablenumber | Cameriere |
+| POST   | { TableNumber, CustomersNumber } |                | Crea un nuovo conto vuoto per il tavolo Tablenumber, occupandolo | Cameriere |
 
 ### /bills/:id
 
@@ -140,7 +140,7 @@ Role {
 
 | Method | Body      | Query Params | Description           | Users |
 | ------ | --------- | ------------ | --------------------- | ----- |
-| GET    |           |              | Ricevi tutti i tavoli | Tutti |
+| GET    |           |              | Ricevi tutti i miei tavoli | Cameriere<br />Cassa |
 | POST#  | { Table } |              | Crea un nuovo tavolo  | Cassa |
 
 ### /tables/:id
