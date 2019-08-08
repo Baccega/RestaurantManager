@@ -7,7 +7,7 @@ const verify = require("./verifyToken");
 /*
  * GET all tables
  */
-router.get("/", async (req, res, next) => {
+router.get("/", verify, async (req, res, next) => {
   const allTables = await TablesModel.find({});
   res.status(200).send(allTables);
 });
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 /*
  * POST new table
  */
-router.post("/", async (req, res, next) => {
+router.post("/", verify, async (req, res, next) => {
   const { error } = tableValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -49,7 +49,7 @@ router.get("/freeTables", verify, async (req, res) => {
 /*
  * GET tables by Id 
  */
-router.get("/:id", async function(req, res) {
+router.get("/:id", verify, async function(req, res) {
   try {
   const table = await TablesModel.find({ number: req.params.id });
   if (!table.length) return res.status(400).send("Table doesnt exist!");
