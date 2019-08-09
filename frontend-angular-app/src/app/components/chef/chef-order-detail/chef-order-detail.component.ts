@@ -31,7 +31,7 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
       this.orderServiceSub = this.orderService.getOrder(id).subscribe(
         order => {
           this.utilsService.setProgressbar(false);
-          this.order = order[0]; // Per qualche motivo mi torna un array
+          this.order = order;
         },
         err => {
           console.error(err);
