@@ -13,6 +13,8 @@ const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
 const tablesRouter = require('./routes/tables');
 const ordersRouter = require('./routes/orders');
+const billsRouter = require('./routes/bills');
+
 
 
 
@@ -39,6 +41,8 @@ app.use('/users', usersRouter);
 app.use('/courses', coursesRouter);
 app.use('/tables', tablesRouter);
 app.use('/orders', ordersRouter);
+app.use('/bills', billsRouter);
+
 
 
 //MONGOOSE CONNECTION

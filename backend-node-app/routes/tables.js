@@ -40,23 +40,37 @@ router.post("/", verify, async (req, res, next) => {
  */
 router.get("/freeTables", verify, async (req, res) => {
   const freeTable = await TablesModel.find({
-    free: true,
-    seats: { $gte: req.body.seats }
+    free: true
   });
   res.status(200).send(freeTable);
 });
 
 /*
- * GET tables by Id 
+ * GET my tables
  */
-router.get("/:id", verify, async function(req, res) {
+router.get("/myTables", verify, async function(req, res) {
   try {
-  const table = await TablesModel.find({ number: req.params.id });
-  if (!table.length) return res.status(400).send("Table doesnt exist!");
-  else return res.status(200).send(table);
-  } catch(e){
+    const table = await TablesModel.find({ waiter: req.user._id });
+    if (!table.length) return res.status(400).send("Table doesnt exist!");
+    else return res.status(200).send(table);
+  } catch (e) {
     return res.status(400).send(e.message);
   }
 });
+
+/*
+ * GET tables by Id
+ */
+router.get("/:id", verify, async function(req, res) {
+  try {
+    const table = await TablesModel.find({ number: req.params.id });
+    if (!table.length) return res.status(400).send("Table doesnt exist!");
+    else return res.status(200).send(table);
+  } catch (e) {
+    return res.status(400).send(e.message);
+  }
+});
+
+
 
 module.exports = router;

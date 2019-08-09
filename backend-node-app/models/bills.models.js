@@ -1,4 +1,5 @@
 let mongoose = require("mongoose");
+const autoIncrement = require("mongoose-sequence")(mongoose);
 
 let billSchema = new mongoose.Schema({
   date: {
@@ -8,12 +9,14 @@ let billSchema = new mongoose.Schema({
   },
   dishes: {
     type: Object,
-    required: false
+    required: false,
+    default: new Array()
   },
   table: String,
   customerNumber: Number,
   waiter: String,
-  total: Number
+  total: { type: Number, default: 0 }
 });
 
+billSchema.plugin(autoIncrement, { inc_field: "billId" });
 module.exports = mongoose.model("Bill", billSchema);
