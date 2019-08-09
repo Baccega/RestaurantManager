@@ -8,34 +8,35 @@
 
 ```typescript
 Dish {
-  id: string;
+  dishId: number;
   name: string;
   price: number;
   quantity: number;
   preparation: string;
   status: DishStatus;
-  category: string;       		// Category ID
+  category: string;    
 }
 
 Course {
-  id: string
-  name: string;
+  courseId: number;
+  category: string;
   dishes: Dish[];
 }
 
 Order {
-  id: String;
+  orderId: number;
   dishes: Dish[];
   foodStatus: OrderStatus;
   drinkStatus: OrderStatus;
-  table: string;								// Table ID
+  table: number;								// Table number
   waiter: string;           		// Employee ID
 }
 
 Table {
-  id: String;
+  number: String;
   seats: number;
   free: boolean;
+  waiter: String;             // Employee ID
 }
 
 Bill {
@@ -43,12 +44,14 @@ Bill {
   date: Date;
   dishes: Object[];
   table: string;			  // Table ID
+  customerNumber: Number;
   waiter: string;       // Employee ID
 }
 
 Employee {
-  id: string;
+  userId: number;
   name: string;
+  email: string;
   role: Role;
   dailyPlate: number;
   totalPlate: number;
