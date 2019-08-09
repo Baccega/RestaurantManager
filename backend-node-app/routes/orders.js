@@ -106,12 +106,9 @@ router.get("/", verify, async (req, res, next) => {
 			console.log("hello kitchen");
 			try {
 				let orderList = await OrderModel.find({});
-				/*let result = orderList.map(elem =>
-          elem.dishes.filter(dish => dish.category != "Bevande")
-				);*/
-				orderList.filter(
-					order => filterOrderCategory(order, "Bevande").dishes.length > 0
-				);
+
+				orderList.forEach(order => filterOrderCategory(order, "Bevande"));
+				orderList.filter(order => order.dishes.length > 0);
 
 				res.status(201).send(orderList);
 			} catch (e) {
@@ -125,9 +122,9 @@ router.get("/", verify, async (req, res, next) => {
 			console.log("hello bar");
 			try {
 				let orderList = await OrderModel.find({});
-				orderList.filter(
-					order => filterOthersOrderCategory(order, "Bevande").dishes.length > 0
-				);
+
+				orderList.forEach(order => filterOthersOrderCategory(order, "Bevande"));
+				orderList.filter(order => order.dishes.length > 0);
 
 				res.status(201).send(orderList);
 			} catch (e) {
