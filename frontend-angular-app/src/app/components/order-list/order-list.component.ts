@@ -26,9 +26,11 @@ export class OrderListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.orderSub = this.orderService
-      .getOrders()
-      .subscribe(orders => (this.orders = orders));
+    this.utilsService.setProgressbar(true);
+    this.orderSub = this.orderService.getOrders().subscribe(orders => {
+      this.utilsService.setProgressbar(false);
+      this.orders = orders;
+    });
 
     this.utilsSub = this.utilsService.watchId().subscribe(newId => {
       this.id = newId;

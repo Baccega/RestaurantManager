@@ -2,7 +2,7 @@ import { Component, OnInit, Output, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { OrderService } from "src/app/services/order.service";
-import { Order, FoodStatus, DrinkStatus } from "src/app/models/Order";
+import { Order, OrderStatus } from "src/app/models/Order";
 import { Subscription } from "rxjs";
 
 @Component({

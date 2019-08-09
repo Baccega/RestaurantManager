@@ -1,8 +1,8 @@
 <ul>
-  <li *ngFor="let order of orders" (click)="navigateTo(order.id)">
-    <mat-card [ngClass]="{ 'is-active': order.id === id }">
+  <li *ngFor="let order of orders" (click)="navigateTo(order.orderId)">
+    <mat-card [ngClass]="{ 'is-active': order.orderId == id }">
       <p>
-        Order: {{ order.id }}<br />
+        Order: {{ order.orderId }}<br />
         Table: {{ order.table }}
       </p>
       <div *ngIf="source == 'chef'">

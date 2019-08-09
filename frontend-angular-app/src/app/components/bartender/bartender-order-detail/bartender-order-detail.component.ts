@@ -3,7 +3,7 @@ import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
-import { Order, DrinkStatus, FoodStatus } from "src/app/models/Order";
+import { Order, OrderStatus } from "src/app/models/Order";
 
 @Component({
   selector: "app-bartender-order-detail",

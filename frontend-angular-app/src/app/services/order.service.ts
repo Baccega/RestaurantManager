@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Order, FoodStatus, DrinkStatus } from "../models/Order";
+import { Order, OrderStatus } from "../models/Order";
 import { Observable, of, throwError } from "rxjs";
 import { DishStatus, Dish } from "../models/Dish";
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from "src/environments/environment";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -11,7 +11,6 @@ const httpOption = {
     "auth-token": localStorage.getItem("token")
   })
 };
-
 
 @Injectable({
   providedIn: "root"
@@ -22,8 +21,8 @@ export class OrderService {
       id: "1",
       table: "1",
       waiter: "io",
-      drinkStatus: DrinkStatus["Waiting"],
-      foodStatus: FoodStatus["Waiting"],
+      drinkStatus: OrderStatus["Waiting"],
+      foodStatus: OrderStatus["Waiting"],
       dishes: [
         {
           id: "1",
@@ -49,8 +48,8 @@ export class OrderService {
       id: "2",
       table: "2",
       waiter: "1",
-      drinkStatus: DrinkStatus["Ready"],
-      foodStatus: FoodStatus["Preparing"],
+      drinkStatus: OrderStatus["Ready"],
+      foodStatus: OrderStatus["Preparing"],
       dishes: [
         {
           id: "1",
@@ -67,8 +66,8 @@ export class OrderService {
       id: "3",
       table: "3",
       waiter: "1",
-      drinkStatus: DrinkStatus["Delivered"],
-      foodStatus: FoodStatus["Delivered"],
+      drinkStatus: OrderStatus["Delivered"],
+      foodStatus: OrderStatus["Delivered"],
       dishes: [
         {
           id: "1",
@@ -139,8 +138,8 @@ export class OrderService {
       id: "2",
       table: "2",
       waiter: "1",
-      drinkStatus: DrinkStatus["Ready"],
-      foodStatus: FoodStatus["Ready"],
+      drinkStatus: OrderStatus["Ready"],
+      foodStatus: OrderStatus["Ready"],
       dishes: [
         {
           id: "1",
@@ -155,25 +154,28 @@ export class OrderService {
     }
   ];
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getOrders(tableId = ""): Observable<Order[]> {
-    return this.http.get<Order[]>(`${environment.serverUrl}/orders/tables/${tableId}`, httpOption);
-    
+    tableId = tableId != "" ? `/tables/${tableId}` : "";
+    return this.http.get<Order[]>(
+      `${environment.serverUrl}/orders${tableId}`,
+      httpOption
+    );
   }
 
-  getOrder(id): Observable<Order> {
-    const found: Order = this.orders.find(order => order.id === id);
-    if (found) {
-      return of(found);
-    } else {
-      return throwError(`Order "${id}" not found`);
-    }
+  getOrder(orderId): Observable<Order> {
+    return this.http.get<Order>(
+      `${environment.serverUrl}/orders/${orderId}`,
+      httpOption
+    );
   }
 
   sendOrder(data): Promise<any> {
-    return this.http.post<Order[]>(`${environment.serverUrl}/orders/`,data, httpOption).toPromise();
-    
+    return this.http
+      .post<Order[]>(`${environment.serverUrl}/orders/`, data, httpOption)
+      .toPromise();
+
     /*
     return new Promise(resolve => {
       setTimeout(() => {
@@ -182,7 +184,7 @@ export class OrderService {
     });*/
   }
 
-  setOrderFoodStatus(id: String, newStatus: FoodStatus) {
+  setOrderFoodStatus(id: String, newStatus: OrderStatus) {
     return new Promise(resolve => {
       setTimeout(() => {
         const order = this.orders.find(order => order.id === id);
@@ -192,7 +194,7 @@ export class OrderService {
     });
   }
 
-  setOrderDrinkStatus(id: String, newStatus: DrinkStatus) {
+  setOrderDrinkStatus(id: String, newStatus: OrderStatus) {
     return new Promise(resolve => {
       setTimeout(() => {
         const order = this.orders.find(order => order.id === id);
@@ -207,7 +209,7 @@ export class OrderService {
       setTimeout(() => {
         const order = this.orders.find(order => order.id === id);
         order.dishes[dishIndex].status = newStatus;
-        order.foodStatus = FoodStatus["Preparing"];
+        order.foodStatus = OrderStatus["Preparing"];
 
         resolve();
       }, 500);

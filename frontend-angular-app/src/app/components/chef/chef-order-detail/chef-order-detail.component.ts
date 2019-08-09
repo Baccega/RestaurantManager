@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DishStatus } from "src/app/models/Dish";
-import { Order, FoodStatus, DrinkStatus } from "src/app/models/Order";
+import { Order, OrderStatus } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
@@ -27,8 +27,12 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
       const id = params["id"];
       this.utilsService.setId(id);
+      this.utilsService.setProgressbar(true);
       this.orderServiceSub = this.orderService.getOrder(id).subscribe(
-        order => (this.order = order),
+        order => {
+          this.utilsService.setProgressbar(false);
+          this.order = order[0]; // Per qualche motivo mi torna un array
+        },
         err => {
           console.error(err);
           this.router.navigate(["chef"]);
@@ -62,7 +66,7 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
       this.utilsService.setProgressbar(true);
       await this.orderService.setOrderFoodStatus(
         this.order.id,
-        FoodStatus["Ready"]
+        OrderStatus["Ready"]
       );
       this.utilsService.setProgressbar(false);
       this.router.navigate(["/chef"]);
