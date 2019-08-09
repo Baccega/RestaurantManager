@@ -1,7 +1,7 @@
 <ul>
-  <li *ngFor="let table of tables" (click)="navigateTo(table.id)">
-    <mat-card [ngClass]="{ 'is-active': table.id === id }">
-      Table: {{ table.id }}
+  <li *ngFor="let table of tables" (click)="navigateTo(table.number)">
+    <mat-card [ngClass]="{ 'is-active': table.number === number }">
+      Table: {{ table.number }}
     </mat-card>
   </li>
 </ul>

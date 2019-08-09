@@ -38,7 +38,7 @@ router.post("/", verify, async (req, res, next) => {
       //Creazione ordine
       newOrder = new OrderModel({
         table: table.number,
-        waiter: req.body.waiter
+        waiter: req.user._id
       });
 
       req.body.dishes.forEach(element => {
@@ -138,6 +138,19 @@ router.get("/:id", verify, async function(req, res, next) {
   try {
     const order = await OrderModel.find({ orderId: req.params.id });
     if (!order.length) res.status(400).send("Table doesn't exist !");
+    else res.status(200).send(order);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
+/*
+ * GET the order of the :table
+*/
+router.get("/tables/:table", verify, async function(req, res, next) {
+  try {
+    const order = await OrderModel.find({ table: req.params.table });
+    if (!order.length) res.status(200).send([]);
     else res.status(200).send(order);
   } catch (e) {
     res.status(400).send(e.message);

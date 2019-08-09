@@ -2,6 +2,16 @@ import { Injectable } from "@angular/core";
 import { Order, FoodStatus, DrinkStatus } from "../models/Order";
 import { Observable, of, throwError } from "rxjs";
 import { DishStatus, Dish } from "../models/Dish";
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOption = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "auth-token": localStorage.getItem("token")
+  })
+};
+
 
 @Injectable({
   providedIn: "root"
@@ -145,10 +155,11 @@ export class OrderService {
     }
   ];
 
-  constructor() {}
+  constructor(private http:HttpClient) {}
 
   getOrders(tableId = ""): Observable<Order[]> {
-    return of(this.orders.filter(el => el.table !== tableId));
+    return this.http.get<Order[]>(`${environment.serverUrl}/orders/tables/${tableId}`, httpOption);
+    
   }
 
   getOrder(id): Observable<Order> {
@@ -160,12 +171,15 @@ export class OrderService {
     }
   }
 
-  sendOrder(order: Dish[]) {
+  sendOrder(data): Promise<any> {
+    return this.http.post<Order[]>(`${environment.serverUrl}/orders/`,data, httpOption).toPromise();
+    
+    /*
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();
       }, 3000);
-    });
+    });*/
   }
 
   setOrderFoodStatus(id: String, newStatus: FoodStatus) {

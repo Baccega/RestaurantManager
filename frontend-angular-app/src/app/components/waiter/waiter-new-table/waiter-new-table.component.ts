@@ -39,7 +39,7 @@ export class WaiterNewTableComponent implements OnInit {
       table: this.selected
     });
     this.utilsService.setProgressbar(false);
-    this.router.navigate(["/waiter", "dashboard", newId], {
+    this.router.navigate(["/waiter", "dashboard", this.selected], {
       queryParams: { result: "success" }
     });
   }

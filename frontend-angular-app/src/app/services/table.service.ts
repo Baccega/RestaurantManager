@@ -56,7 +56,7 @@ export class TableService {
   ];
 
   watchTables(): Observable<Table[]> {
-    return of(this.tables);
+    return this.http.get<any>(`${environment.serverUrl}/tables/myTables`, httpOption);
   }
 
   getFreeTables(): Observable<Table[]> {
@@ -72,16 +72,8 @@ export class TableService {
     }
   }
 
-  createTable(data) {
+  createTable(data): Promise<any>{
     console.log(data);
-    return this.http.post<any>(`${environment.serverUrl}/bills/`, httpOption, data);
-    /*
-    return new Promise(resolve => {
-      setTimeout(() => {
-        console.log(`Added table with ${seats} seats`);
-        const id = 3;
-        resolve(3);
-      }, 3000);
-    }); */
+    return this.http.post<any>(`${environment.serverUrl}/bills/`,data, httpOption).toPromise();
   }
 }
