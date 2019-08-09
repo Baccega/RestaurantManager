@@ -165,6 +165,10 @@ export class OrderService {
   }
 
   getOrder(orderId): Observable<Order> {
+    // return this.http.get<Order>(
+    //   `${environment.serverUrl}/orders/${orderId}`,
+    //   httpOption
+    // );
     return this.http.get<Order>(
       `${environment.serverUrl}/orders/${orderId}`,
       httpOption

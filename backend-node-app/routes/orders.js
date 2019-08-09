@@ -89,7 +89,6 @@ router.post("/", verify, async (req, res, next) => {
 router.get("/", verify, async (req, res, next) => {
 	const { role } = await UserModel.findById(req.user._id);
 	console.log(role);
-
 	switch (role) {
 		//Waiter test id --> 5d35cb8d1471d70980e39209
 		case "waiter":
@@ -142,39 +141,36 @@ router.get("/", verify, async (req, res, next) => {
  * GET the order with the :id
  */
 router.get("/:id", verify, async function(req, res, next) {
-	try {
-		let order = await OrderModel.find({ orderId: req.params.id });
-		if (!order.length) res.status(400).send("Order doesn't exist !");
-		order = order[0];
+	const { role } = await UserModel.findById(req.user._id);
+	console.log(role);
 
-		const { role } = await UserModel.findById(req.user._id);
-		console.log(role);
+	let order = await OrderModel.find({ orderId: req.params.id });
+	if (!order.length) res.status(400).send("Order doesn't exist !");
 
-		switch (role) {
-			case "waiter":
-				res.status(201).send(order);
+	order = order[0];
 
-				break;
-			case "chef":
-				console.log("hello kitchen");
-				const result = filterOrderCategory(order, "Bevande");
-				res.status(201).send(result);
+	switch (role) {
+		case "waiter":
+			res.status(201).send(order);
 
-				break;
+			break;
+		case "chef":
+			console.log("hello kitchen");
+			const result = filterOrderCategory(order, "Bevande");
+			res.status(201).send(result);
 
-			//Bartender test id --> 5d37043e1930b11928e876ed
-			case "bartender":
-				console.log("hello bar");
-				const result = filterOthersOrderCategory(order, "Bevande");
-				res.status(201).send(result);
-				break;
+			break;
 
-			default:
-				res.status(400).send("bad bad");
-				break;
-		}
-	} catch (e) {
-		res.status(400).send(e.message);
+		//Bartender test id --> 5d37043e1930b11928e876ed
+		case "bartender":
+			console.log("hello bar");
+			const result = filterOthersOrderCategory(order, "Bevande");
+			res.status(201).send(result);
+			break;
+
+		default:
+			res.status(400).send("bad bad");
+			break;
 	}
 });
 
