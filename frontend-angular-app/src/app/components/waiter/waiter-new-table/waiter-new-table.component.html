@@ -16,10 +16,10 @@
   <ul>
     <li *ngFor="let table of visibleTables">
       <mat-card
-        (click)="select(table.id)"
-        [ngClass]="{ active: table.id === selected }"
+        (click)="select(table.number)"
+        [ngClass]="{ active: table.number === selected }"
         class="table-block"
-        >Table {{ table.id }}</mat-card
+        >Table {{ table.number }}</mat-card
       >
     </li>
   </ul>

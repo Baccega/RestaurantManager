@@ -23,7 +23,8 @@ export class WaiterNewTableComponent implements OnInit {
 
   ngOnInit() {
     this.utilsService.setTitle("New Table");
-    this.tableService.getFreeTables(true).subscribe(newTables => {
+    this.tableService.getFreeTables().subscribe(newTables => {
+      console.log(newTables);
       this.tables = newTables;
       this.visibleTables = this.tables.filter(
         table => table.seats > this.seats
@@ -33,7 +34,10 @@ export class WaiterNewTableComponent implements OnInit {
 
   async createTable() {
     this.utilsService.setProgressbar(true);
-    const newId = await this.tableService.createTable(this.seats);
+    const newId = await this.tableService.createTable({
+      customer: this.seats,
+      table: this.selected
+    });
     this.utilsService.setProgressbar(false);
     this.router.navigate(["/waiter", "dashboard", newId], {
       queryParams: { result: "success" }

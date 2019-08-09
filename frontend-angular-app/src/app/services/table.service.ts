@@ -1,11 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Table } from "../models/Table";
 import { Observable, throwError, of } from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+const httpOption = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "auth-token": localStorage.getItem("token")
+  })
+};
 
 @Injectable({
   providedIn: "root"
 })
 export class TableService {
+  constructor(private http:HttpClient){}
+
   tables: Table[] = [
     {
       id: "1",
@@ -48,8 +59,8 @@ export class TableService {
     return of(this.tables);
   }
 
-  getFreeTables(free: boolean): Observable<Table[]> {
-    return of(this.tables.filter(table => table.free == free));
+  getFreeTables(): Observable<Table[]> {
+    return this.http.get<any>(`${environment.serverUrl}/tables/freeTables`, httpOption);
   }
 
   watchTable(id): Observable<Table> {
@@ -61,15 +72,16 @@ export class TableService {
     }
   }
 
-  createTable(seats) {
+  createTable(data) {
+    console.log(data);
+    return this.http.post<any>(`${environment.serverUrl}/bills/`, httpOption, data);
+    /*
     return new Promise(resolve => {
       setTimeout(() => {
         console.log(`Added table with ${seats} seats`);
         const id = 3;
         resolve(3);
       }, 3000);
-    });
+    }); */
   }
-
-  constructor() {}
 }
