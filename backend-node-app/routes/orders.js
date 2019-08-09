@@ -107,7 +107,7 @@ router.get("/", verify, async (req, res, next) => {
 				let orderList = await OrderModel.find({});
 
 				orderList.forEach(order => filterOrderCategory(order, "Bevande"));
-				orderList.filter(order => order.dishes.length > 0);
+				orderList = orderList.filter(order => order.dishes.length > 0);
 
 				res.status(201).send(orderList);
 			} catch (e) {
@@ -123,7 +123,7 @@ router.get("/", verify, async (req, res, next) => {
 				let orderList = await OrderModel.find({});
 
 				orderList.forEach(order => filterOthersOrderCategory(order, "Bevande"));
-				orderList.filter(order => order.dishes.length > 0);
+				orderList = orderList.filter(order => order.dishes.length > 0);
 
 				res.status(201).send(orderList);
 			} catch (e) {
