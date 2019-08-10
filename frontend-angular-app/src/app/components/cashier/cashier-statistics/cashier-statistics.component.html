@@ -14,7 +14,7 @@
   <h3>Employees management</h3>
   <mat-divider></mat-divider>
   <mat-list>
-    <a [routerLink]="['users', user.id]" *ngFor="let user of users">
+    <a [routerLink]="['users', user.userId]" *ngFor="let user of users">
       <mat-list-item>
         <div>
           <p>{{ user.name }}</p>

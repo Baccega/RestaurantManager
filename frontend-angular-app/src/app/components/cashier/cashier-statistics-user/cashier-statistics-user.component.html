@@ -3,7 +3,7 @@
     <h3>Name</h3>
     <h3 class="right">{{ user.name }}</h3>
     <p>Role</p>
-    <p class="right">{{ roles[user.role] }}</p>
+    <p class="right">{{ user.role }}</p>
   </div>
   <mat-divider></mat-divider>
   <div class="stats" *ngIf="stat.customersServed > 0">

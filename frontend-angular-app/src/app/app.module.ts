@@ -32,9 +32,10 @@ import { CashierStatisticsUserComponent } from "./components/cashier/cashier-sta
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 import { AuthService } from "./services/auth.service";
 import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
+import { UserService } from "./services/user.service";
 
 export function tokenGetter() {
-  return localStorage.getItem("access_token");
+  return localStorage.getItem("token");
 }
 
 @NgModule({
@@ -86,7 +87,7 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [SnackbarComponent]
 })

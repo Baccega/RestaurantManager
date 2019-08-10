@@ -26,10 +26,12 @@ export class CashierStatisticsUserComponent implements OnInit {
     private statisticService: StatisticsService
   ) {}
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(newUserId => {
+  async ngOnInit() {
+    this.activatedRoute.params.subscribe(async newUserId => {
       this.userId = newUserId["user"];
-      this.user = this.userService.getUser(this.userId);
+      this.utilsService.setProgressbar(true);
+      this.user = await this.userService.getUser(this.userId);
+      this.utilsService.setProgressbar(false);
       this.utilsService.setTitle("Employees Management");
       this.stat = this.statisticService.getTodayEmployeeStatistics(this.userId);
     });

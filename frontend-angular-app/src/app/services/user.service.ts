@@ -1,36 +1,33 @@
 import { Injectable } from "@angular/core";
 import { User, Role } from "../models/User";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+
+const httpOption = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    "auth-token": "text"
+  })
+};
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
-  users: User[] = [
-    {
-      id: "5",
-      name: "Scode",
-      role: 0,
-      dailyPlate: 1,
-      totalPlate: 20
-    },
-    {
-      id: "1",
-      name: "Scode2",
-      role: 1,
-      dailyPlate: 2,
-      totalPlate: 30
-    }
-  ];
+  users: User[];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Promise<any> {
+    return this.http
+      .get<any>(`${environment.serverUrl}/users`, httpOption)
+      .toPromise();
   }
 
-  getUser(id): User {
-    let found = this.users.find(user => user.id === id);
-    return found;
+  getUser(id): Promise<any> {
+    return this.http
+      .get<any>(`${environment.serverUrl}/users/${id}`, httpOption)
+      .toPromise();
   }
 
   deleteUser(id) {

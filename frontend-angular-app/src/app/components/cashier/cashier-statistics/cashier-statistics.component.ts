@@ -25,7 +25,7 @@ export class CashierStatisticsComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.utilsService.setTitle("Statistics & Management");
 
     const {
@@ -36,10 +36,10 @@ export class CashierStatisticsComponent implements OnInit {
     this.profit = profit;
     this.customersServed = customersServed;
 
-    this.users = this.userService.getUsers();
-  }
+    this.utilsService.setProgressbar(true);
 
-  navigateToUser(user: User) {
-    this.router.navigate(["./" + user.id], { relativeTo: this.activatedRoute });
+    this.users = await this.userService.getUsers();
+
+    this.utilsService.setProgressbar(false);
   }
 }
