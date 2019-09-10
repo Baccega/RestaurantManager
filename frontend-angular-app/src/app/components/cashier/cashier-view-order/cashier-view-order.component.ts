@@ -34,9 +34,7 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
         .getOrders(this.tableId)
         .subscribe(newOrders => {
           this.orders = newOrders;
-          this.waiterName = this.userService.getUser(
-            this.orders[0].waiter
-          ).name;
+          this.waiterName = "test";
           this.utilService.setTitle(`Table: ${this.tableId}`);
         });
     });
