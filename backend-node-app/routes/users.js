@@ -12,7 +12,7 @@ const verify = require("./verifyToken");
  * the specific role
  */
 router.get("/", verify, async function(req, res, next) {
-	if (!req.body) {
+	if (!req.body.role) {
 		const allUser = await UsersModel.find({});
 		res.status(200).send(allUser);
 	} else {

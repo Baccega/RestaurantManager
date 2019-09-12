@@ -14,7 +14,7 @@ export class BillService {
       name: "antipasti",
       dishes: [
         {
-          id: "0",
+          dishId: "0",
           preparation: "10",
           category: "antipasti",
           name: "baccala ecca la",
@@ -23,110 +23,10 @@ export class BillService {
           status: DishStatus["Finished"]
         },
         {
-          id: "0",
+          dishId: "0",
           preparation: "10",
           category: "antipasti",
           name: "baccala ecca la",
-          price: 33,
-          quantity: 2,
-          status: DishStatus["Finished"]
-        }
-      ]
-    },
-
-    {
-      id: "2",
-      name: "primi",
-      dishes: [
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "basta",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "lisotto",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "blodo",
-          price: 33,
-          quantity: 2,
-          status: DishStatus["Finished"]
-        }
-      ]
-    },
-    {
-      id: "2",
-      name: "primi",
-      dishes: [
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "basta",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "lisotto",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "blodo",
-          price: 33,
-          quantity: 2,
-          status: DishStatus["Finished"]
-        }
-      ]
-    },
-    {
-      id: "2",
-      name: "primi",
-      dishes: [
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "basta",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "lisotto",
-          price: 33,
-          quantity: 1,
-          status: DishStatus["Finished"]
-        },
-        {
-          id: "0",
-          preparation: "10",
-          category: "primi",
-          name: "blodo",
           price: 33,
           quantity: 2,
           status: DishStatus["Finished"]
