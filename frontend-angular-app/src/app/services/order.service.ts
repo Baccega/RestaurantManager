@@ -58,7 +58,7 @@ export class OrderService {
   }
 
   setOrderDrinkStatus(id: String, newStatus: OrderStatus) {
-    const data = { status: newStatus };
+    const data = { drinkStatus: newStatus };
     return this.http
       .post<Order>(`${environment.serverUrl}/orders/${id}`, data, httpOption)
       .toPromise();

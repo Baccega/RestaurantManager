@@ -24,10 +24,11 @@
               <mat-icon *ngIf="order.drinkStatus == 0"
                 >hourglass_empty</mat-icon
               >
-              <mat-icon *ngIf="order.drinkStatus == 1"
+              <mat-icon *ngIf="order.drinkStatus == 1">whatshot</mat-icon>
+              <mat-icon *ngIf="order.drinkStatus == 2"
                 >notifications_active</mat-icon
               >
-              <mat-icon *ngIf="order.drinkStatus == 2">done</mat-icon>
+              <mat-icon *ngIf="order.drinkStatus == 3"></mat-icon>
             </div>
           </div>
         </mat-expansion-panel-header>

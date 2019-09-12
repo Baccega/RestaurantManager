@@ -25,7 +25,7 @@ router.get("/", verify, async function(req, res, next) {
  * GET the the user by Id
  */
 router.get("/:id", verify, async function(req, res, next) {
-	const user = await UsersModel.find({ userId: req.params.id });
+	const user = await UsersModel.findOne({ userId: req.params.id });
 	if (!user) res.status(400).send("User doesn't exist !");
 	else res.status(200).send(user);
 });
@@ -89,13 +89,11 @@ router.post("/login", async function(req, res, next) {
  * DELETE the user with the id
  */
 router.delete("/:id", async function(req, res, next) {
-	try {
-		let del = await UsersModel.remove({ userId: req.params.id });
-		console.log(del);
-		if (!del.n) return res.status(400).send("User doesn't exist!");
-		else return res.status(400).send("Deleted user successfully!");
-	} catch (e) {
-		return res.status(400).send(e.message);
+	let del = await UsersModel.remove({ userId: req.params.id });
+	if (!del.n) {
+		res.status(400).send("User doesn't exist!");
+	} else {
+		res.status(200).send("Deleted user successfully!");
 	}
 });
 

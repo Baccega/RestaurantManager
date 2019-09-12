@@ -12,7 +12,7 @@ import { StatisticsService } from "src/app/services/statistics.service";
 })
 export class CashierStatisticsUserComponent implements OnInit {
   userId;
-  user: User;
+  user;
   // preparedDishes;
   // customersServed;
   stat;
@@ -41,9 +41,14 @@ export class CashierStatisticsUserComponent implements OnInit {
   }
 
   async deleteUser() {
-    this.utilsService.setProgressbar(true);
-    await this.userService.deleteUser(this.userId);
-    this.utilsService.setProgressbar(false);
-    this.router.navigate(["../../"], { relativeTo: this.activatedRoute });
+    try {
+      this.utilsService.setProgressbar(true);
+      const result = await this.userService.deleteUser(this.userId);
+      console.log(result);
+      this.utilsService.setProgressbar(false);
+      this.router.navigate(["../../"], { relativeTo: this.activatedRoute });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

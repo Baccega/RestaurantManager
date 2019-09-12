@@ -41,12 +41,23 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
   }
 
   async startOrder() {
-    this.order.drinkStatus = 1; // OrderStatus["Preparing"]
-    // post to backend
+    this.utilsService.setProgressbar(true);
+    this.order.drinkStatus = 1;
+    await this.orderService.setOrderDrinkStatus(
+      this.order.orderId,
+      OrderStatus["Preparing"]
+    );
+    this.utilsService.setProgressbar(false);
   }
 
   async finishOrder() {
-    this.order.drinkStatus = 2; // OrderStatus["Preparing"]
-    // post to backend
+    this.utilsService.setProgressbar(true);
+    this.order.drinkStatus = 2;
+    await this.orderService.setOrderDrinkStatus(
+      this.order.orderId,
+      OrderStatus["Ready"]
+    );
+    this.utilsService.setProgressbar(false);
+    this.router.navigate(["../"], { relativeTo: this.activatedRoute });
   }
 }

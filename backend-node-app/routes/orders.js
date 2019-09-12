@@ -197,17 +197,20 @@ router.get("/tables/:table", verify, async function(req, res, next) {
  */
 router.post("/:id", verify, async function(req, res, next) {
 	try {
-		console.log("OK");
 		let order = await OrderModel.findOne({ orderId: req.params.id });
-		console.log(req.body);
 		if (!order) res.status(400).send("Orders doesn't exist !");
 		else {
-			console.log(order);
 			if (req.body.foodStatus) {
 				order.foodStatus = req.body.foodStatus;
-			} else if (req.body.drinkStatus) order.drinkStatus = req.body.drinkStatus;
-			else req.status(400).send("HTTP body is wrong !");
-			console.log(order);
+			} else if (req.body.drinkStatus) {
+				order.drinkStatus = req.body.drinkStatus;
+				order.dishes.map(dish => {
+					if (dish.category === "Bevande") {
+						dish.status++;
+					}
+				});
+			} else req.status(400).send("HTTP body is wrong !");
+			// NON SALVA ORDER.DISHES
 			await order.save();
 			res.status(200).send(order);
 		}

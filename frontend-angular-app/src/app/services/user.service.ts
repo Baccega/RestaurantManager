@@ -22,17 +22,15 @@ export class UserService {
       .toPromise();
   }
 
-  getUser(id): Promise<any> {
+  getUser(id): Promise<User> {
     return this.http
-      .get<any>(`${environment.serverUrl}/users/${id}`, httpOption)
+      .get<User>(`${environment.serverUrl}/users/${id}`, httpOption)
       .toPromise();
   }
 
   deleteUser(id) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 3000);
-    });
+    return this.http
+      .delete<string>(`${environment.serverUrl}/users/${id}`, httpOption)
+      .toPromise();
   }
 }

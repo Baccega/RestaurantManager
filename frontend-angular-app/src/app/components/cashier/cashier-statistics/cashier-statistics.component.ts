@@ -35,7 +35,6 @@ export class CashierStatisticsComponent implements OnInit {
     this.utilsService.setProgressbar(true);
 
     this.users = await this.userService.getUsers();
-    console.log(this.users);
 
     this.utilsService.setProgressbar(false);
   }

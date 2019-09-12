@@ -16,42 +16,6 @@ const httpOption = {
   providedIn: "root"
 })
 export class DishService {
-  menu: Course[] = [
-    {
-      id: "1",
-      name: "antipasti",
-      dishes: [
-        {
-          dishId: "0",
-          preparation: "10",
-          category: "antipasti",
-          name: "baccala ecca la",
-          price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
-        },
-        {
-          dishId: "0",
-          preparation: "10",
-          category: "antipasti",
-          name: "baccala ecca la",
-          price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
-        },
-        {
-          dishId: "0",
-          preparation: "10",
-          category: "antipasti",
-          name: "baccala ecca la",
-          price: 33,
-          quantity: 0,
-          status: DishStatus["Waiting"]
-        }
-      ]
-    }
-  ];
-
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Course[]> {
