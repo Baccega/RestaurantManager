@@ -1,5 +1,6 @@
 export interface Table {
-  id: String;
+  number: number;
   seats: number;
   free: boolean;
+  waiter: String;
 }

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { User } from "../models/User";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -14,6 +15,8 @@ const httpOption = {
   providedIn: "root"
 })
 export class AuthService {
+  public userWatcher: Subject<User> = new Subject();
+
   constructor(private http: HttpClient) {}
 
   registerUser(data): Promise<any> {
@@ -28,5 +31,13 @@ export class AuthService {
       user,
       httpOption
     );
+  }
+
+  setUser(user) {
+    this.userWatcher.next(user);
+  }
+
+  watchUser(): Observable<User> {
+    return this.userWatcher;
   }
 }

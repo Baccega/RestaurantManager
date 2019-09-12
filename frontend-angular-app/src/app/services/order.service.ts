@@ -16,144 +16,6 @@ const httpOption = {
   providedIn: "root"
 })
 export class OrderService {
-  private orders: Order[] = [
-    {
-      id: "1",
-      table: "1",
-      waiter: "io",
-      drinkStatus: OrderStatus["Waiting"],
-      foodStatus: OrderStatus["Waiting"],
-      dishes: [
-        {
-          id: "1",
-          category: "Primi",
-          name: "Pasta",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "2",
-          category: "Primi",
-          name: "Pizza",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        }
-      ]
-    },
-    {
-      id: "2",
-      table: "2",
-      waiter: "1",
-      drinkStatus: OrderStatus["Ready"],
-      foodStatus: OrderStatus["Preparing"],
-      dishes: [
-        {
-          id: "1",
-          category: "Primi",
-          name: "Pasta1",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        }
-      ]
-    },
-    {
-      id: "3",
-      table: "3",
-      waiter: "1",
-      drinkStatus: OrderStatus["Delivered"],
-      foodStatus: OrderStatus["Delivered"],
-      dishes: [
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        },
-        {
-          id: "1",
-          category: "Prim12wefi",
-          name: "Pasta2s",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        }
-      ]
-    },
-    {
-      id: "2",
-      table: "2",
-      waiter: "1",
-      drinkStatus: OrderStatus["Ready"],
-      foodStatus: OrderStatus["Ready"],
-      dishes: [
-        {
-          id: "1",
-          category: "Primi",
-          name: "Pasta2",
-          price: 2,
-          quantity: 1,
-          preparation: "10",
-          status: DishStatus["Waiting"]
-        }
-      ]
-    }
-  ];
-
   constructor(private http: HttpClient) {}
 
   getOrders(tableId = ""): Observable<Order[]> {
@@ -189,34 +51,27 @@ export class OrderService {
   }
 
   setOrderFoodStatus(id: String, newStatus: OrderStatus) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const order = this.orders.find(order => order.id === id);
-        order.foodStatus = newStatus;
-        resolve();
-      }, 3000);
-    });
+    const data = { foodStatus: newStatus };
+    return this.http
+      .post<Order>(`${environment.serverUrl}/orders/${id}`, data, httpOption)
+      .toPromise();
   }
 
   setOrderDrinkStatus(id: String, newStatus: OrderStatus) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const order = this.orders.find(order => order.id === id);
-        order.drinkStatus = newStatus;
-        resolve();
-      }, 3000);
-    });
+    const data = { status: newStatus };
+    return this.http
+      .post<Order>(`${environment.serverUrl}/orders/${id}`, data, httpOption)
+      .toPromise();
   }
 
-  setDishStatus(id: String, dishIndex: number, newStatus: DishStatus) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const order = this.orders.find(order => order.id === id);
-        order.dishes[dishIndex].status = newStatus;
-        order.foodStatus = OrderStatus["Preparing"];
-
-        resolve();
-      }, 500);
-    });
+  setDishStatus(id: String, dishId: String, newStatus: DishStatus) {
+    const data = { status: newStatus };
+    return this.http
+      .post<Dish>(
+        `${environment.serverUrl}/orders/${id}/${dishId}`,
+        data,
+        httpOption
+      )
+      .toPromise();
   }
 }

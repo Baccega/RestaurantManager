@@ -5,7 +5,7 @@ export enum DishStatus {
 }
 
 export interface Dish {
-  id: string;
+  dishId: string;
   name: string;
   price: number;
   quantity: number;

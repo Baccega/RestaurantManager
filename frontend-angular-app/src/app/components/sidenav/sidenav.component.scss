@@ -1,0 +1,14 @@
+@import "../../css-variables.scss";
+
+.container {
+  width: calc("100% - 40px");
+  display: flex;
+  flex-direction: column;
+  height: calc("100vh - 40px");
+  padding: 20px;
+  mat-nav-list {
+    mat-icon {
+      margin-right: 10px;
+    }
+  }
+}

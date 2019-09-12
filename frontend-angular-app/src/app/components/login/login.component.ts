@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
     this.utilsService.setProgressbar(true);
 
     this.authService.loginUser(data).subscribe(
-      data => {
+      payload => {
         this.utilsService.setProgressbar(false);
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        this.router.navigate([data.role]);
+        localStorage.setItem("token", payload.token);
+        this.authService.setUser(payload.user);
+        this.router.navigate([payload.user.role]);
       },
       err => {
         this.utilsService.setProgressbar(false);

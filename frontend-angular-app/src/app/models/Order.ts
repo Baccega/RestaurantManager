@@ -9,7 +9,7 @@ export enum OrderStatus {
 }
 
 export interface Order {
-  id: String;
+  orderId: String;
   dishes: Dish[];
   foodStatus: OrderStatus;
   drinkStatus: OrderStatus;

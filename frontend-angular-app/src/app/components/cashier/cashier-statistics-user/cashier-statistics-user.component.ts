@@ -16,7 +16,6 @@ export class CashierStatisticsUserComponent implements OnInit {
   // preparedDishes;
   // customersServed;
   stat;
-  roles = ["Waiter", "Chef", "Bartender", "Cashier"];
 
   constructor(
     private utilsService: UtilsService,

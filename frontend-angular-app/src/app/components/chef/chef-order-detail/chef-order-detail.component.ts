@@ -49,7 +49,11 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   async setDishStatus(index, newStatus) {
     this.utilsService.setProgressbar(true);
     this.order.dishes[index].status = newStatus;
-    await this.orderService.setDishStatus(this.order.id, index, newStatus);
+    await this.orderService.setDishStatus(
+      this.order.orderId,
+      this.order.dishes[index].dishId,
+      newStatus
+    );
     this.utilsService.setProgressbar(false);
   }
 
@@ -65,7 +69,7 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     ) {
       this.utilsService.setProgressbar(true);
       await this.orderService.setOrderFoodStatus(
-        this.order.id,
+        this.order.orderId,
         OrderStatus["Ready"]
       );
       this.utilsService.setProgressbar(false);
