@@ -3,8 +3,8 @@ import { UtilsService } from "src/app/services/utils.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BillService } from "src/app/services/bill.service";
 import { Subscription } from "rxjs";
-import { DishService } from "src/app/services/dish.service";
-import { Course } from "src/app/models/Course";
+import { Order } from "src/app/models/Order";
+import { Dish } from "src/app/models/Dish";
 
 @Component({
   selector: "app-cashier-bill",
@@ -13,7 +13,7 @@ import { Course } from "src/app/models/Course";
 })
 export class CashierBillComponent implements OnInit, OnDestroy {
   tableId;
-  courses: Course[];
+  orders: Order[];
   total: number;
   routerSub: Subscription;
   orderSub: Subscription;
@@ -26,16 +26,15 @@ export class CashierBillComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Typescript dice che è sbagliato, ma esiste.....
     this.routerSub = this.activatedRoute.paramMap.subscribe(
       ({ params }: any) => {
         this.tableId = params["table"];
         this.orderSub = this.billService
           .getBill(this.tableId)
-          .subscribe(newCourses => {
+          .subscribe(newOrders => {
             this.utilService.setTitle(`Table: ${this.tableId} - Bill`);
-            this.courses = newCourses;
-            this.total = this.calcTotal(newCourses);
+            this.orders = newOrders;
+            this.total = this.calcTotal(newOrders);
           });
       }
     );
@@ -45,7 +44,7 @@ export class CashierBillComponent implements OnInit, OnDestroy {
     this.orderSub.unsubscribe();
   }
 
-  private calcTotal(courses: Course[]): number {
+  private calcTotal(courses: Order[]): number {
     let tot = 0;
     courses.forEach(course => {
       course.dishes.forEach(dish => {
@@ -55,13 +54,24 @@ export class CashierBillComponent implements OnInit, OnDestroy {
     return tot;
   }
 
+  private mergeDishes(orders: Order[]) {
+    return orders.reduce(
+      (prev: Dish[], order) => [...prev, ...order.dishes],
+      []
+    );
+  }
+
   navigateToOrder() {
     this.router.navigate(["../"], { relativeTo: this.activatedRoute });
   }
 
   async createBill() {
     this.utilService.setProgressbar(true);
-    await this.billService.createBill(this.tableId);
+    await this.billService.createBill(
+      this.tableId,
+      this.total,
+      this.mergeDishes(this.orders)
+    );
     this.utilService.setProgressbar(false);
     this.router.navigate(["cashier", "dashboard"]);
   }

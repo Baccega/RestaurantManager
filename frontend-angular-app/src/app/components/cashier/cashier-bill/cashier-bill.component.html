@@ -1,10 +1,10 @@
 <div class="main-container">
-  <mat-list *ngFor="let course of courses">
+  <mat-list *ngFor="let order of orders">
     <mat-card>
       <mat-list-item>
-        <h3>{{ course.name.toUpperCase() }}</h3>
+        <h3>Order: {{ order.orderId }}</h3>
       </mat-list-item>
-      <mat-list-item *ngFor="let dish of course.dishes">
+      <mat-list-item *ngFor="let dish of order.dishes">
         <div class="dish-container">
           <p class="name">{{ dish.name }}</p>
           <p class="quantity">{{ dish.quantity }}</p>

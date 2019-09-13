@@ -19,7 +19,10 @@
       <ng-container *ngFor="let table of tables">
         <li *ngIf="!table.free">
           <a [routerLink]="['/cashier/tables/' + table.number]">
-            <mat-card class="table-block">Table {{ table.number }}</mat-card>
+            <mat-card class="table-block">
+              <span>Table {{ table.number }}</span>
+              <mat-icon>restaurant_menu</mat-icon>
+            </mat-card>
           </a>
         </li>
       </ng-container>
@@ -27,7 +30,10 @@
     <ul *ngIf="tab === 'free'">
       <ng-container *ngFor="let table of tables">
         <li *ngIf="table.free">
-          <mat-card class="table-block">Table {{ table.number }}</mat-card>
+          <mat-card class="table-block">
+            <span>Table {{ table.number }}</span>
+            <span><mat-icon>event_seat</mat-icon> {{ table.seats }}</span>
+          </mat-card>
         </li>
       </ng-container>
     </ul>

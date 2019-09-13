@@ -8,8 +8,10 @@
       >
         <mat-expansion-panel-header class="panel">
           <div class="flexedTitle">
-            <mat-panel-title>Ordine: {{ order.orderId }}</mat-panel-title>
+            <mat-panel-title>Ord. {{ order.orderId }}</mat-panel-title>
             <div>
+              <mat-icon>restaurant</mat-icon>
+              <p>:</p>
               <mat-icon *ngIf="order.foodStatus == 0">hourglass_empty</mat-icon>
               <mat-icon *ngIf="order.foodStatus == 1">whatshot</mat-icon>
               <mat-icon *ngIf="order.foodStatus == 2"
@@ -18,13 +20,16 @@
               <mat-icon *ngIf="order.foodStatus == 3"></mat-icon>
             </div>
             <div>
+              <mat-icon>local_bar</mat-icon>
+              <p>:</p>
               <mat-icon *ngIf="order.drinkStatus == 0"
                 >hourglass_empty</mat-icon
               >
-              <mat-icon *ngIf="order.drinkStatus == 1"
+              <mat-icon *ngIf="order.drinkStatus == 1">whatshot</mat-icon>
+              <mat-icon *ngIf="order.drinkStatus == 2"
                 >notifications_active</mat-icon
               >
-              <mat-icon *ngIf="order.drinkStatus == 2">done</mat-icon>
+              <mat-icon *ngIf="order.drinkStatus == 3"></mat-icon>
             </div>
           </div>
         </mat-expansion-panel-header>
