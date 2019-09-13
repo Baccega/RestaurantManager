@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UtilsService } from "src/app/services/utils.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { User } from "src/app/models/User";
 import { UserService } from "src/app/services/user.service";
 import { StatisticsService } from "src/app/services/statistics.service";
 
@@ -12,10 +11,14 @@ import { StatisticsService } from "src/app/services/statistics.service";
 })
 export class CashierStatisticsUserComponent implements OnInit {
   userId;
-  user;
-  // preparedDishes;
-  // customersServed;
-  stat;
+  user = {
+    name: "",
+    role: ""
+  };
+  stat = {
+    preparedDishes: 0,
+    customersServed: 0
+  };
 
   constructor(
     private utilsService: UtilsService,
@@ -44,7 +47,6 @@ export class CashierStatisticsUserComponent implements OnInit {
     try {
       this.utilsService.setProgressbar(true);
       const result = await this.userService.deleteUser(this.userId);
-      console.log(result);
       this.utilsService.setProgressbar(false);
       this.router.navigate(["../../"], { relativeTo: this.activatedRoute });
     } catch (e) {
