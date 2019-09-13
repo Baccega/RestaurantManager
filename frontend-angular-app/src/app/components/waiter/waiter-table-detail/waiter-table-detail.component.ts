@@ -37,6 +37,22 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  private async served(what, index) {
+    if (what == "food") {
+      this.tableOrders[index].foodStatus = OrderStatus["Delivered"];
+      await this.orderService.setOrderFoodStatus(
+        this.tableOrders[index].orderId,
+        OrderStatus["Delivered"]
+      );
+    } else if (what == "drink") {
+      this.tableOrders[index].drinkStatus = OrderStatus["Delivered"];
+      await this.orderService.setOrderDrinkStatus(
+        this.tableOrders[index].orderId,
+        OrderStatus["Delivered"]
+      );
+    }
+  }
+
   ngOnDestroy() {
     this.ordersSub.unsubscribe();
     this.routeSub.unsubscribe();

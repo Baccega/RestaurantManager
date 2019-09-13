@@ -13,10 +13,16 @@
               <p>:</p>
               <mat-icon *ngIf="order.foodStatus == 0">hourglass_empty</mat-icon>
               <mat-icon *ngIf="order.foodStatus == 1">whatshot</mat-icon>
-              <mat-icon *ngIf="order.foodStatus == 2"
-                >notifications_active</mat-icon
+              <button
+                *ngIf="order.foodStatus == 2"
+                mat-icon-button
+                (click)="served('food', i)"
+                color="primary"
               >
-              <mat-icon *ngIf="order.foodStatus == 3"></mat-icon>
+                <mat-icon>notifications_active</mat-icon>
+              </button>
+
+              <mat-icon *ngIf="order.foodStatus == 3">done</mat-icon>
             </div>
             <div>
               <mat-icon>local_bar</mat-icon>
@@ -25,10 +31,15 @@
                 >hourglass_empty</mat-icon
               >
               <mat-icon *ngIf="order.drinkStatus == 1">whatshot</mat-icon>
-              <mat-icon *ngIf="order.drinkStatus == 2"
-                >notifications_active</mat-icon
+              <button
+                *ngIf="order.drinkStatus == 2"
+                mat-icon-button
+                (click)="served('drink', i)"
+                color="primary"
               >
-              <mat-icon *ngIf="order.drinkStatus == 3"></mat-icon>
+                <mat-icon>notifications_active</mat-icon>
+              </button>
+              <mat-icon *ngIf="order.drinkStatus == 3">done</mat-icon>
             </div>
           </div>
         </mat-expansion-panel-header>
