@@ -9,15 +9,6 @@ const express = require("express");
 const router = express.Router();
 const verify = require("./verifyToken");
 
-function filterOrderCategory(order, category) {
-	order.dishes = [...order.dishes.filter(dish => dish.category != category)];
-	return order;
-}
-function filterOthersOrderCategory(order, category) {
-	order.dishes = order.dishes.filter(dish => dish.category == category);
-	return order;
-}
-
 /*
  * GET all orders
  */
@@ -252,12 +243,26 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 		 * Quando lo status è "completed" aumentare il contatore
 		 * dell'utente del JWT
 		 */
-		let order = await OrderModel.findOne({ orderId: req.params.id });
-		order.dishes.map(dish => {
-			dish.status =
-				dish.dishId == req.params.dish ? req.body.status : dish.status;
+
+		// Fa schifo, ma non ho voglia di cercare una soluzione migliore
+
+		const order = await OrderModel.findOne({
+			orderId: req.params.id
 		});
-		await order.save();
+
+		const dish = order.dishes.map(dish => ({
+			...dish,
+			status: dish.dishId == req.params.dish ? req.body.status : dish.status
+		}));
+
+		await OrderModel.updateOne(
+			{ orderId: req.params.id },
+			{ dishes: dish },
+			(err, res) => {
+				if (err) res.status(400).send("Update error!");
+			}
+		);
+
 		res.status(200).send(order);
 	} catch (e) {
 		res.status(400).send(e.message);
