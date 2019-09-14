@@ -5,7 +5,6 @@ const BillModel = require("../models/bills.models");
 
 router.get("/daily", async (req, res, next) => {
 	try {
-		console.log("ok");
 		const now = new Date();
 		const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		const found = await BillModel.find({ date: { $gte: today } });
@@ -24,10 +23,18 @@ router.get("/daily", async (req, res, next) => {
 	}
 });
 
-router.get("/user", (req, res, next) => {
-	UserModel.findById(req.body.id)
-		.then(doc => res.json(doc))
-		.catch(err => res.status(500).json(err));
+router.get("/user/:id", async (req, res, next) => {
+	try {
+		const user = await UserModel.findOne({ userId: req.params.id });
+
+		const response = {
+			preparedDishes: user.role == "waiter" ? 0 : user.dailyPlate,
+			customersServed: user.role != "waiter" ? 0 : user.dailyPlate
+		};
+		res.json(response);
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
 
 module.exports = router;

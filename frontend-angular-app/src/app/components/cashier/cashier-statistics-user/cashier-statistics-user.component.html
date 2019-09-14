@@ -6,11 +6,11 @@
     <p class="right">{{ user.role }}</p>
   </div>
   <mat-divider></mat-divider>
-  <div class="stats" *ngIf="stat.customersServed > 0">
+  <div class="stats" *ngIf="user.role == 'waiter'">
     <h3>Today's customers served: {{ stat.customersServed }}</h3>
   </div>
-  <div class="stats" *ngIf="stat.preparedDishes > 0">
-    <h3>Today's customers: {{ stat.preparedDishes }}</h3>
+  <div class="stats" *ngIf="user.role != 'waiter'">
+    <h3>Today's prepared dishes: {{ stat.preparedDishes }}</h3>
   </div>
 </mat-card>
 
