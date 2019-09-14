@@ -267,7 +267,7 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 			}
 		);
 		//ADDED SOCKET
-		res.io.emit("modified-plate", order);
+		res.io.emit("updated-plate", order);
 
 		res.status(200).send(order);
 	} catch (e) {
