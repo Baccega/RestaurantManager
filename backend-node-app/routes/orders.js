@@ -35,6 +35,10 @@ router.post("/", verify, async (req, res, next) => {
 				table.free = false;
 				await table.save();
 			}
+
+			//OCCUPA TAVOLO
+			res.io.emit("occupied-table", table);
+
 			//Creazione ordine
 			newOrder = new OrderModel({
 				table: table.number,
@@ -262,6 +266,8 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 				if (err) res.status(400).send("Update error!");
 			}
 		);
+		//ADDED SOCKET
+		res.io.emit("modified-plate", order);
 
 		res.status(200).send(order);
 	} catch (e) {
