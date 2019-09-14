@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { of, Observable } from "rxjs";
-import { HttpHeaders } from "@angular/common/http";
-import { HttpClient } from "selenium-webdriver/http";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 
 const httpOption = {
