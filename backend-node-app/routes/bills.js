@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const BillModel = require("../models/bills.models");
 const TableModel = require("../models/tables.models");
+const OrderModel = require("../models/orders.models");
 const { tableValidation } = require("../validation");
 const verify = require("./verifyToken");
 
@@ -19,7 +20,7 @@ router.post("/", verify, async (req, res, next) => {
 
 		let table = await TableModel.findOne({ number: req.body.table });
 		table.waiter = req.user._id;
-		table.free = true;
+		table.free = false;
 		await table.save();
 
 		const model = new BillModel({
@@ -53,13 +54,16 @@ router.post("/:tableId", verify, async (req, res, next) => {
 		bill.total = req.body.total;
 		bill.dishes = req.body.dishes;
 
-		const savedBill = await bill.save();
+		await bill.save();
 
 		let table = await TableModel.findOne({ number: req.params.tableId });
 		table.free = true;
+		table.waiter = "";
 		await table.save();
 
-		res.status(200).send(savedBill);
+		await OrderModel.deleteMany({ table: req.params.tableId });
+
+		res.status(200).send(bill);
 	} catch (e) {
 		res.status(400).send(e.message);
 	}

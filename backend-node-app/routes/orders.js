@@ -206,7 +206,9 @@ router.post("/:id", verify, async function(req, res, next) {
 		} else if (req.body.drinkStatus) {
 			order.drinkStatus = req.body.drinkStatus;
 			order.dishes.forEach(dish =>
-				dish.category == "Bevande" ? { ...dish, status: dish.status++ } : dish
+				dish.category == "Bevande"
+					? { ...dish, status: dish.status == 3 ? dish.status : dish.status++ }
+					: dish
 			);
 		} else req.status(400).send("HTTP body is wrong !");
 

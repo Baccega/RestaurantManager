@@ -18,10 +18,13 @@ export class TableService {
   constructor(private http: HttpClient) {}
 
   watchTables(): Observable<Table[]> {
-    return this.http.get<any>(`${environment.serverUrl}/tables`, httpOption);
+    return this.http.get<Table[]>(
+      `${environment.serverUrl}/tables`,
+      httpOption
+    );
   }
 
-  watchFreeTables(): Observable<Table[]> {
+  watchMyTables(): Observable<Table[]> {
     return this.http.get<any>(
       `${environment.serverUrl}/tables/myTables`,
       httpOption
