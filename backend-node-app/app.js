@@ -14,6 +14,8 @@ const coursesRouter = require('./routes/courses');
 const tablesRouter = require('./routes/tables');
 const ordersRouter = require('./routes/orders');
 const billsRouter = require('./routes/bills');
+const statisticsRouter = require('./routes/statistics');
+
 
 
 
@@ -42,6 +44,8 @@ app.use('/courses', coursesRouter);
 app.use('/tables', tablesRouter);
 app.use('/orders', ordersRouter);
 app.use('/bills', billsRouter);
+app.use('/statistics', statisticsRouter);
+
 
 
 
