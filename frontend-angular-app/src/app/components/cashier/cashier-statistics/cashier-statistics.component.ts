@@ -3,7 +3,7 @@ import { UtilsService } from "src/app/services/utils.service";
 import { StatisticsService } from "src/app/services/statistics.service";
 import { UserService } from "src/app/services/user.service";
 import { User } from "src/app/models/User";
-import { Router, ActivatedRoute } from "@angular/router";
+import { TodayStatistics } from "src/app/models/Statistics";
 
 @Component({
   selector: "app-cashier-statistics",
@@ -24,13 +24,10 @@ export class CashierStatisticsComponent implements OnInit {
   async ngOnInit() {
     this.utilsService.setTitle("Statistics & Management");
 
-    const {
-      profit,
-      customersServed
-    } = this.statisticsService.getTodayStatistics();
+    const statistics: TodayStatistics = await this.statisticsService.getTodayStatistics();
 
-    this.profit = profit;
-    this.customersServed = customersServed;
+    this.profit = statistics.profit;
+    this.customersServed = statistics.customersServed;
 
     this.utilsService.setProgressbar(true);
 

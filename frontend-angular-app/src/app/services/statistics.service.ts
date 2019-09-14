@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { of, Observable } from "rxjs";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { TodayStatistics, EmployeeStatistics } from "../models/Statistics";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -25,11 +26,21 @@ export class StatisticsService {
 
   constructor(private http: HttpClient) {}
 
-  getTodayStatistics(): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/daily`, httpOption);
+  getTodayStatistics(): Promise<TodayStatistics> {
+    return this.http
+      .get<TodayStatistics>(
+        `${environment.serverUrl}/statistics/daily`,
+        httpOption
+      )
+      .toPromise();
   }
 
-  getTodayEmployeeStatistics(id): Observable<any> {
-    return this.http.get<any>(`${environment.serverUrl}/user`, id, httpOption);
+  getTodayEmployeeStatistics(id): Promise<EmployeeStatistics> {
+    return this.http
+      .get<EmployeeStatistics>(
+        `${environment.serverUrl}/statistics/user/${id}`,
+        httpOption
+      )
+      .toPromise();
   }
 }
