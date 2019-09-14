@@ -11,7 +11,15 @@ import { Order, OrderStatus } from "src/app/models/Order";
   styleUrls: ["./bartender-order-detail.component.scss"]
 })
 export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
-  order: Order;
+  order: Order = {
+    orderId: "0",
+    dishes: [],
+    drinkStatus: 0,
+    foodStatus: 0,
+    table: "0",
+    waiter: ""
+  };
+
   orderServiceSub: Subscription;
   routerSub: Subscription;
   constructor(

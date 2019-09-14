@@ -9,15 +9,6 @@ const express = require("express");
 const router = express.Router();
 const verify = require("./verifyToken");
 
-function filterOrderCategory(order, category) {
-	order.dishes = order.dishes.filter(dish => dish.category != category);
-	return order;
-}
-function filterOthersOrderCategory(order, category) {
-	order.dishes = order.dishes.filter(dish => dish.category == category);
-	return order;
-}
-
 /*
  * GET all orders
  */
@@ -104,12 +95,14 @@ router.get("/", verify, async (req, res, next) => {
 		case "chef":
 			console.log("hello kitchen");
 			try {
-				let orderList = await OrderModel.find({});
-
-				orderList.forEach(order => filterOrderCategory(order, "Bevande"));
-				orderList = orderList.filter(order => order.dishes.length > 0);
-
-				res.status(201).send(orderList);
+				const orderList = await OrderModel.find({});
+				const filtered = orderList
+					.map(order => ({
+						...order.toObject(),
+						dishes: order.dishes.filter(dish => dish.category != "Bevande")
+					}))
+					.filter(order => order.dishes.length > 0 && order.foodStatus < 2);
+				res.status(201).send(filtered);
 			} catch (e) {
 				res.status(400).send(e.message);
 			}
@@ -120,12 +113,14 @@ router.get("/", verify, async (req, res, next) => {
 		case "bartender":
 			console.log("hello bar");
 			try {
-				let orderList = await OrderModel.find({});
-
-				orderList.forEach(order => filterOthersOrderCategory(order, "Bevande"));
-				orderList = orderList.filter(order => order.dishes.length > 0);
-
-				res.status(201).send(orderList);
+				const orderList = await OrderModel.find({});
+				const filtered2 = orderList
+					.map(order => ({
+						...order.toObject(),
+						dishes: order.dishes.filter(dish => dish.category == "Bevande")
+					}))
+					.filter(order => order.dishes.length > 0 && order.drinkStatus < 2);
+				res.status(201).send(filtered2);
 			} catch (e) {
 				res.status(400).send(e);
 			}
@@ -145,10 +140,8 @@ router.get("/:id", verify, async (req, res, next) => {
 		const { role } = await UserModel.findById(req.user._id);
 		console.log(role);
 
-		let order = await OrderModel.find({ orderId: req.params.id });
-		if (!order.length) res.status(400).send("Order doesn't exist !");
-
-		order = order[0];
+		let order = await OrderModel.findOne({ orderId: req.params.id });
+		if (!order) res.status(400).send("Order doesn't exist !");
 
 		switch (role) {
 			case "waiter":
@@ -157,16 +150,21 @@ router.get("/:id", verify, async (req, res, next) => {
 				break;
 			case "chef":
 				console.log("hello kitchen");
-				const result = filterOrderCategory(order, "Bevande");
-				res.status(201).send(result);
-
+				const filtered = {
+					...order.toObject(),
+					dishes: order.dishes.filter(dish => dish.category != "Bevande")
+				};
+				res.status(201).send(filtered);
 				break;
 
 			//Bartender test id --> 5d37043e1930b11928e876ed
 			case "bartender":
 				console.log("hello bar");
-				const result2 = filterOthersOrderCategory(order, "Bevande");
-				res.status(201).send(result2);
+				const filtered2 = {
+					...order.toObject(),
+					dishes: order.dishes.filter(dish => dish.category == "Bevande")
+				};
+				res.status(201).send(filtered2);
 				break;
 
 			default:
@@ -245,15 +243,27 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 		 * Quando lo status è "completed" aumentare il contatore
 		 * dell'utente del JWT
 		 */
-		let order = await OrderModel.findOne({ orderId: req.params.id });
-		console.log(order);
-		let plate = order.dishes.find(elem => {
-			console.log(elem);
-			if (elem.dishId == req.params.dish) return elem;
+
+		// Fa schifo, ma non ho voglia di cercare una soluzione migliore
+
+		const order = await OrderModel.findOne({
+			orderId: req.params.id
 		});
-		plate.status = req.body.status;
-		await order.save();
-		res.status(200).send(plate);
+
+		const dish = order.dishes.map(dish => ({
+			...dish,
+			status: dish.dishId == req.params.dish ? req.body.status : dish.status
+		}));
+
+		await OrderModel.updateOne(
+			{ orderId: req.params.id },
+			{ dishes: dish },
+			(err, res) => {
+				if (err) res.status(400).send("Update error!");
+			}
+		);
+
+		res.status(200).send(order);
 	} catch (e) {
 		res.status(400).send(e.message);
 	}

@@ -58,6 +58,13 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
   }
 
   async startDish(index) {
+    if (this.order.foodStatus == OrderStatus["Waiting"]) {
+      this.order.foodStatus = OrderStatus["Waiting"];
+      await this.orderService.setOrderFoodStatus(
+        this.order.orderId,
+        OrderStatus["Preparing"]
+      );
+    }
     await this.setDishStatus(index, DishStatus["Started"]);
   }
 
@@ -75,5 +82,9 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
       this.utilsService.setProgressbar(false);
       this.router.navigate(["/chef"]);
     }
+  }
+
+  private timeSort(dishes) {
+    return dishes.sort((dish, succ) => succ.preparation - dish.preparation);
   }
 }

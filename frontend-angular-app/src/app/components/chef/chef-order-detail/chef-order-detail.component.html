@@ -1,5 +1,5 @@
 <ul *ngIf="order">
-  <li *ngFor="let dish of this.order.dishes; let i = index">
+  <li *ngFor="let dish of timeSort(this.order.dishes); let i = index">
     <mat-card>
       <div class="container">
         <p>{{ dish.name }}</p>
