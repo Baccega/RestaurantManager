@@ -201,21 +201,19 @@ router.post("/:id", verify, async function(req, res, next) {
 	try {
 		let order = await OrderModel.findOne({ orderId: req.params.id });
 		if (!order) res.status(400).send("Orders doesn't exist !");
-		else {
-			if (req.body.foodStatus) {
-				order.foodStatus = req.body.foodStatus;
-			} else if (req.body.drinkStatus) {
-				order.drinkStatus = req.body.drinkStatus;
-				order.dishes.map(dish => {
-					if (dish.category === "Bevande") {
-						dish.status++;
-					}
-				});
-			} else req.status(400).send("HTTP body is wrong !");
-			// NON SALVA ORDER.DISHES
-			await order.save();
-			res.status(200).send(order);
-		}
+		if (req.body.foodStatus) {
+			order.foodStatus = req.body.foodStatus;
+		} else if (req.body.drinkStatus) {
+			order.drinkStatus = req.body.drinkStatus;
+			order.dishes.forEach(dish =>
+				dish.category == "Bevande" ? { ...dish, status: dish.status++ } : dish
+			);
+		} else req.status(400).send("HTTP body is wrong !");
+
+		await order.save();
+		res.io.emit("updated-order", order);
+
+		res.status(200).send(order);
 	} catch (e) {
 		res.status(400).send(e.message);
 	}
@@ -254,20 +252,23 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 			orderId: req.params.id
 		});
 
-		const dish = order.dishes.map(dish => ({
+		const updatedDishes = order.dishes.map(dish => ({
 			...dish,
 			status: dish.dishId == req.params.dish ? req.body.status : dish.status
 		}));
 
 		const updatedOrder = await OrderModel.updateOne(
 			{ orderId: req.params.id },
-			{ dishes: dish },
+			{ dishes: updatedDishes },
 			(err, doc) => {
 				if (err) res.status(400).send("Update error!");
 
-				const updated = { ...order.toObject(), dishes: dish };
+				const updated = {
+					...order.toObject(),
+					dishes: updatedDishes
+				};
 				//ADDED SOCKET
-				res.io.emit("updated-plate", updated);
+				res.io.emit("updated-order", updated);
 
 				res.status(200).send(updated);
 			}

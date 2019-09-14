@@ -43,7 +43,7 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
 
     this.socketService.initSocket();
     this.socketService
-      .listen<Order>("updated-plate")
+      .listen<Order>("updated-order")
       .subscribe(updatedOrder => {
         this.orders.forEach(order => {
           if (order.orderId == updatedOrder.orderId) {

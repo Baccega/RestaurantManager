@@ -28,7 +28,7 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.socketService.initSocket();
     this.socketService
-      .listen<Order>("updated-plate")
+      .listen<Order>("updated-order")
       .subscribe(updatedOrder => {
         console.log("Received update");
         if (

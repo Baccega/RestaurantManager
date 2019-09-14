@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
 import { Source } from "webpack-sources";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-order-list",
@@ -22,7 +23,8 @@ export class OrderListComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private router: Router,
     private utilsService: UtilsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,27 @@ export class OrderListComponent implements OnInit, OnDestroy {
     this.utilsSub = this.utilsService.watchId().subscribe(newId => {
       this.id = newId;
     });
+
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-order")
+      .subscribe(updatedOrder => {
+        console.log("Received Update");
+        if (
+          (this.source == "chef" && updatedOrder.foodStatus > 1) ||
+          (this.source == "bartender" && updatedOrder.drinkStatus > 1)
+        ) {
+          this.orders = this.orders.filter(
+            order => order.orderId != updatedOrder.orderId
+          );
+        } else if (
+          this.orders.find(order => order.orderId == updatedOrder.orderId)
+        ) {
+          this.orders = this.orders.map(order =>
+            order.orderId == updatedOrder.orderId ? updatedOrder : order
+          );
+        }
+      });
   }
   ngOnDestroy() {
     this.orderSub.unsubscribe();

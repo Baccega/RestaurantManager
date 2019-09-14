@@ -48,6 +48,7 @@ export function tokenGetter() {
     OrderListComponent,
 
     BartenderDashboardComponent,
+    BartenderOrderDetailComponent,
 
     CashierDashboardComponent,
     CashierStatisticsComponent,
@@ -67,8 +68,7 @@ export function tokenGetter() {
     SidenavComponent,
 
     LoginComponent,
-    SnackbarComponent,
-    BartenderOrderDetailComponent
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,

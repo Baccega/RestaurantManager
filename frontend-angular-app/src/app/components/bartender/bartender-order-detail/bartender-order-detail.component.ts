@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, Params } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
 import { Order, OrderStatus } from "src/app/models/Order";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-bartender-order-detail",
@@ -26,7 +27,8 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -41,6 +43,21 @@ export class BartenderOrderDetailComponent implements OnInit, OnDestroy {
         }
       );
     });
+
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-order")
+      .subscribe(updatedOrder => {
+        console.log("Received Update");
+        if (this.order.orderId == updatedOrder.orderId) {
+          this.order = {
+            ...updatedOrder,
+            dishes: updatedOrder.dishes.filter(
+              dish => dish.category == "Bevande"
+            )
+          };
+        }
+      });
   }
 
   ngOnDestroy() {
