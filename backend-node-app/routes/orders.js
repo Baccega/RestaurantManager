@@ -259,17 +259,19 @@ router.post("/:id/:dish", verify, async function(req, res, next) {
 			status: dish.dishId == req.params.dish ? req.body.status : dish.status
 		}));
 
-		await OrderModel.updateOne(
+		const updatedOrder = await OrderModel.updateOne(
 			{ orderId: req.params.id },
 			{ dishes: dish },
-			(err, res) => {
+			(err, doc) => {
 				if (err) res.status(400).send("Update error!");
+
+				const updated = { ...order.toObject(), dishes: dish };
+				//ADDED SOCKET
+				res.io.emit("updated-plate", updated);
+
+				res.status(200).send(updated);
 			}
 		);
-		//ADDED SOCKET
-		res.io.emit("updated-plate", order);
-
-		res.status(200).send(order);
 	} catch (e) {
 		res.status(400).send(e.message);
 	}

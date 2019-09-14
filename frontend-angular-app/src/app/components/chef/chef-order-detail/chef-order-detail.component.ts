@@ -45,6 +45,7 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     this.socketService
       .listen<Order>("updated-plate")
       .subscribe(updatedOrder => {
+        console.log("Received Update");
         if (this.order.orderId == updatedOrder.orderId) {
           this.order = updatedOrder;
         }

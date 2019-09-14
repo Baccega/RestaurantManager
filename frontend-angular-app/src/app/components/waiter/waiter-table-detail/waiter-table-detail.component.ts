@@ -26,6 +26,20 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-plate")
+      .subscribe(updatedOrder => {
+        console.log("Received update");
+        if (
+          this.tableOrders.find(order => order.orderId == updatedOrder.orderId)
+        ) {
+          this.tableOrders = this.tableOrders.map(order =>
+            order.orderId == updatedOrder.orderId ? updatedOrder : order
+          );
+        }
+      });
+
     this.routeSub = this.activatedRoute.params.subscribe((par: Params) => {
       if (par["id"]) {
         this.tableId = par["id"];
@@ -37,18 +51,7 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
           });
       }
     });
-    this.socketService.initSocket();
-    this.socketService
-      .listen<Order>("updated-plate")
-      .subscribe(updatedOrder => {
-        this.tableOrders.forEach(order => {
-          if (order.orderId == updatedOrder.orderId) {
-            order = updatedOrder;
-          }
-        });
-      });
   }
-
   private async served(what, index) {
     if (what == "food") {
       this.tableOrders[index].foodStatus = OrderStatus["Delivered"];

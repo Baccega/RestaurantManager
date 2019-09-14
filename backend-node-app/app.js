@@ -34,6 +34,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//SICKET
+io.on("connect", function(socket) {
+	console.log("a user connected");
+	socket.on("disconnect", function() {
+		console.log("user disconnected");
+	});
+});
+
+app.set("socketio", io);
+
+app.use(function(req, res, next) {
+	res.io = io;
+	next();
+});
+
 //USAGE OF ROUTES
 app.use("/users", usersRouter);
 app.use("/courses", coursesRouter);
@@ -42,36 +57,23 @@ app.use("/orders", ordersRouter);
 app.use("/bills", billsRouter);
 app.use("/statistics", statisticsRouter);
 
-//SICKET
-io.on("connect", function(socket) {
-  console.log("a user connected");
-  socket.on("disconnect", function() {
-    console.log("user disconnected");
-  });
-});
-
-app.use(function(req, res, next) {
-  res.io = io;
-  next();
-});
-
 //MONGOOSE CONNECTION
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+	// render the error page
+	res.status(err.status || 500);
+	res.render("error");
 });
 
 module.exports = { app: app, server: server };
