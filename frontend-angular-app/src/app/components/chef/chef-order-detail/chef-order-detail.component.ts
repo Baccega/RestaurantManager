@@ -3,8 +3,9 @@ import { DishStatus } from "src/app/models/Dish";
 import { Order, OrderStatus } from "src/app/models/Order";
 import { OrderService } from "src/app/services/order.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-chef-order-detail",
@@ -20,7 +21,8 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,14 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
         }
       );
     });
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-plate")
+      .subscribe(updatedOrder => {
+        if (this.order.orderId == updatedOrder.orderId) {
+          this.order = updatedOrder;
+        }
+      });
   }
 
   ngOnDestroy() {

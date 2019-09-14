@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 import { OrderService } from "src/app/services/order.service";
 import { Order } from "src/app/models/Order";
 import { UserService } from "src/app/services/user.service";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-cashier-view-order",
@@ -23,7 +24,8 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private utilService: UtilsService,
     private orderService: OrderService,
-    private userService: UserService
+    private userService: UserService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -38,6 +40,17 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
           this.utilService.setTitle(`Table: ${this.tableId}`);
         });
     });
+
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-plate")
+      .subscribe(updatedOrder => {
+        this.orders.forEach(order => {
+          if (order.orderId == updatedOrder.orderId) {
+            order = updatedOrder;
+          }
+        });
+      });
   }
 
   ngOnDestroy() {

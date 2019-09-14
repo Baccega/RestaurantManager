@@ -4,6 +4,7 @@ import { UtilsService } from "src/app/services/utils.service";
 import { OrderService } from "src/app/services/order.service";
 import { Order, OrderStatus } from "src/app/models/Order";
 import { Subscription } from "rxjs";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-waiter-table-detail",
@@ -20,7 +21,8 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private utils: UtilsService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -35,6 +37,16 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
           });
       }
     });
+    this.socketService.initSocket();
+    this.socketService
+      .listen<Order>("updated-plate")
+      .subscribe(updatedOrder => {
+        this.tableOrders.forEach(order => {
+          if (order.orderId == updatedOrder.orderId) {
+            order = updatedOrder;
+          }
+        });
+      });
   }
 
   private async served(what, index) {
