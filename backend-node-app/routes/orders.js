@@ -29,18 +29,11 @@ router.post("/", verify, async (req, res, next) => {
 		if (!table) {
 			res.status(400).send("Table doesn't exist!");
 		} else {
-			let newOrder;
-			//SE IL TAVOLO è VUOTO
-			if (table.free) {
-				table.free = false;
-				await table.save();
-			}
-
-			//OCCUPA TAVOLO
-			res.io.emit("occupied-table", table);
-
+			//Non funziona....
+			// const dishes = [...req.body.dishes];
 			//Creazione ordine
-			newOrder = new OrderModel({
+
+			let newOrder = new OrderModel({
 				table: table.number,
 				waiter: req.user._id
 			});
@@ -66,6 +59,7 @@ router.post("/", verify, async (req, res, next) => {
 				if (!savedOrder || savedOrder.length === 0) {
 					return res.status(500).send(savedOrder);
 				}
+				res.io.emit("new-order", newOrder);
 				res
 					.status(201)
 					.type("application/json")
@@ -205,11 +199,20 @@ router.post("/:id", verify, async function(req, res, next) {
 			order.foodStatus = req.body.foodStatus;
 		} else if (req.body.drinkStatus) {
 			order.drinkStatus = req.body.drinkStatus;
-			order.dishes.forEach(dish =>
-				dish.category == "Bevande"
-					? { ...dish, status: dish.status == 3 ? dish.status : dish.status++ }
-					: dish
-			);
+			console.log("New status: " + order.drinkStatus);
+			order.dishes.forEach(dish => {
+				if (dish.category == "Bevande") {
+					dish.status++;
+				}
+			});
+			// console.log("New status: " + order.drinkStatus);
+			// console.log(order.dishes[0].name + ": " + order.dishes[0].status);
+			// order.dishes = order.dishes.map(dish =>
+			// 	dish.category == "Bevande"
+			// 		? { ...dish, status: dish.status + 1 }
+			// 		: { ...dish }
+			// );
+			// console.log(order.dishes[0].name + ": " + order.dishes[0].status);
 		} else req.status(400).send("HTTP body is wrong !");
 
 		await order.save();

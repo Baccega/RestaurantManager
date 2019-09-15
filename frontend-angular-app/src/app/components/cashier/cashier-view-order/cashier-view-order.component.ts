@@ -51,6 +51,11 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
           );
         }
       });
+    this.socketService.listen<Order>("new-order").subscribe(newOrder => {
+      if (newOrder.table == this.tableId) {
+        this.orders.push(newOrder);
+      }
+    });
   }
 
   ngOnDestroy() {

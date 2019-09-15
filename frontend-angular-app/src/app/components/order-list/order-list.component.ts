@@ -58,6 +58,22 @@ export class OrderListComponent implements OnInit, OnDestroy {
           );
         }
       });
+    this.socketService.listen<Order>("new-order").subscribe(newOrder => {
+      console.log("Received new order");
+      const filtered =
+        this.source == "bartender"
+          ? {
+              ...newOrder,
+              dishes: newOrder.dishes.filter(dish => dish.category == "Bevande")
+            }
+          : {
+              ...newOrder,
+              dishes: newOrder.dishes.filter(dish => dish.category != "Bevande")
+            };
+      if (newOrder.dishes.length > 0) {
+        this.orders.push(newOrder);
+      }
+    });
   }
   ngOnDestroy() {
     this.orderSub.unsubscribe();
