@@ -3,6 +3,8 @@ import { TableService } from "src/app/services/table.service";
 import { Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Table } from "src/app/models/Table";
+import { SocketService } from "src/app/services/socket.service";
+import { Bill } from "src/app/models/Bill";
 
 @Component({
   selector: "app-waiter-new-table",
@@ -18,16 +20,35 @@ export class WaiterNewTableComponent implements OnInit {
   constructor(
     private tableService: TableService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
     this.utilsService.setTitle("New Table");
     this.tableService.getFreeTables().subscribe(newTables => {
-      console.log(newTables);
       this.tables = newTables;
       this.visibleTables = this.tables.filter(
         table => table.seats > this.seats
+      );
+    });
+
+    this.socketService.initSocket();
+    this.socketService.listen<Table>("new-table").subscribe(newTable => {
+      const index = this.tables.findIndex(
+        table => newTable.number == table.number
+      );
+      this.tables[index] = newTable;
+      this.visibleTables = this.tables.filter(
+        table => table.free && table.seats > this.seats
+      );
+    });
+
+    this.socketService.initSocket();
+    this.socketService.listen<Table>("new-bill").subscribe(newTable => {
+      this.tables.push(newTable);
+      this.visibleTables = this.tables.filter(
+        table => table.free && table.seats > this.seats
       );
     });
   }
@@ -52,14 +73,16 @@ export class WaiterNewTableComponent implements OnInit {
     if (this.seats > 1) {
       this.seats--;
       this.visibleTables = this.tables.filter(
-        table => table.seats > this.seats
+        table => table.free && table.seats > this.seats
       );
     }
   }
 
   addSeat() {
     this.seats++;
-    this.visibleTables = this.tables.filter(table => table.seats > this.seats);
+    this.visibleTables = this.tables.filter(
+      table => table.free && table.seats > this.seats
+    );
   }
 
   select(id) {

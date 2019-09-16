@@ -4,6 +4,7 @@ import { TableService } from "src/app/services/table.service";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { UtilsService } from "src/app/services/utils.service";
+import { SocketService } from "src/app/services/socket.service";
 
 @Component({
   selector: "app-waiter-table-list",
@@ -19,7 +20,8 @@ export class WaiterTableListComponent implements OnInit, OnDestroy {
   constructor(
     private tableService: TableService,
     private router: Router,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private socketService: SocketService
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,13 @@ export class WaiterTableListComponent implements OnInit, OnDestroy {
 
     this.utilsSub = this.utils.watchId().subscribe(newId => {
       this.id = newId;
+    });
+
+    this.socketService.initSocket();
+    this.socketService.listen<Table>("new-bill").subscribe(newTable => {
+      this.tables = this.tables.filter(
+        table => table.number != newTable.number
+      );
     });
   }
 

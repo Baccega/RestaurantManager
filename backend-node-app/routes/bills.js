@@ -28,7 +28,9 @@ router.post("/", verify, async (req, res, next) => {
 			customerNumber: req.body.customer,
 			waiter: req.user._id
 		});
+
 		const savedBill = await model.save();
+		res.io.emit("new-table", table);
 		res.status(200).send(savedBill);
 	} catch (e) {
 		res.status(400).send(e.message);
@@ -62,6 +64,8 @@ router.post("/:tableId", verify, async (req, res, next) => {
 		await table.save();
 
 		await OrderModel.deleteMany({ table: req.params.tableId });
+
+		res.io.emit("new-bill", table);
 
 		res.status(200).send(bill);
 	} catch (e) {
