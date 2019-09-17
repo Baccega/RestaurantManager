@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         console.log(payload.token);
         sessionStorage.setItem("token", payload.token);
         this.authService.setUser(payload.user);
+        console.log(payload.user);
         this.router.navigate([payload.user.role]);
       },
       err => {

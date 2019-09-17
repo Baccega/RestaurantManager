@@ -27,35 +27,38 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.initSocket();
-    // this.socketService
-    //   .listen<Order>("updated-order")
-    //   .subscribe(updatedOrder => {
-    //     console.log("Received Update");
-    //     if (this.order.orderId == updatedOrder.orderId) {
-    //       this.order = {
-    //         ...updatedOrder,
-    //         dishes: updatedOrder.dishes.filter(
-    //           dish => dish.category != "Bevande"
-    //         )
-    //       };
-    //     }
-    //   });
-
-    this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
-      const id = params["id"];
-      this.utilsService.setId(id);
-      this.utilsService.setProgressbar(true);
-      this.orderServiceSub = this.orderService.getOrder(id).subscribe(
-        order => {
-          this.utilsService.setProgressbar(false);
-          this.order = order;
-        },
-        err => {
-          console.error(err);
-          this.router.navigate(["chef"]);
+    this.socketService
+      .listen<Order>("updated-order")
+      .subscribe(updatedOrder => {
+        console.log("Received Update");
+        if (this.order.orderId == updatedOrder.orderId) {
+          this.order = {
+            ...updatedOrder,
+            dishes: updatedOrder.dishes.filter(
+              dish => dish.category != "Bevande"
+            )
+          };
         }
-      );
-    });
+      });
+
+    this.routerSub = this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        const id = params["id"];
+        this.utilsService.setId(id);
+        this.utilsService.setProgressbar(true);
+        this.orderServiceSub = this.orderService.getOrder(id).subscribe(
+          order => {
+            this.utilsService.setProgressbar(false);
+            this.order = order;
+          },
+          err => {
+            console.error(err);
+            this.router.navigate(["chef"]);
+          }
+        );
+      },
+      err => console.log(err)
+    );
   }
 
   ngOnDestroy() {

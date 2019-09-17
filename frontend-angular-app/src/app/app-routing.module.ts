@@ -101,7 +101,7 @@ const routes: Routes = [
       { path: "**", redirectTo: "dashboard" }
     ]
   },
-  { path: "**", redirectTo: "login" }
+  { path: "**", redirectTo: "logout" }
 ];
 
 @NgModule({

@@ -21,6 +21,7 @@ export class NotificationService {
         this.socketService
           .listen<any>("notify-waiter")
           .subscribe(newNotification => {
+            console.log("Notification arrived for " + newNotification.waiterId);
             if (newNotification.waiterId == this.waiterId) {
               this.notifications.next(newNotification);
             }

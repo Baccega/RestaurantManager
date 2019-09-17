@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class LogoutComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.authService.setUser({
       role: "nobody",
       userId: "0",

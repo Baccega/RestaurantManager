@@ -221,8 +221,10 @@ router.post("/:id", verify, async function(req, res, next) {
 
 		if (req.body.foodStatus == 2 || req.body.drinkStatus == 2) {
 			console.log("Notified");
+			let user = await UserModel.findOne({ _id: order.waiter });
+
 			res.io.emit("notify-waiter", {
-				waiterId: order.waiter,
+				waiterId: user.userId,
 				orderId: order.orderId,
 				tableNumber: order.table,
 				changedStatus: req.body.foodStatus == 2 ? "food" : "drink"

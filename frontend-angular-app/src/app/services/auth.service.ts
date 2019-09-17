@@ -33,17 +33,6 @@ export class AuthService {
     );
   }
 
-  logout(): void {
-    this.userWatcher.next({
-      role: "nobody",
-      userId: "0",
-      name: "",
-      dailyPlate: 0,
-      totalPlate: 0
-    });
-    sessionStorage.clear();
-  }
-
   setUser(user) {
     this.userWatcher.next(user);
   }
