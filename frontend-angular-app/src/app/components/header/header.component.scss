@@ -1,9 +1,12 @@
 mat-toolbar {
   display: grid;
-  grid-template-columns: 70px auto;
+  grid-template-columns: 70px auto 70px;
   height: 100%;
 }
 
 .progressBar {
   position: absolute;
+}
+.notification {
+  justify-items: end;
 }

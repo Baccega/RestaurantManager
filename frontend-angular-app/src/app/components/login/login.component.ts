@@ -3,6 +3,7 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
+import { NotificationService } from "src/app/services/notification.service";
 
 @Component({
   selector: "app-login",
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private notficationService: NotificationService
   ) {}
 
   onSubmit(data: any) {
@@ -27,6 +29,9 @@ export class LoginComponent implements OnInit {
         this.utilsService.setProgressbar(false);
         localStorage.setItem("token", payload.token);
         this.authService.setUser(payload.user);
+        if (payload.user.role == "waiter") {
+          this.notficationService.setWaiterId(payload.user._id);
+        }
         this.router.navigate([payload.user.role]);
       },
       err => {
