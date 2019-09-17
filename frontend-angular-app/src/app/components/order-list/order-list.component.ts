@@ -4,7 +4,6 @@ import { OrderService } from "src/app/services/order.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { Subscription } from "rxjs";
-import { Source } from "webpack-sources";
 import { SocketService } from "src/app/services/socket.service";
 
 @Component({
@@ -71,8 +70,8 @@ export class OrderListComponent implements OnInit, OnDestroy {
               ...newOrder,
               dishes: newOrder.dishes.filter(dish => dish.category != "Bevande")
             };
-      if (newOrder.dishes.length > 0) {
-        this.orders.push(newOrder);
+      if (filtered.dishes.length > 0) {
+        this.orders.push(filtered);
       }
     });
   }

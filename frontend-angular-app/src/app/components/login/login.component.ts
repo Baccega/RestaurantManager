@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.utilsService.setTitle("Restaurant App");
+    this.authService.logout();
     this.credential = new FormGroup({
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [

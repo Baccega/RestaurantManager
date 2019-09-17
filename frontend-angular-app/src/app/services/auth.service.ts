@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, Subject } from "rxjs";
 import { User } from "../models/User";
+import { UtilsService } from "./utils.service";
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ const httpOption = {
 export class AuthService {
   public userWatcher: Subject<User> = new Subject();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private utils: UtilsService) {}
 
   registerUser(data): Promise<any> {
     return this.http
@@ -31,6 +32,18 @@ export class AuthService {
       user,
       httpOption
     );
+  }
+
+  logout() {
+    this.setUser({
+      role: "nobody",
+      userId: "0",
+      name: "",
+      dailyPlate: 0,
+      totalPlate: 0
+    });
+    sessionStorage.clear();
+    this.utils.setId("");
   }
 
   setUser(user) {
