@@ -63,14 +63,14 @@ export class WaiterNewOrderComponent implements OnInit, OnDestroy {
   async sendOrder() {
     const order = flattenCourse(this.menu).filter(dish => dish.quantity > 0);
     this.utilsService.setProgressbar(true);
-    await this.orderService.sendOrder({dishes:order, table:this.tableId});
+    await this.orderService.sendOrder({ dishes: order, table: this.tableId });
     this.utilsService.setProgressbar(false);
-    this.router.navigate(["/waiter", "dashboard", this.tableId], {
+    this.router.navigate(["/waiter", this.tableId], {
       queryParams: { result: "success" }
     });
   }
 
   cancelOrder(): void {
-    this.router.navigate(["/waiter", "dashboard", this.tableId]);
+    this.router.navigate(["/waiter", this.tableId]);
   }
 }

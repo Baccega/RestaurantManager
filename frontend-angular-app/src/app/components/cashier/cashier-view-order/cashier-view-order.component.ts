@@ -64,7 +64,7 @@ export class CashierViewOrderComponent implements OnInit, OnDestroy {
   }
 
   navigateToDashboard() {
-    this.router.navigate(["cashier", "dashboard"]);
+    this.router.navigate(["cashier"]);
   }
 
   navigateToBill() {

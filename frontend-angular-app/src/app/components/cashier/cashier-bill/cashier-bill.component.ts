@@ -73,6 +73,6 @@ export class CashierBillComponent implements OnInit, OnDestroy {
       this.mergeDishes(this.orders)
     );
     this.utilService.setProgressbar(false);
-    this.router.navigate(["cashier", "dashboard"]);
+    this.router.navigate(["cashier"]);
   }
 }

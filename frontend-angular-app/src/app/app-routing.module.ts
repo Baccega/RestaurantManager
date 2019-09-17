@@ -36,25 +36,24 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
+    path: "waiter/new-table",
+    component: WaiterNewTableComponent
+  },
+  {
+    path: "waiter/new-order/:id",
+    component: WaiterNewOrderComponent
+  },
+  {
     path: "waiter",
+    component: WaiterDashboardComponent,
     children: [
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
       {
-        path: "dashboard",
-        component: WaiterDashboardComponent,
-        children: [
-          {
-            path: "",
-            component: DummyComponent,
-            pathMatch: "full"
-          },
-          { path: ":id", component: WaiterTableDetailComponent },
-          { path: "**", redirectTo: "" }
-        ]
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
       },
-      { path: "new-table", component: WaiterNewTableComponent },
-      { path: "new-order/:id", component: WaiterNewOrderComponent },
-      { path: "**", redirectTo: "dashboard" }
+      { path: ":id", component: WaiterTableDetailComponent },
+      { path: "**", redirectTo: "" }
     ]
   },
   {
