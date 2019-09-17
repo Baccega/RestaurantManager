@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
 const httpOption = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
-    "auth-token": localStorage.getItem("token")
+    "auth-token": sessionStorage.getItem("token")
   })
 };
 

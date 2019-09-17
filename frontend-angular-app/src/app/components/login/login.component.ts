@@ -3,7 +3,6 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
-import { NotificationService } from "src/app/services/notification.service";
 
 @Component({
   selector: "app-login",
@@ -17,8 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private utilsService: UtilsService,
-    private notficationService: NotificationService
+    private utilsService: UtilsService
   ) {}
 
   onSubmit(data: any) {

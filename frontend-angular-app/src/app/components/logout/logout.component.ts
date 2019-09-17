@@ -9,16 +9,10 @@ import { Router } from "@angular/router";
   styleUrls: ["./logout.component.scss"]
 })
 export class LogoutComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private utilsService: UtilsService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async ngOnInit() {
-    await this.utilsService.setProgressbar(true);
-    await this.authService.logout();
-    await this.utilsService.setProgressbar(false);
+    this.authService.logout();
     this.router.navigate(["login"]);
   }
 }

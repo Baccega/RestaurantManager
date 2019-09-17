@@ -7,7 +7,7 @@ import { TodayStatistics, EmployeeStatistics } from "../models/Statistics";
 const httpOption = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
-    "auth-token": localStorage.getItem("token")
+    "auth-token": sessionStorage.getItem("token")
   })
 };
 @Injectable({

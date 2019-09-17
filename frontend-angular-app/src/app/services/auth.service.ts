@@ -33,13 +33,15 @@ export class AuthService {
     );
   }
 
-  logout(): Promise<void> {
-    return new Promise<void>(resolve => {
-      this.userWatcher.complete();
-      this.userWatcher = new Subject();
-      sessionStorage.clear();
-      resolve();
+  logout(): void {
+    this.userWatcher.next({
+      role: "nobody",
+      userId: "0",
+      name: "",
+      dailyPlate: 0,
+      totalPlate: 0
     });
+    sessionStorage.clear();
   }
 
   setUser(user) {

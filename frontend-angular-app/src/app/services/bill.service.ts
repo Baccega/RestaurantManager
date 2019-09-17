@@ -7,7 +7,7 @@ import { Order } from "../models/Order";
 const httpOption = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
-    "auth-token": localStorage.getItem("token")
+    "auth-token": sessionStorage.getItem("token")
   })
 };
 

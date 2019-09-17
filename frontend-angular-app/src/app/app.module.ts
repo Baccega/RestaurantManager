@@ -33,10 +33,10 @@ import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/c
 import { AuthService } from "./services/auth.service";
 import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
 import { UserService } from "./services/user.service";
-import { LogoutComponent } from './components/logout/logout.component';
+import { LogoutComponent } from "./components/logout/logout.component";
 
 export function tokenGetter() {
-  return localStorage.getItem("token");
+  return sessionStorage.getItem("token");
 }
 
 @NgModule({

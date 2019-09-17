@@ -28,6 +28,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.authService.watchUser().subscribe(userLogged => {
+      console.log("New user logged");
       this.user = userLogged;
       this.uppedRole =
         userLogged.role.charAt(0).toUpperCase() + userLogged.role.slice(1);
