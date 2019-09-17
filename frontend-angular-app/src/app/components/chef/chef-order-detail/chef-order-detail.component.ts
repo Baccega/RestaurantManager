@@ -27,20 +27,19 @@ export class ChefOrderDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.initSocket();
-    this.socketService
-      .listen<Order>("updated-order")
-      .subscribe(updatedOrder => {
-        console.log("Received Update");
-        console.log(updatedOrder);
-        if (this.order.orderId == updatedOrder.orderId) {
-          this.order = {
-            ...updatedOrder,
-            dishes: updatedOrder.dishes.filter(
-              dish => dish.category != "Bevande"
-            )
-          };
-        }
-      });
+    // this.socketService
+    //   .listen<Order>("updated-order")
+    //   .subscribe(updatedOrder => {
+    //     console.log("Received Update");
+    //     if (this.order.orderId == updatedOrder.orderId) {
+    //       this.order = {
+    //         ...updatedOrder,
+    //         dishes: updatedOrder.dishes.filter(
+    //           dish => dish.category != "Bevande"
+    //         )
+    //       };
+    //     }
+    //   });
 
     this.routerSub = this.activatedRoute.params.subscribe((params: Params) => {
       const id = params["id"];

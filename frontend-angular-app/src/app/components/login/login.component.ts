@@ -27,11 +27,9 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(data).subscribe(
       payload => {
         this.utilsService.setProgressbar(false);
-        localStorage.setItem("token", payload.token);
+        console.log(payload.token);
+        sessionStorage.setItem("token", payload.token);
         this.authService.setUser(payload.user);
-        if (payload.user.role == "waiter") {
-          this.notficationService.setWaiterId(payload.user._id);
-        }
         this.router.navigate([payload.user.role]);
       },
       err => {

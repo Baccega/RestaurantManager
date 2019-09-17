@@ -60,7 +60,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   openNotification() {
     const notification = this.notifications.pop();
-    console.log("Go to : " + "waiter", "dashboard", notification.tableNumber);
     this.router.navigate(["waiter", "dashboard", notification.tableNumber]);
   }
 }

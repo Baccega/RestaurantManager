@@ -201,7 +201,6 @@ router.post("/:id", verify, async function(req, res, next) {
 			order.foodStatus = req.body.foodStatus;
 		} else if (req.body.drinkStatus) {
 			order.drinkStatus = req.body.drinkStatus;
-			console.log("New status: " + order.drinkStatus);
 			order.dishes.forEach(dish => {
 				if (dish.category == "Bevande") {
 					dish.status++;
@@ -221,6 +220,7 @@ router.post("/:id", verify, async function(req, res, next) {
 		res.io.emit("updated-order", order);
 
 		if (req.body.foodStatus == 2 || req.body.drinkStatus == 2) {
+			console.log("Notified");
 			res.io.emit("notify-waiter", {
 				waiterId: order.waiter,
 				orderId: order.orderId,

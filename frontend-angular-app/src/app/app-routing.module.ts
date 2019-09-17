@@ -17,6 +17,7 @@ import { CashierBillComponent } from "./components/cashier/cashier-bill/cashier-
 import { CashierStatisticsUserComponent } from "./components/cashier/cashier-statistics-user/cashier-statistics-user.component";
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
+import { LogoutComponent } from "./components/logout/logout.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+    pathMatch: "full"
+  },
+  {
+    path: "logout",
+    component: LogoutComponent,
     pathMatch: "full"
   },
   {

@@ -46,7 +46,6 @@ export class TableService {
   }
 
   createTable(data): Promise<any> {
-    console.log(data);
     return this.http
       .post<any>(`${environment.serverUrl}/bills/`, data, httpOption)
       .toPromise();

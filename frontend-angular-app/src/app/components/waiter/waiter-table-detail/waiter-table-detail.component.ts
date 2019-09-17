@@ -34,6 +34,7 @@ export class WaiterTableDetailComponent implements OnInit, OnDestroy {
         if (
           this.tableOrders.find(order => order.orderId == updatedOrder.orderId)
         ) {
+          console.log("Found");
           this.tableOrders = this.tableOrders.map(order =>
             order.orderId == updatedOrder.orderId ? updatedOrder : order
           );

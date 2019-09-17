@@ -60,6 +60,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
       });
     this.socketService.listen<Order>("new-order").subscribe(newOrder => {
       console.log("Received new order");
+      console.log(newOrder);
       const filtered =
         this.source == "bartender"
           ? {
