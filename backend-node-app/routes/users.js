@@ -6,6 +6,44 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const verify = require("./verifyToken");
+const refresh = require("./refreshToken");
+
+function createJwt(bodyJson) {
+	const AccessToken = jwt.sign(
+		{
+			...bodyJson.toObject(),
+			password: ""
+		},
+		process.env.TOKEN_SECRET,
+		{ expiresIn: process.env.ACCESS_EXPIRE }
+	);
+	// REFRESH TOKEN, LONGER DURATE
+	const RefreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
+		expiresIn: process.env.REFRESH_EXPIRE
+	});
+	// set the header
+	console.log(AccessToken);
+	console.log(RefreshToken);
+	//inviamo il body vuoto, l'authorization si troverà nell'header della respose
+	return { AccessToken, RefreshToken };
+}
+
+function refreshAccessJwt(bodyJson) {
+	// create the token , we can send information along jwt token
+	// set the expire time of jwt
+	const AccessToken = jwt.sign(
+		{
+			_id: bodyJson.id,
+			// insert the task of the user
+			name: bodyJson.name,
+			task: bodyJson.task
+		},
+		process.env.ACCESS_TOKEN_SECRET,
+		{ expiresIn: AccessExpire }
+	);
+	//inviamo il body vuoto, l'authorization si troverà nell'header della respose
+	return { AccessToken };
+}
 
 /* GET users listing.
  * If no body return all user, otherwise only the user with
@@ -65,24 +103,48 @@ router.post("/register", async function(req, res, next) {
  * LOGIN of an user
  */
 router.post("/login", async function(req, res, next) {
-	//validate before creation
-	const { error } = loginValidation(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
+	try {
+		if (!req.body) return res.status(400).send("Request body is missing");
+		else {
+			// VALIDATE WITH JOI
+			const { error } = loginValidation(req.body);
+			if (error) return res.status(400).send(error.details[0].message);
+			// checking if the email already exists
+			const user = await UsersModel.findOne({ email: req.body.email });
+			if (!user) return res.status(400).send("Email or Password is wrong");
+			// checking if the password is OK
+			const validPass = await bcrypt.compare(req.body.password, user.password);
+			if (!validPass) return res.status(400).send("Invalid password");
+			const jwtToken = createJwt(user);
+			console.log(jwtToken);
+			return res
+				.status(201)
+				.header("auth-token", jwtToken.AccessToken)
+				.send(jwtToken);
+		}
+	} catch (err) {
+		return res.status(400).send(err);
+	}
+});
 
-	//check if the email already exist
-	const user = await UsersModel.findOne({ email: req.body.email });
-	if (!user) return res.status(400).send("Email or password wrong !");
-
-	//Password correct
-	const validPass = await bcrypt.compare(req.body.password, user.password);
-	if (!validPass) return res.status(400).send("Invalid password !");
-
-	//Create and assign token
-	const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-	res
-		.status(200)
-		.header("auth-token", token)
-		.send({ token: token, user: user });
+router.post("/refresh-token", refresh, async function(req, res, next) {
+	try {
+		if (!req.body) return res.status(400).send("Request body is missing");
+		else if (!req.body.AccessToken || !req.body.AccessToken)
+			return res.status(400).send("Missing parameters");
+		else {
+			let decoded = jwt.decode(req.body.AccessToken);
+			console.log(decoded);
+			const jwtToken = refreshAccessJwt(decoded);
+			return res
+				.status(201)
+				.header("auth-token", jwtToken.AccessToken)
+				.send(jwtToken);
+		}
+	} catch (err) {
+		console.log(err);
+		return res.status(400).send(err);
+	}
 });
 
 /*

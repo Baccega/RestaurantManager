@@ -4,12 +4,6 @@ import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { TodayStatistics, EmployeeStatistics } from "../models/Statistics";
 
-const httpOption = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-    "auth-token": sessionStorage.getItem("token")
-  })
-};
 @Injectable({
   providedIn: "root"
 })
@@ -28,19 +22,13 @@ export class StatisticsService {
 
   getTodayStatistics(): Promise<TodayStatistics> {
     return this.http
-      .get<TodayStatistics>(
-        `${environment.serverUrl}/statistics/daily`,
-        httpOption
-      )
+      .get<TodayStatistics>(`${environment.serverUrl}/statistics/daily`)
       .toPromise();
   }
 
   getTodayEmployeeStatistics(id): Promise<EmployeeStatistics> {
     return this.http
-      .get<EmployeeStatistics>(
-        `${environment.serverUrl}/statistics/user/${id}`,
-        httpOption
-      )
+      .get<EmployeeStatistics>(`${environment.serverUrl}/statistics/user/${id}`)
       .toPromise();
   }
 }

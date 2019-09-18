@@ -36,7 +36,7 @@ import { UserService } from "./services/user.service";
 import { LogoutComponent } from "./components/logout/logout.component";
 
 export function tokenGetter() {
-  return sessionStorage.getItem("token");
+  return sessionStorage.getItem("AccessToken");
 }
 
 @NgModule({

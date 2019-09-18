@@ -4,13 +4,6 @@ import { environment } from "src/environments/environment";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Order } from "../models/Order";
 
-const httpOption = {
-  headers: new HttpHeaders({
-    "Content-Type": "application/json",
-    "auth-token": sessionStorage.getItem("token")
-  })
-};
-
 @Injectable({
   providedIn: "root"
 })
@@ -20,15 +13,12 @@ export class BillService {
   createBill(tableId, total, dishes) {
     const data = { total: total, dishes: dishes };
     return this.http
-      .post<any>(`${environment.serverUrl}/bills/${tableId}`, data, httpOption)
+      .post<any>(`${environment.serverUrl}/bills/${tableId}`, data)
       .toPromise();
   }
 
   getBill(tableId): Observable<Order[]> {
     tableId = tableId != "" ? `/tables/${tableId}` : "";
-    return this.http.get<Order[]>(
-      `${environment.serverUrl}/orders${tableId}`,
-      httpOption
-    );
+    return this.http.get<Order[]>(`${environment.serverUrl}/orders${tableId}`);
   }
 }

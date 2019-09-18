@@ -18,6 +18,7 @@ import { CashierStatisticsUserComponent } from "./components/cashier/cashier-sta
 import { CashierNewUserComponent } from "./components/cashier/cashier-new-user/cashier-new-user.component";
 import { BartenderOrderDetailComponent } from "./components/bartender/bartender-order-detail/bartender-order-detail.component";
 import { LogoutComponent } from "./components/logout/logout.component";
+import { AuthGuardService as AuthGuard } from "./services/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -37,15 +38,27 @@ const routes: Routes = [
   },
   {
     path: "waiter/new-table",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
     component: WaiterNewTableComponent
   },
   {
     path: "waiter/new-order/:id",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
     component: WaiterNewOrderComponent
   },
   {
     path: "waiter",
     component: WaiterDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
     children: [
       {
         path: "",
@@ -59,6 +72,10 @@ const routes: Routes = [
   {
     path: "bartender",
     component: BartenderDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "bartender"
+    },
     children: [
       {
         path: "",
@@ -72,6 +89,10 @@ const routes: Routes = [
   {
     path: "chef",
     component: ChefDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "chef"
+    },
     children: [
       {
         path: "",
@@ -84,6 +105,10 @@ const routes: Routes = [
   },
   {
     path: "cashier",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "cashier"
+    },
     children: [
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
       { path: "dashboard", component: CashierDashboardComponent },

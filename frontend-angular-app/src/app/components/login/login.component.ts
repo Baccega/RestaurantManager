@@ -3,6 +3,7 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
 import { AuthService } from "src/app/services/auth.service";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: "app-login",
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private jwt: JwtHelperService
   ) {}
 
   onSubmit(data: any) {
@@ -25,11 +27,17 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(data).subscribe(
       payload => {
         this.utilsService.setProgressbar(false);
-        console.log(payload.token);
-        sessionStorage.setItem("token", payload.token);
-        this.authService.setUser(payload.user);
-        console.log(payload.user);
-        this.router.navigate([payload.user.role]);
+        const user = this.jwt.decodeToken(payload.AccessToken);
+        sessionStorage.setItem("AccessToken", payload.AccessToken);
+        sessionStorage.setItem("RefreshToken", payload.RefreshToken);
+        sessionStorage.setItem("UserName", user.name);
+        sessionStorage.setItem("UserRole", user.role);
+        console.log("ACCESS: ", payload.AccessToken);
+        console.log("REFRESH: ", payload.RefreshToken);
+        this.router.navigate(["/user"]);
+        this.authService.setUser(user);
+        console.log(user);
+        this.router.navigate([user.role]);
       },
       err => {
         this.utilsService.setProgressbar(false);
