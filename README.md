@@ -83,15 +83,11 @@ Role {
 
 # Endpoints
 
-'*' vuol dire che è opzionale (tipo un parametro opzionale, ma che bisogna implementare)
-
-'#' vuol dire che non è necessario farlo
-
 ### /users
 
 | Method | Body         | Query Params         | Description                                                  | Users |
 | ------ | ------------ | -------------------- | ------------------------------------------------------------ | ----- |
-| GET    |              | {*role : String} | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
+| GET    |              | {role : String} | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
 
 ### /users/login
 
@@ -217,15 +213,14 @@ Role {
 
 
 
-### /statistics
+### /statistics/daily
 
-| Method  | Body        | Query Params | Description                                        | Users                |
-| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
-| GET     |             |              | Ricevi le statistiche della giornata               | Cassa                |
+| Method | Body | Query Params | Description                          | Users |
+| ------ | ---- | ------------ | ------------------------------------ | ----- |
+| GET    |      |              | Ricevi le statistiche della giornata | Cassa |
 
+### /statistics/user/:id
 
-### /statistics/:id
-
-| Method  | Body        | Query Params | Description                                        | Users                |
-| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
-| GET     |             |              | Ricevi le statistiche dell'utente :id              | Cassa                |
+| Method | Body | Query Params | Description                           | Users |
+| ------ | ---- | ------------ | ------------------------------------- | ----- |
+| GET    |      | {id: String} | Ricevi le statistiche dell'utente :id | Cassa |
