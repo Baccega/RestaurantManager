@@ -151,12 +151,11 @@ router.post("/refresh-token", refresh, async function(req, res, next) {
  * DELETE the user with the id
  */
 router.delete("/:id", async function(req, res, next) {
-	let del = await UsersModel.remove({ userId: req.params.id });
-	if (!del.n) {
-		res.status(400).send("User doesn't exist!");
-	} else {
-		res.status(200).send("Deleted user successfully!");
+	let del = await UsersModel.deleteOne({ userId: req.params.id });
+	if (!del) {
+		return res.status(400).send("User Doesn't exist");
 	}
+	return res.status(200).send({ res: "Deleted user successfully!" });
 });
 
 module.exports = router;

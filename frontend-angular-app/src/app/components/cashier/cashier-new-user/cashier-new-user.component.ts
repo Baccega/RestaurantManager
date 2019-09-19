@@ -36,7 +36,7 @@ export class CashierNewUserComponent implements OnInit {
       const response = await this.authService.registerUser(data);
       this.utilsService.setProgressbar(false);
       console.log(response);
-      this.router.navigate(["../"], { relativeTo: this.activatedRoute });
+      this.router.navigate(["../../"], { relativeTo: this.activatedRoute });
     } catch (err) {
       this.utilsService.setProgressbar(false);
       this._snackBar.openFromComponent(SnackbarComponent, {
