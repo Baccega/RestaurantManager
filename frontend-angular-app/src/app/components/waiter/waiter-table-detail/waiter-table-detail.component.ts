@@ -13,7 +13,7 @@ import { SocketService } from "src/app/services/socket.service";
 })
 export class WaiterTableDetailComponent implements OnInit, OnDestroy {
   tableId = "";
-  tableOrders: Order[];
+  tableOrders: Order[] = [];
   ordersSub: Subscription;
   routeSub: Subscription;
 

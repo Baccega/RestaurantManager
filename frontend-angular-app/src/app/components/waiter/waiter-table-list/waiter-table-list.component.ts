@@ -12,7 +12,7 @@ import { SocketService } from "src/app/services/socket.service";
   styleUrls: ["./waiter-table-list.component.scss"]
 })
 export class WaiterTableListComponent implements OnInit, OnDestroy {
-  tables: Table[];
+  tables: Table[] = [];
   id: String;
   tableSub: Subscription;
   utilsSub: Subscription;
@@ -38,6 +38,9 @@ export class WaiterTableListComponent implements OnInit, OnDestroy {
       this.tables = this.tables.filter(
         table => table.number != newTable.number
       );
+      if (this.id == newTable.number.toString()) {
+        this.router.navigate(["waiter"]);
+      }
     });
   }
 
@@ -48,5 +51,9 @@ export class WaiterTableListComponent implements OnInit, OnDestroy {
 
   navigateTo(id: string) {
     this.router.navigate(["/", "waiter", id]);
+  }
+
+  goToNewTable() {
+    this.router.navigate(["/", "waiter", "new-table"]);
   }
 }
