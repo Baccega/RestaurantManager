@@ -50,6 +50,7 @@ export class CashierStatisticsUserComponent implements OnInit {
     try {
       this.utilsService.setProgressbar(true);
       const result = await this.userService.deleteUser(this.userId);
+      console.log(result);
       this.utilsService.setProgressbar(false);
       this.router.navigate(["../../"], { relativeTo: this.activatedRoute });
     } catch (e) {

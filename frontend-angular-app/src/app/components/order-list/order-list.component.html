@@ -1,4 +1,7 @@
 <ul>
+  <p *ngIf="orders.length == 0">
+    The orders list is empty!
+  </p>
   <li *ngFor="let order of orders" (click)="navigateTo(order.orderId)">
     <mat-card [ngClass]="{ 'is-active': order.orderId == id }">
       <p>

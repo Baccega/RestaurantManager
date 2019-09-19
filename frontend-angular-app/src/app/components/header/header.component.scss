@@ -2,6 +2,7 @@ mat-toolbar {
   display: grid;
   grid-template-columns: 70px auto 70px;
   height: 100%;
+  width: 100vw;
 }
 
 .progressBar {

@@ -13,7 +13,7 @@ import { SocketService } from "src/app/services/socket.service";
 })
 export class OrderListComponent implements OnInit, OnDestroy {
   @Input() source: string;
-  orders: Order[];
+  orders: Order[] = [];
   id: String;
   orderSub: Subscription;
   utilsSub: Subscription;
