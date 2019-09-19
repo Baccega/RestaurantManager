@@ -130,7 +130,7 @@ router.post("/login", async function(req, res, next) {
 router.post("/refresh-token", refresh, async function(req, res, next) {
 	try {
 		if (!req.body) return res.status(400).send("Request body is missing");
-		else if (!req.body.AccessToken || !req.body.AccessToken)
+		else if (!req.body.AccessToken)
 			return res.status(400).send("Missing parameters");
 		else {
 			let decoded = jwt.decode(req.body.AccessToken);

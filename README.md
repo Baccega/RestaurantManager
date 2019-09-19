@@ -91,41 +91,75 @@ Role {
 
 | Method | Body         | Query Params         | Description                                                  | Users |
 | ------ | ------------ | -------------------- | ------------------------------------------------------------ | ----- |
-| GET    |              | role* = (role in String) | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
-| POST   | { Employee } |                      | Crea un nuovo dipendente                                     | Cassa |
+| GET    |              | {*role : String} | Ricevi tutti i dipendenti con ruolo *role*, altrimenti tutti | Cassa |
+
+### /users/login
+
+| Method | Body                            | Query Params | Description                         | Users |
+| ------ | ------------------------------- | ------------ | ----------------------------------- | ----- |
+| POST   | {email:String, password:String} |              | Utilizzato per il login dell'utente |       |
+
+### /users/register
+
+| Method | Body                                          | Query Params | Description                         | Users |
+| ------ | --------------------------------------------- | ------------ | ----------------------------------- | ----- |
+| POST   | {email:String, password:String, role: String} |              | Utilizzato per registrare un utente |       |
 
 ### /users/:id
 
 | Method | Body | Query Params | Description                | Users |
 | ------ | ---- | ------------ | -------------------------- | ----- |
-| GET    |      |              | Ricevi il dipendente :id   | Cassa |
-| DELETE |      |              | Cancella il dipendente :id | Cassa |
+| GET    |      | {id: Number} | Ricevi il dipendente :id   | Cassa |
+| DELETE |      | {id: Number} | Cancella il dipendente :id | Cassa |
+
+### /users/refresh-token
+
+| Method | Body                  | Query Params | Description              | Users                                      |
+| ------ | --------------------- | ------------ | ------------------------ | ------------------------------------------ |
+| POST   | {AccessToken: String} |              | Ricevi il dipendente :id | Cassa<br />Cameriere<br />Barman<br />Chef |
+
+
 
 ### /bills
 
 | Method | Body            | Query Params   | Description                                                  | Users |
 | ------ | --------------- | -------------- | ------------------------------------------------------------ | ----- |
 | GET    |                 |  | Ricevi tutti i conti| Cassa |
-| POST   | { TableNumber, CustomersNumber } |         | Crea un nuovo conto vuoto per il tavolo Tablenumber, occupandolo | Cameriere |
+| POST   | { table: Number, customer: Number} |         | Crea un nuovo conto vuoto per il tavolo Tablenumber, occupandolo | Cameriere |
 
 ### /bills/:id
 
 | Method | Body | Query Params | Description         | Users |
 | ------ | ---- | ------------ | ------------------- | ----- |
-| GET    |      |              | Ricevi il conto :id | Cassa |
+| GET    |      | {id: Number} | Ricevi il conto :id | Cassa |
+
+### /bills/:tableId
+
+| Method | Body                            | Query Params      | Description         | Users |
+| ------ | ------------------------------- | ----------------- | ------------------- | ----- |
+| POST   | {total: Number, dishes: Dish[]} | {tableId: Number} | Ricevi il conto :id | Cassa |
+
+
 
 ### /orders
 
-| Method | Body | Query Params | Description                                              | Users                            |
-| ------ | ---- | ------------ | -------------------------------------------------------- | -------------------------------- |
-| GET    |      |              | Ricevi tutti gli ordini in base al tuo ruolo e a chi sei | Barman<br />Cuoco<br />Cameriere |
+| Method | Body                             | Query Params | Description                                        | Users                            |
+| ------ | -------------------------------- | ------------ | -------------------------------------------------- | -------------------------------- |
+| GET    |                                  |              | Ricevi tutti gli ordini in base al ruolo assegnato | Barman<br />Cuoco<br />Cameriere |
+| POST   | {table: Number, dishes: Dish[] } |              | Posta un ordine di piatti nel tavolo specificato   | Cameriere                        |
 
 ### /orders/:id
 
-| Method | Body                                       | Query Params | Description                 | Users |
-| ------ | ------------------------------------------ | ------------ | --------------------------- | ----- |
-| GET    |                                            |              | Ricevi l'ordine :id         | Tutti |
-| POST   | { food*: FoodStatus, drink*: DrinkStatus } |              | Cambia lo stato dell'ordine | Tutti |
+| Method | Body                                       | Query Params | Description                 | Users  |
+| ------ | ------------------------------------------ | ------------ | --------------------------- | ------ |
+| GET    |                                            | {id: Number} | Ricevi l'ordine :id         | Tutti  |
+| POST   | { food*: FoodStatus, drink*: DrinkStatus } |              | Cambia lo stato dell'ordine | Tutti? |
+
+### /orders/tables/:id
+
+| Method | Body | Query Params    | Description                       | Users |
+| ------ | ---- | --------------- | --------------------------------- | ----- |
+| GET    |      | {table: Number} | Ricevi l'ordine del tavolo :table | Tutti |
 
 ### /orders/:id/:dish
 
@@ -134,32 +168,54 @@ Role {
 | GET    |              |              | Ricevi il piatto :dish dell'ordine :id           | Tutti            |
 | POST   | {status:DishStatus} |              | Cambia lo stato del piatto :dish dell'ordine :id | Barman<br/>Cuoco |
 
+
+
 ### /courses
 
 | Method | Body         | Query Params | Description                                      | Users            |
 | ------ | ------------ | ------------ | ------------------------------------------------ | ---------------- |
 | GET    |              |              | Ricevi la lista di menù                          | Tutti            |
 
+### /courses/createCourse
+
+| Method | Body              | Query Params | Description                          | Users |
+| ------ | ----------------- | ------------ | ------------------------------------ | ----- |
+| POST   | {category:String} |              | Crea una nuova categoria per il menù |       |
+
+### /courses/newPlate
+
+| Method | Body   | Query Params | Description                      | Users |
+| ------ | ------ | ------------ | -------------------------------- | ----- |
+| POST   | {Dish} |              | Crea un nuovo piatto per il menù |       |
+
+### 
+
 ### /tables
 
 | Method | Body      | Query Params | Description           | Users |
 | ------ | --------- | ------------ | --------------------- | ----- |
 | GET    |           |              | Ricevi tutti i miei tavoli | Cameriere<br />Cassa |
-| POST#  | { Table } |              | Crea un nuovo tavolo  | Cassa |
+| POST  | { Table } |              | Crea un nuovo tavolo  | Cassa |
 
 ### /tables/:id
 
-| Method  | Body        | Query Params | Description                                        | Users                |
-| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
-| GET     |             |              | Ricevi il tavolo :id                               | Tutti                |
-| POST    | { boolean } |              | Cambia lo stato del tavolo :id (free: true\|false) | Cassa<br />Cameriere |
-| DELETE# |             |              | Cancella il tavolo :id                             | Cassa                |
+| Method | Body | Query Params | Description          | Users |
+| ------ | ---- | ------------ | -------------------- | ----- |
+| GET    |      |              | Ricevi il tavolo :id | Tutti |
 
-### /tables/:id/bill
+### /tables/freeTables
 
-| Method  | Body        | Query Params | Description                                        | Users                |
-| ------- | ----------- | ------------ | -------------------------------------------------- | -------------------- |
-| POST     | Object |              | Chiudi il conto del tavolo :id                    | Cassa                |
+| Method | Body | Query Params | Description                   | Users                |
+| ------ | ---- | ------------ | ----------------------------- | -------------------- |
+| GET    |      |              | Ritorna tutti i tavoli liberi | Cameriere<br />Cassa |
+
+### /tables/myTables
+
+| Method | Body | Query Params | Description                                           | Users     |
+| ------ | ---- | ------------ | ----------------------------------------------------- | --------- |
+| GET    |      |              | Ricevi i tavoli che sono impegnati dal quel cameriere | Cameriere |
+
+
 
 ### /statistics
 
