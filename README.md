@@ -40,6 +40,7 @@ Table {
 }
 
 Bill {
+  billId: number;
   total: number;
   date: Date;
   dishes: Object[];
@@ -48,7 +49,7 @@ Bill {
   waiter: string;       // Employee ID
 }
 
-Employee {
+User {
   userId: number;
   name: string;
   email: string;
