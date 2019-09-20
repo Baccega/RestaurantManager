@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("RefreshToken", payload.RefreshToken);
         sessionStorage.setItem("UserName", user.name);
         sessionStorage.setItem("UserRole", user.role);
-        console.log("ACCESS: ", payload.AccessToken);
-        console.log("REFRESH: ", payload.RefreshToken);
         this.authService.setUser(user);
         this.router.navigate([user.role]);
       },

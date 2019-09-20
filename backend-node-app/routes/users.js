@@ -17,31 +17,26 @@ function createJwt(bodyJson) {
 		process.env.TOKEN_SECRET,
 		{ expiresIn: process.env.ACCESS_EXPIRE }
 	);
-	// REFRESH TOKEN, LONGER DURATE
+
 	const RefreshToken = jwt.sign({}, process.env.REFRESH_TOKEN_SECRET, {
 		expiresIn: process.env.REFRESH_EXPIRE
 	});
-	// set the header
 	console.log(AccessToken);
 	console.log(RefreshToken);
-	//inviamo il body vuoto, l'authorization si troverà nell'header della respose
 	return { AccessToken, RefreshToken };
 }
 
 function refreshAccessJwt(bodyJson) {
-	// create the token , we can send information along jwt token
-	// set the expire time of jwt
 	const AccessToken = jwt.sign(
 		{
 			_id: bodyJson.id,
-			// insert the task of the user
+
 			name: bodyJson.name,
 			task: bodyJson.task
 		},
 		process.env.ACCESS_TOKEN_SECRET,
 		{ expiresIn: AccessExpire }
 	);
-	//inviamo il body vuoto, l'authorization si troverà nell'header della respose
 	return { AccessToken };
 }
 
@@ -76,15 +71,10 @@ router.post("/register", async function(req, res, next) {
 	const { error } = registerValidation(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	//check if the email already exist
 	const existingEmail = await UsersModel.findOne({ email: req.body.email });
 	if (existingEmail) return res.status(400).send("Email altready exists !");
-
-	//password hash
 	const salt = await bcrypt.genSalt(10);
 	const hashPassword = await bcrypt.hash(req.body.password, salt);
-
-	//all good create the user
 	const user = new UsersModel({
 		name: req.body.name,
 		email: req.body.email,
@@ -106,13 +96,10 @@ router.post("/login", async function(req, res, next) {
 	try {
 		if (!req.body) return res.status(400).send("Request body is missing");
 		else {
-			// VALIDATE WITH JOI
 			const { error } = loginValidation(req.body);
 			if (error) return res.status(400).send(error.details[0].message);
-			// checking if the email already exists
 			const user = await UsersModel.findOne({ email: req.body.email });
 			if (!user) return res.status(400).send("Email or Password is wrong");
-			// checking if the password is OK
 			const validPass = await bcrypt.compare(req.body.password, user.password);
 			if (!validPass) return res.status(400).send("Invalid password");
 			const jwtToken = createJwt(user);
