@@ -8,16 +8,6 @@ import { TodayStatistics, EmployeeStatistics } from "../models/Statistics";
   providedIn: "root"
 })
 export class StatisticsService {
-  today = {
-    customersServed: 10,
-    profit: 100
-  };
-
-  scode = {
-    preparedDishes: 0,
-    customersServed: 100
-  };
-
   constructor(private http: HttpClient) {}
 
   getTodayStatistics(): Promise<TodayStatistics> {
@@ -29,6 +19,12 @@ export class StatisticsService {
   getTodayEmployeeStatistics(id): Promise<EmployeeStatistics> {
     return this.http
       .get<EmployeeStatistics>(`${environment.serverUrl}/statistics/user/${id}`)
+      .toPromise();
+  }
+
+  closeDay(): Promise<void> {
+    return this.http
+      .post<void>(`${environment.serverUrl}/statistics/endDay`, {})
       .toPromise();
   }
 }

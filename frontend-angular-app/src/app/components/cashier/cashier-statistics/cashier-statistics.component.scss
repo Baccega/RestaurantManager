@@ -14,7 +14,7 @@
   }
 }
 .user-container {
-  height: 60vh;
+  height: 53vh;
   margin: 20px;
   h3 {
     text-align: center;
@@ -54,5 +54,15 @@
         }
       }
     }
+  }
+}
+.close-day {
+  height: 5vh;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  button {
+    width: 90%;
+    max-width: 300px;
   }
 }

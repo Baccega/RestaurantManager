@@ -35,4 +35,9 @@ export class CashierStatisticsComponent implements OnInit {
 
     this.utilsService.setProgressbar(false);
   }
+  closeDay() {
+    this.profit = 0;
+    this.customersServed = 0;
+    this.statisticsService.closeDay();
+  }
 }
