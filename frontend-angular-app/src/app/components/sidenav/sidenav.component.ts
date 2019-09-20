@@ -10,13 +10,8 @@ import { UtilsService } from "src/app/services/utils.service";
   styleUrls: ["./sidenav.component.scss"]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
-  user: User = {
-    userId: "",
-    name: "",
-    role: "",
-    dailyPlate: 0,
-    totalPlate: 0
-  };
+  userName: string = "";
+  userRole: string = "";
   notUppedRole: string;
   uppedRole: string;
   sub: Subscription;
@@ -27,11 +22,23 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sub = this.authService.watchUser().subscribe(userLogged => {
-      console.log("New user logged");
-      this.user = userLogged;
+    const name = sessionStorage.getItem("UserName");
+    const role = sessionStorage.getItem("UserRole");
+    if (name && name != "") {
+      console.log("Already Authenticated");
+      this.userName = name;
+      this.userRole = role;
       this.uppedRole =
-        userLogged.role.charAt(0).toUpperCase() + userLogged.role.slice(1);
+        this.userRole.charAt(0).toUpperCase() + this.userRole.slice(1);
+    }
+    this.authService.watchUser().subscribe(newUser => {
+      if (newUser.role && newUser.role != "nobody") {
+        console.log("New user logged");
+        this.userName = sessionStorage.getItem("UserName");
+        this.userRole = sessionStorage.getItem("UserRole");
+        this.uppedRole =
+          this.userRole.charAt(0).toUpperCase() + this.userRole.slice(1);
+      }
     });
   }
   ngOnDestroy() {

@@ -59,9 +59,7 @@ export class AuthService {
     return this.userWatcher;
   }
 
-  // isAuthenticated sync
   isAuthenticated(): boolean {
-    // Per vedere le richieste non devi fare un refresh dal server, ma semplicamente convalidare la presenza del token
     const saved_AccessToken = sessionStorage.getItem("AccessToken");
     const saved_RefreshToken = sessionStorage.getItem("RefreshToken");
     return (
@@ -80,7 +78,6 @@ export class AuthService {
         if (!this.jwtHelper.isTokenExpired(saved_AccessToken)) {
           resolve("AccessToken doesn't expire");
         } else {
-          // il problema del token expire deve essere da parte del server
           let body = {
             AccessToken: saved_AccessToken,
             RefreshToken: saved_RefreshToken
@@ -93,7 +90,6 @@ export class AuthService {
                 resolve("Created new AccessToken");
               },
               err => {
-                //console.log('refreshToken ERR', err.error);
                 reject(err.error);
               }
             );

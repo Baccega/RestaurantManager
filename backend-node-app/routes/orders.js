@@ -216,7 +216,7 @@ router.post("/:id", verify, async function(req, res, next) {
 			order.dishes.forEach(dish => {
 				if (dish.category == "Bevande") {
 					console.log(dish.status);
-					dish.status = dish.status + 1;
+					dish.status = dish.status == 2 ? dish.status : dish.status + 1;
 					user.dailyPlate += dish.status == 2 ? dish.quantity : 0;
 					console.log(dish.status);
 				}
