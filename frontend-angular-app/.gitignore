@@ -45,5 +45,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
-mobile/www
 mobile/node_modules
+mobile/build
+mobile/SeaDuel-*
+mobile/assets
+mobile/www/assets
+mobile/www/build
+mobile/.gradle
