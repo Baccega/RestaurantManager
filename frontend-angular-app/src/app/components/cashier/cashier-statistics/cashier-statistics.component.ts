@@ -25,9 +25,8 @@ export class CashierStatisticsComponent implements OnInit {
     this.utilsService.setTitle("Statistics & Management");
 
     const statistics: TodayStatistics = await this.statisticsService.getTodayStatistics();
-
-    this.profit = statistics.profit;
-    this.customersServed = statistics.customersServed;
+    this.profit = statistics[0].statistic;
+    this.customersServed = statistics[1].statistic;
 
     this.utilsService.setProgressbar(true);
 

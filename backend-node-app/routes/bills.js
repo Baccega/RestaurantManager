@@ -3,7 +3,7 @@ var router = express.Router();
 const BillModel = require("../models/bills.models");
 const TableModel = require("../models/tables.models");
 const OrderModel = require("../models/orders.models");
-const { tableValidation } = require("../validation");
+const StatisticModel = require("../models/statistics.models");
 const verify = require("./verifyToken");
 
 /*
@@ -57,6 +57,15 @@ router.post("/:tableId", verify, async (req, res, next) => {
 		bill.dishes = req.body.dishes;
 
 		await bill.save();
+
+		await StatisticModel.updateOne(
+			{ name: "todaysCustomers" },
+			{ $inc: { statistic: bill.customerNumber } }
+		);
+		await StatisticModel.updateOne(
+			{ name: "todaysProfit" },
+			{ $inc: { statistic: req.body.total } }
+		);
 
 		let table = await TableModel.findOne({ number: req.params.tableId });
 		table.free = true;
