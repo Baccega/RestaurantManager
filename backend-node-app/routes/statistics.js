@@ -38,20 +38,12 @@ router.get("/user/:id", verify, async (req, res, next) => {
   }
 });
 
-router.post("/closuer", verify, async (req, res, next) => {
+router.post("/endDay", verify, async (req, res, next) => {
   try {
     if (req.user.role != "cashier") {
       res.status(400).send("Permission Denied!");
     } else {
-      let users = await UserModel.find({});
-      console.log(users);
-
-      users.forEach(user => {
-        console.log(user);
-        user.totalPlate += user.dailyPlate;
-        user.dailyPlate = 0;
-      });
-      await users.save();
+      await UserModel.updateMany({}, { $set: { dailyPlate: 0 } });
 
       res.status(200).send("The resturant is close!");
     }
