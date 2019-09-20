@@ -1,0 +1,11 @@
+{
+	"name": "RestaurantApp",
+	"private": true,
+	"scripts": {
+		"install": "cd backend-node-app && yarn && cd - && cd frontend-angular-app && yarn && cd - ",
+		"start-backend": "cd backend-node-app && yarn start && cd -",
+		"start-web": "cd frontend-angular-app && yarn start && cd -"
+	},
+	"dependencies": {},
+	"devDependencies": {}
+}
