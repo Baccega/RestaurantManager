@@ -6,23 +6,12 @@ import { environment } from "./environments/environment";
 
 if (environment.production) {
   enableProdMode();
+  let onDeviceReady = () => {
+    platformBrowserDynamic().bootstrapModule(AppModule);
+  };
+  document.addEventListener("deviceready", onDeviceReady, false);
+} else {
+  platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch(err => console.error(err));
 }
-
-// platformBrowserDynamic()
-//   .bootstrapModule(AppModule)
-//   .catch(err => console.error(err));
-
-// document.addEventListener(
-//   "deviceready",
-//   () => {
-//     platformBrowserDynamic()
-//       .bootstrapModule(AppModule)
-//       .catch(err => console.error(err));
-//   },
-//   false
-// );
-
-let onDeviceReady = () => {
-  platformBrowserDynamic().bootstrapModule(AppModule);
-};
-document.addEventListener("deviceready", onDeviceReady, false);
