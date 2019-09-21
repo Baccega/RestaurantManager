@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, Input } from "@angular/core";
 import { Subscription, Observable } from "rxjs";
 import { UtilsService } from "./services/utils.service";
 
+declare var device;
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",

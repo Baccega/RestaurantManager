@@ -1,10 +1,11 @@
 {
-	"name": "RestaurantApp",
+	"name": "restaurantapp",
 	"private": true,
 	"scripts": {
 		"install": "cd backend-node-app && yarn && cd - && cd frontend-angular-app && yarn && cd - ",
 		"start-backend": "cd backend-node-app && yarn start && cd -",
-		"start-web": "cd frontend-angular-app && yarn start && cd -"
+		"start-web": "cd frontend-angular-app && yarn start && cd -",
+		"start-android": "cd frontend-angular-app/mobile && yarn run build-android && yarn run start-android"
 	},
 	"dependencies": {},
 	"devDependencies": {}
