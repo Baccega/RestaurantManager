@@ -20,6 +20,10 @@ Il progetto é stato sviluppato seguendo lo stack di sviluppo **MEAN** con qualc
 
 Come packet-manager è stato scelto **Yarn**, per la sua semplicità d'uso.
 
+### Front-end
+
+----------------- material
+
 ### Backend
 
 I compiti principali del server sono:
@@ -286,6 +290,110 @@ Role {
 | GET    |      | {id: String} | Ricevi le statistiche dell'utente :id | Cassa |
 
 ### Componenti di Angular
+
+L'applicazione si divide in 22 componenti.
+
+- Il cameriere (Waiter)
+
+  - waiter-dashboard
+
+    Pagina principale che crea altri 2 sotto componenti:
+
+    - waiter-table-list
+
+      La lista dei tavoli appartenenti al cameriere
+
+    - waiter-table-detail (Utilizzando un router-outlet)
+
+      La lista di ordini di un determinato tavolo
+
+  - waiter-new-table
+
+    Pagina secondaria, accessibile via sidenav, dove un cameriere può occupare un tavolo
+
+  - waiter-new-order
+
+    Pagina secondaria, accessibile via FAB (Floating Action Button) in basso a destra nella dashboard (Solo quando un tavolo è selezionato)
+
+- Il Cuoco (Chef)
+
+  - chef-dashboard
+
+    Pagina principale che crea altri 2 sotto componenti:
+
+    - order-list (source = "chef")
+
+      Componente condiviso tra chef e bartender che mostra gli ordini in attesa secondo la logica FIFO (First In First Out)
+
+    - chef-order-detail
+
+      La lista dei piatti di un selezionato ordine, con possibilità di iniziare e completare la preparazione di un certo piatto
+
+- Il Barista (Bartender)
+
+  - bartender-dashboard
+
+    Pagina principale che crea altri 2 sotto componenti:
+
+    - order-list (source = "bartender")
+
+      Componente condiviso tra chef e bartender che mostra gli ordini in attesa secondo la logica FIFO (First In First Out)
+
+    - bartender-order-detail
+
+      La lista dei piatti di un selezionato ordine, con possibilità di iniziare e completare la preparazione dell'intero ordine
+
+- La Cassa (Cashier)
+
+  - cashier-dashboard
+
+    Pagina principale mostra i tavoli occupati e liberi
+
+  - cashier-view-order
+
+    Pagina secondaria, accessibile da cashier-dashboard selezionando un tavolo, dove è possibile vedere lo stato degli ordini di un determinato tavolo
+
+  - cashier-bill
+
+    Pagina secondaria, accessibile da cashier-view-order usando il FAB in basso a destra, dove è possibile visualizzare il conto totale di un tavolo e poterlo chiudere
+
+  - cashier-statistics
+
+    Pagina secondaria, accessibile dalla sidenav, dove è possibile vedere le statistiche della giornataa, la lista degli utenti, e dove è possibile chiudere la giornata azzerando le statistiche del giorno
+
+  - cashier-statistics-user
+
+    Pagina secondaria, accessibile da cashier-statistics selezionando un utente, dove è possibile vedere le statistiche di un utente e dove è possibile eliminarlo dall'applicazione
+
+  - cashier-new-user
+
+    Pagina secondaria, accessibile da cashier-statistics selezionando l'icona con il simbolo "+", dove è possibile aggiungere un utente all'applicazione
+
+- Altri componenti
+
+  - dummy
+
+    Componente vuoto, utile per il routing
+
+  - header
+
+    Componente che forma la navbar dell'applicazione
+
+  - sidenav
+
+    Componete che forma la sidenav dell'applicazione
+
+  - login
+
+    Componente che contiene il form di login
+
+  - logout 
+
+    Componente per il logout, accessibile dalla sidenav
+
+  - snackbar
+
+    Componente per creare una snackbar
 
 ### Servizi di Angular
 
