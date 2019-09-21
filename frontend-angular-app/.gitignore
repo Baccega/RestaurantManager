@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+mobile/node_modules
+mobile/build
+mobile/SeaDuel-*
+mobile/assets
+mobile/www/assets
+mobile/www/build
+mobile/.gradle
