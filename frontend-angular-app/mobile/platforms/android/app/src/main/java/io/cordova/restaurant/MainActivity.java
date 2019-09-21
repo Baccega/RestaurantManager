@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -17,20 +15,27 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
-*/
+ */
 
+package io.cordova.restaurant;
 
-var path = require('path'),
-    clean = require('./lib/clean'),
-    args  = process.argv;
+import android.os.Bundle;
+import org.apache.cordova.*;
 
-// Support basic help commands
-if ( args.length > 2
-   || args[2] == '--help' || args[2] == '/?' || args[2] == '-h' ||
-                    args[2] == 'help' || args[2] == '-help' || args[2] == '/help') {
-    console.log('Usage: ' + path.relative(process.cwd(), path.join(__dirname, 'clean')) );
-    process.exit(0);
-} else {
-    clean.run();
+public class MainActivity extends CordovaActivity
+{
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        // enable Cordova apps to be started in the background
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
+            moveTaskToBack(true);
+        }
+
+        // Set by <content src="index.html" /> in config.xml
+        loadUrl(launchUrl);
+    }
 }
-
