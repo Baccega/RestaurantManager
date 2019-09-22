@@ -22,7 +22,59 @@ Come packet-manager è stato scelto **Yarn**, per la sua semplicità d'uso.
 
 ### Front-end
 
------------------ material
+La parte front-end, scritto con **Typescript** utlizzando il framework **Angular**, è stata realizzata mettendo insieme dei componenti provenienti da **Angular Material**, una libreria che fornisce componenti Angular utilizzabili conformi alle *guidelines* di **Material Design**.
+
+Per utlizzare Angular Material, e mantenere organizzato il progetto, abbiamo importato un modulo apposito **MaterialComponentsModule**, cioè un modulo creato da noi che racchiude tutte le importazioni da Angular Material.
+
+Questo è un esempio di importazione da Angular Material, presente sul MaterialComponentsModule:
+
+```typescript
+import { NgModule } from "@angular/core";
+// ...
+import { MatCardModule } from "@angular/material/card";
+
+@NgModule({
+  declarations: [],
+  exports: [
+  	// ...
+    MatCardModule,
+  ]
+})
+export class MaterialComponentsModule {}
+
+```
+
+Per utlizzare un componente di Angular Material si procede così:
+
+```html
+<mat-card class="table-block">
+    ...
+</mat-card>
+```
+
+#### SCSS
+
+Per i fogli di stile abbiamo utlizzato **SCSS** (Sassy CSS), un superset di CSS che permette una scrittura di CSS molto più semplice e organizzata.
+
+Questo è un esempio di codice SCSS utilizzato in *app.component.scss*:
+
+```scss
+@import "./css-variables.scss";
+.main-container {
+  height: 100%;
+  width: 100%;
+  background-color: $background;
+  .content-container {
+    display: grid;
+    grid-template-rows: 8vh auto;
+  }
+  .sidenav {
+    width: 60vw;
+  }
+}
+```
+
+Come si può vedere, la struttura delle classi gerarchica di scss, è molto più organizzata e meno *error prone* di un normale script CSS. Ovviamente ogni codice CSS valido è anche codice SCSS valido, in quanto SCSS, come già detto, è un superset di CSS. 
 
 ### Backend
 
@@ -396,6 +448,53 @@ L'applicazione si divide in 22 componenti.
     Componente per creare una snackbar
 
 ### Servizi di Angular
+
+L'applicazione è formata da 11 servizi Angular:
+
+- **auth.service**
+
+  Contiene le richieste per l'autenticazione/registrazione degli utenti, ed anche la logica per la gestione dei tokens.
+
+- **bill.service**
+
+  Contiene le richieste per la creazione e il fetch di una *bill* (conto).
+
+- **dish.service**
+
+  Contiene le richieste per la gestione del menù.
+
+- **notification.service**
+
+  Contiene la logica per la notfica dei camerieri (*waiter*).
+
+- **order.service**
+
+  Contiene le richieste per la gestione degli ordini.
+
+- **socket.service**
+
+  Contiene il codice per la creazione e l'utilizzo di un socket.
+
+- **statistics.service**
+
+  Contiene le richieste per le statistiche.
+
+- **table.service**
+
+  Contiene le richieste per la gestione dei tavoli.
+
+- **user.service**
+
+  Contiene le richieste per la gestione degli utenti.
+
+- **utils.service**
+
+  Contiene alcuni **Subject** utili, usati da molti components, per la gestione dell'applicazione:
+
+  - titleWatcher: Subject per la gestione del titolo nell'Header.
+  - sidebarWatcher: Subject che monitora lo stato di apertura o chiusura della sidenav.
+  - progressbarWatcher: Subject per la getione della *progress bar* (Un componente di Angular Material), che indica una richiesta in attesa di risposta del server.
+  - idWatcher: Subject per una semplice gestione degli id, usato per mitigare alle limitazioni del Router.
 
 ### Routes  di Angular
 
