@@ -498,4 +498,117 @@ L'applicazione è formata da 11 servizi Angular:
 
 ### Routes  di Angular
 
+Queste sono tutte le routes utlizzate nel front-end:
+
+```typescript
+const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
+  },
+  {
+    path: "login",
+    component: LoginComponent,
+    pathMatch: "full"
+  },
+  {
+    path: "logout",
+    component: LogoutComponent,
+    pathMatch: "full"
+  },
+  {
+    path: "waiter/new-table",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
+    component: WaiterNewTableComponent
+  },
+  {
+    path: "waiter/new-order/:id",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
+    component: WaiterNewOrderComponent
+  },
+  {
+    path: "waiter",
+    component: WaiterDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "waiter"
+    },
+    children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
+      { path: ":id", component: WaiterTableDetailComponent },
+      { path: "**", redirectTo: "" }
+    ]
+  },
+  {
+    path: "bartender",
+    component: BartenderDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "bartender"
+    },
+    children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
+      { path: ":id", component: BartenderOrderDetailComponent },
+      { path: "**", redirectTo: "" }
+    ]
+  },
+  {
+    path: "chef",
+    component: ChefDashboardComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "chef"
+    },
+    children: [
+      {
+        path: "",
+        component: DummyComponent,
+        pathMatch: "full"
+      },
+      { path: ":id", component: ChefOrderDetailComponent },
+      { path: "**", redirectTo: "" }
+    ]
+  },
+  {
+    path: "cashier",
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: "cashier"
+    },
+    children: [
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      { path: "dashboard", component: CashierDashboardComponent },
+      { path: "tables/:table", component: CashierViewOrderComponent },
+      { path: "tables/:table/bill", component: CashierBillComponent },
+      { path: "statistics", component: CashierStatisticsComponent },
+      {
+        path: "statistics/users/new",
+        component: CashierNewUserComponent
+      },
+      {
+        path: "statistics/users/:user",
+        component: CashierStatisticsUserComponent
+      },
+      { path: "**", redirectTo: "dashboard" }
+    ]
+  },
+  { path: "**", redirectTo: "logout" }
+];
+```
+
 ### Esempio di Workflow dell'applicazione
