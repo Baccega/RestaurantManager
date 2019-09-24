@@ -2,10 +2,10 @@
 	"name": "restaurantapp",
 	"private": true,
 	"scripts": {
-		"install": "cd backend-node-app && yarn && cd ../ && cd frontend-angular-app && yarn && cd ../ ",
+		"install": "cd backend-node-app && yarn && cd ../ && cd frontend-angular-app && yarn && cd mobile && yarn",
 		"start-backend": "cd backend-node-app && yarn start && cd ../",
-		"start-web": "cd frontend-angular-app && yarn start && cd ../",
-		"start-android": "cd frontend-angular-app/mobile && yarn run build-android && yarn run start-android",
+		"start-web": "cd frontend-angular-app && yarn start --open && cd ../",
+		"start-android": "cd frontend-angular-app/mobile && yarn build-android && yarn start-android",
 		"start-desktop": "cd frontend-angular-app && yarn start:electron"
 	},
 	"dependencies": {},

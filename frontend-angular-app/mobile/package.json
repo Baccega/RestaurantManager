@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build-angular": "rm -rf www && cd ../ && ng build --prod --output-path ./mobile/www && sed 's/<base href=\"\\/\"/<base href=\".\\/\"/' ./mobile/www/index.html > ./mobile/www/index2.html && rm -rf ./mobile/www/index.html && mv ./mobile/www/index2.html ./mobile/www/index.html",
-    "build-android": "npm run build-angular && cordova build android",
+    "build-android": "yarn build-angular && cordova build android",
     "start-android": "cordova run android"
   },
   "keywords": [

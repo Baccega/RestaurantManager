@@ -8,16 +8,18 @@ Assignment for Web Technologies and Applications course.
 
 - Yarn
 - Node.js 10.x
-- Android Sdk (for Android build)
+- Android Sdk (for the Android build)
 
 ## Building
 
 ```bash
-yarn run install
+yarn install
 
-yarn run start-backend
+yarn start-backend
 
-yarn run start-web
-yarn run start-android
-yarn run start-desktop
+yarn start-web
+yarn start-android
+yarn start-desktop
 ```
+
+Server run on http://localhost:4200
