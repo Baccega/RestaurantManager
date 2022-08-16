@@ -51,3 +51,4 @@ mobile/assets
 mobile/www/assets
 mobile/www/build
 mobile/.gradle
+mobile/platforms
