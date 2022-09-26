@@ -1,6 +1,6 @@
 # 👨🏻‍🍳📱🖥 Restaurant App
 
-![GitHub](https://img.shields.io/github/license/Baccega/page-rank-and-hits)
+![GitHub](https://img.shields.io/github/license/Baccega/RestaurantManager)
 
 <img src="Documents/screenshot.png" alt="screenshot" style="width:600px;padding:10px"/>
 
